@@ -1,0 +1,49 @@
+{
+  "name":"test",
+  "namespace":"my.test",
+  "contentPackId":"my.test",
+  "framework":"#9c4",
+  "version":"1.0",
+  "author":"me",
+  "url":"http://fabianlee.org",
+  "contentVersion":"1.0",  
+  "info":"<span>Loads the test log</span>",
+  "queries":[ ],
+  "alerts":[ ],
+  "dashboardSections":[ ],
+  "extractedFields":[ 
+{
+    "displayName":"test.level",
+    "internalName":"test.level",
+    "preContext":"^\\S+ \\S+ ",
+    "postContext":"",
+    "regexValue":"\\S+",
+    "constraints":"{\"filters\":[{\"internalName\":\"subtype\",\"displayName\":\"subtype\",\"operator\":\"CONTAINS\",\"value\":\"test\",\"fieldType\":\"STRING\",\"isExtracted\":true,\"hidden\":false}]}",
+    "info":null
+  }, {
+    "displayName":"test.classname",
+    "internalName":"test.classname",
+    "preContext":"^\\S+ \\S+ \\S+\\s+",
+    "postContext":"",
+    "regexValue":"\\S+",
+    "constraints":"{\"filters\":[{\"internalName\":\"subtype\",\"displayName\":\"subtype\",\"operator\":\"CONTAINS\",\"value\":\"test\",\"fieldType\":\"STRING\",\"isExtracted\":true,\"hidden\":false}]}",
+    "info":null
+  }, {
+    "displayName":"test.threadname",
+    "internalName":"test.threadname",
+    "preContext":"^\\S+ \\S+ \\S+\\s+\\S+\\s+\\-\\s\\[\\s+",
+    "postContext":"",
+    "regexValue":"\\d+",
+    "constraints":"{\"filters\":[{\"internalName\":\"subtype\",\"displayName\":\"subtype\",\"operator\":\"CONTAINS\",\"value\":\"test\",\"fieldType\":\"NUMBER\",\"isExtracted\":true,\"hidden\":false}]}",
+    "info":null
+  }, {
+    "displayName":"test.httpResponseCode",
+    "internalName":"test.httpResponseCode",
+    "preContext":"^\\S+ \\S+ \\S+\\s+\\S+\\s+\\-\\s\\[\\s+\\d+\\]\\s+",
+    "postContext":"",
+    "regexValue":"\\d+",
+    "constraints":"{\"filters\":[{\"internalName\":\"subtype\",\"displayName\":\"subtype\",\"operator\":\"CONTAINS\",\"value\":\"test\",\"fieldType\":\"NUMBER\",\"isExtracted\":true,\"hidden\":false}]}",
+    "info":null
+  }
+]
+}
