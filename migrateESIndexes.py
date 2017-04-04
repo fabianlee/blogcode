@@ -21,8 +21,8 @@ from datetime import date,timedelta
 ESDUMP = "/usr/local/lib/node_modules/elasticdump/bin/elasticdump"
 
 # check for mandatory src/dest arguments
-if len(sys.argv) < 4:
-  print "USAGE: baseIndexName src dest [ndays] [--dry-run]"
+if len(sys.argv) < 5:
+  print "USAGE: baseIndexName src dest ndays [--dry-run]"
   print "EXAMPLE: myindex http://127.0.0.1:9200/ http://127.0.0.1:9200/"
   sys.exit(1)
 
@@ -30,10 +30,8 @@ if len(sys.argv) < 4:
 baseIndexName = sys.argv[1]
 src = sys.argv[2]
 dst = sys.argv[3]
-ndays = 14
+ndays = int(sys.argv[4])
 dryrun = False
-if len(sys.argv)>4:
-  ndays = int(sys.argv[4])
 if len(sys.argv)>5 and "--dry-run"==sys.argv[5]:
   dryrun = True
 if not src.endswith("/"):
