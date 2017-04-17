@@ -22,15 +22,26 @@ DAEMON=$EA_DIR/bin/$NAME
 LOG_DIR=/var/log/$NAME
 EA_USER=elastalert
 EA_GROUP=$EA_USER
+
 CONFIG_NAME=config.yaml
-RULE_NAME=cpu_high.yaml
-DAEMON_ARGS="--config $EA_DIR/$CONFIG_NAME --rule $EA_DIR/$RULE_NAME --debug --verbose"
+# if RULE_OPTS is empty, then rules_folder from config is used
+RULE_OPTS=""
+#RULE_OPTS="--rule $EA_DIR/cpu_high.yaml"
+DAEMON_ARGS="--config $EA_DIR/$CONFIG_NAME $RULE_OPTS --debug --verbose"
+
 PID_DIR="/var/run/$NAME"
 PID_FILE="$PID_DIR/$NAME.pid"
 SCRIPTNAME=/etc/init.d/$NAME
 
-# Exit if the package is not installed
-[ -x "$DAEMON" ] || exit 0
+# Exit if elastalert is not installed in expected location
+if [ ! -d "$EA_DIR" ]; then
+  echo "$EA_DIR folder does not exist, check EA_DIR variable in script"
+  exit 3
+fi
+if [ ! -f "$DAEMON" ]; then
+  echo "$DAEMON executable does not exist, was expecting $EA_DIR/bin/$NAME"
+  exit 3
+fi
 
 # Read configuration variable file if it is present
 [ -r /etc/default/$NAME ] && . /etc/default/$NAME
@@ -60,6 +71,7 @@ do_start()
 
         # Prepare environment
         mkdir -p "$LOG_DIR" "$PID_DIR" && chown "$EA_USER":"$EA_GROUP" "$LOG_DIR" "$PID_DIR"
+	touch -f "$LOG_DIR/$NAME.log" && chown "$EA_USER":"$EA_GROUP" "$LOG_DIR/$NAME.log"
 
 	# Return
 	#   0 if daemon has been started
@@ -100,11 +112,6 @@ do_stop()
         else
                 log_daemon_msg "(not running)"
         fi
-
-	#[ "$?" = 2 ] && return 2
-	# Many daemons don't delete their pidfiles when they exit.
-	#rm -f $PIDFILE
-	#return "$RETVAL"
 
         log_end_msg 0
 }
