@@ -23,7 +23,7 @@ ESDUMP = "/usr/local/lib/node_modules/elasticdump/bin/elasticdump"
 # check for mandatory src/dest arguments
 if len(sys.argv) < 5:
   print "USAGE: baseIndexName src dest ndays [--dry-run]"
-  print "EXAMPLE: myindex http://127.0.0.1:9200/ http://127.0.0.1:9200/"
+  print "EXAMPLE: myindex http://127.0.0.1:9200/ http://127.0.0.1:9200/ 7"
   sys.exit(1)
 
 # sanitize command line arguments
