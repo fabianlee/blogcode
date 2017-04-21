@@ -49,7 +49,8 @@ print "Found host {} with id {}".format(host,hostId)
 # now look for item within that host
 itemId = None
 for item in thehost['result'][0]['items']:
-  print "item[{}] -> {}".format(item['itemid'],item['key_'])
+  # for debugging
+  #print "item[{}] -> {}".format(item['itemid'],item['key_'])
   # if match, then get out int id and type (0=float,1=char,3=unsign,4=text)
   if item['key_'] == key:
     itemId = item['itemid']
