@@ -51,5 +51,4 @@ print "templates with Linux in their name: {}".format(templates)
 print "----------------------------"
 triggers = zapi.do_request('trigger.get', { 'sortfield': ['triggerid'], 'sortorder': 'DESC', 'limit':'5', 'output':'extend'  }  )
 for trigger in triggers['result']:
-  #print trigger
   print "TRIGGER {}: {}".format(trigger['triggerid'],trigger['description'])
