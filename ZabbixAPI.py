@@ -50,7 +50,7 @@ print "templates with Linux in their name: {}".format(templates)
 # https://www.zabbix.com/documentation/2.2/manual/api/reference/trigger/get
 # get latest 5 trigger issues
 print "----------------------------"
-triggers = zapi.do_request('trigger.get', { 'withUnacknowledgedEvents':'true','sortfield':['priority'], 'sortorder': 'DESC', 'limit':'5', 'output':'extend' })
+triggers = zapi.do_request('trigger.get', { 'min_severity':'2', 'withUnacknowledgedEvents':'true','sortfield':['priority'], 'sortorder': 'DESC', 'limit':'5', 'output':'extend' })
 for trigger in triggers['result']:
   print "TRIGGER PRIORITY {}: {}".format(trigger['priority'],trigger['description'])
 
