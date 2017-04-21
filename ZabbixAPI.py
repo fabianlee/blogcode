@@ -46,9 +46,11 @@ templates = zapi.do_request('template.get', {'search': { 'host':'Linux'}, 'outpu
 templates = [ template['host'] for template in templates['result']  ]
 print "templates with Linux in their name: {}".format(templates)
 
+
 # https://www.zabbix.com/documentation/2.2/manual/api/reference/trigger/get
-# get latest 5 triggers
+# get latest 5 trigger issues
 print "----------------------------"
-triggers = zapi.do_request('trigger.get', { 'sortfield': ['triggerid'], 'sortorder': 'DESC', 'limit':'5', 'output':'extend'  }  )
+triggers = zapi.do_request('trigger.get', { 'withUnacknowledgedEvents':'true','sortfield':['priority'], 'sortorder': 'DESC', 'limit':'5', 'output':'extend' })
 for trigger in triggers['result']:
-  print "TRIGGER {}: {}".format(trigger['triggerid'],trigger['description'])
+  print "TRIGGER PRIORITY {}: {}".format(trigger['priority'],trigger['description'])
+
