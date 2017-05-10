@@ -26,6 +26,9 @@ if len(sys.argv) < 5:
   print "EXAMPLE: myindex http://127.0.0.1:9200/ http://127.0.0.1:9200/ 7"
   sys.exit(1)
 
+# number of objects to dump at a time
+BATCH = 1000
+
 # sanitize command line arguments
 baseIndexName = sys.argv[1]
 src = sys.argv[2]
@@ -89,7 +92,7 @@ for i in range(1,ndays):
 
   # only do dump if target does not already have index
   if data_dst is None:
-      cmd = "{0} --input={1}{3} --output={2}{3}".format(ESDUMP,src,dst,indexPattern)
+      cmd = "{0} --input={1}{3} --output={2}{3} --limit {4}".format(ESDUMP,src,dst,indexPattern,BATCH)
       # actually call elasticdump or do dry run
       if dryrun:
         print "--dry-run " + cmd
