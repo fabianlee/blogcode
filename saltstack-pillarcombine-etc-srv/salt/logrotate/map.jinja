@@ -1,0 +1,57 @@
+# /srv/salt/logrotate/map.jinja
+{% import_yaml 'logrotate/defaults.yaml' as default_settings %}
+
+# standard OS family customization
+{% set os_family_map = salt['grains.filter_by']({
+    'RedHat': {
+    },
+    'Arch': {
+    },
+    'Debian': {
+    },
+    'Suse': {
+    },
+  }, merge=salt['pillar.get']('logrotate:lookup'))
+%}
+{% do default_settings.logrotate.update(os_family_map) %}
+
+# merge pillar lookup on top of default settings
+{% set logrotate = salt['pillar.get'](
+        'logrotate:lookup',
+        default=default_settings.logrotate,
+        merge=True
+    )
+%}
+
+
+# inner loop variables don't have scope, so have to use hash trick
+# https://fabianlee.org/2016/10/18/saltstack-setting-a-jinja2-variable-from-an-inner-block-scope/
+#
+{% set mergedresult = { 'logrotate': {} } %}
+{% for key in pillar.keys() %}
+{% if "logrotate-" in key %}
+
+  {% set val = pillar.get(key) %}
+  {% set keylookup = key~":lookup" %}
+  {% set custjobs = salt['pillar.get'](keylookup,{}) %}
+
+{% set merged = salt['slsutil.merge'](
+     mergedresult['logrotate'],
+     custjobs,
+     merge_lists=True
+   )
+%}
+{% do mergedresult.update({'logrotate': merged}) %}
+
+{% endif %}
+{% endfor %}
+
+
+# do final merge, adding to main variable in outer scope
+{% set logrotate = salt['slsutil.merge'](
+     logrotate,
+     mergedresult.logrotate,
+     merge_lists=True
+   )
+%}
+

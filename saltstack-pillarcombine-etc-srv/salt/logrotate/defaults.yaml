@@ -1,0 +1,6 @@
+# /srv/salt/logrotate/defaults.yaml
+
+logrotate:
+  rotatejobs:
+#    placeholder:
+#      path: /var/log/placeholder/dummy.log
