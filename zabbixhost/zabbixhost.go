@@ -28,7 +28,7 @@ func main() {
         os.Exit(1)
     }
 
-    fmt.Printf("Going to connect to %s/zabbix/api_jsonrpc.php as %s",*zserver,*user)
+    fmt.Printf("Going to connect to %s/zabbix/api_jsonrpc.php as %s\n",*zserver,*user)
 
 
     // define connection settings
