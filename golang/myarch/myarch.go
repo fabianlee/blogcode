@@ -1,3 +1,4 @@
+// put at $GOPATH/src/myarch/myarch.go
 package main
 
 import "fmt"
