@@ -2,6 +2,7 @@ package main
 
 import (
         //"github.com/rday/zabbix"
+	// fork has support for logout, templates, hostgroup
         "github.com/fabianlee/zabbix"
 	"fmt"
 	"flag"
