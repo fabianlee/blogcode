@@ -62,7 +62,7 @@ func main() {
 	fmt.Println("Could not resolve templateId, exiting")
 	return
     }
-    fmt.Println("template id for linux: ",templateId)
+    fmt.Println("template id: ",templateId)
 
     // lookup group id
     hostgroupId := GetHostGroupId(api,*hostGroupName)
@@ -70,7 +70,7 @@ func main() {
 	fmt.Println("Could not resolve hostgroupId, exiting")
 	return
     }
-    fmt.Println("hostgroup id for Linux servers: ",hostgroupId)
+    fmt.Println("hostgroup id: ",hostgroupId)
 
     // create zabbix host definition
     isCreated := CreateZabbixHost(api,*hostName,templateId,hostgroupId,*IP)
