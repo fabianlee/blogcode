@@ -23,8 +23,8 @@ LOG_DIR=/var/log/$NAME
 EA_USER=echoservice
 EA_GROUP=$EA_USER
 
-CONFIG_NAME=config.json
-DAEMON_ARGS="--config $EA_DIR/$CONFIG_NAME --verbose"
+# unused, for passing extra args 
+DAEMON_ARGS="--verbose"
 
 PID_DIR="/var/run/$NAME"
 PID_FILE="$PID_DIR/$NAME.pid"
