@@ -25,7 +25,7 @@ func main() {
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	log.Println("Responsing to /hello request")
+	log.Println("Responding to /hello request")
 	log.Println(r.UserAgent())
 
 	// request variables
