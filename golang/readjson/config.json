@@ -1,0 +1,8 @@
+{ 
+  "name": "foo",
+  "version": "1.0",
+  "props": {
+    "key1" : "value1",
+    "key2" : "value2"
+  }
+}
