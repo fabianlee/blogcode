@@ -1,0 +1,21 @@
+[Unit]
+Description=Sleep service
+ConditionPathExists=/home/ubuntu/work/src/sleepservice/sleepservice
+After=network.target
+ 
+[Service]
+Type=simple
+PIDFile=/var/run/sleepservice.pid
+User=sleepservice
+Group=sleepservice
+LimitNOFILE=1024
+startLimitInterval=600
+
+Restart=on-failure
+RestartSec=10
+
+WorkingDirectory=/home/ubuntu/work/src/sleepservice
+ExecStart=/home/ubuntu/work/src/sleepservice/sleepservice --name=foo
+ 
+[Install]
+WantedBy=multi-user.target
