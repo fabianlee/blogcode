@@ -14,7 +14,7 @@ EOF
 # now take advantage of this invocation to send back values
 # build up list of values in /tmp/zdata.txt
 agenthost="`hostname -f`"
-zserver="192.168.2.116"
+zserver="myzabbix"
 zport="10051"
 
 cat /dev/null > /tmp/zdata.txt
