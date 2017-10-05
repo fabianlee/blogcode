@@ -121,7 +121,7 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c winrm set winrm/config/winrs @{MaxMemoryPerShellMB="800"}</CommandLine>
+                    <CommandLine>cmd.exe /c winrm set winrm/config/winrs @{MaxMemoryPerShellMB="2048"}</CommandLine>
                     <Description>Win RM MaxMemoryPerShellMB</Description>
                     <Order>6</Order>
                     <RequiresUserInput>true</RequiresUserInput>
@@ -151,14 +151,14 @@
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c netsh advfirewall firewall set rule group="remote administration" new enable=yes </CommandLine>
-                    <Description>Win RM adv firewall enable</Description>
+                    <CommandLine>cmd.exe /c netsh advfirewall firewall add rule group="Windows Remote Management (HTTP-In)" dir=in action=allow protocol=TCP localport=5985</CommandLine>
+                    <Description>Win RM adv firewall enable http</Description>
                     <Order>11</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c netsh firewall add portopening TCP 5985 "Port 5985" </CommandLine>
-                    <Description>Win RM port open</Description>
+                    <CommandLine>cmd.exe /c netsh advfirewall firewall add rule group="Windows Remote Management (HTTPS-In)" dir=in action=allow protocol=TCP localport=5985</CommandLine>
+                    <Description>Win RM adv firewall enable https</Description>
                     <Order>12</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
@@ -220,6 +220,17 @@
                     <Order>23</Order>
                     <Description>Disable AutoLogon for future reboots</Description>
                 </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c wmic useraccount where "name='vagrant'" set PasswordExpires=FALSE</CommandLine>
+                    <Order>24</Order>
+                    <Description>Disable password expiration for vagrant user</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD "HKLM\SOFTWARE\policies\microsoft\Windows NT\Reliability" /v ShutdownReasonUI /t REG_DWORD /d 0 /f</CommandLine>
+                    <Order>25</Order>
+                    <Description>Disable shutdown tracker per vagrant docs</Description>
+                </SynchronousCommand>
+
 	    </FirstLogonCommands>
 
             <OOBE> 
@@ -244,6 +255,16 @@
                         <DisplayName>Administrator</DisplayName>
                         <Group>Administrators</Group>
                         <Name>Administrator</Name>
+                    </LocalAccount>
+                    <LocalAccount wcm:action="add">
+                        <Password>
+                            <Value>vagrant</Value>
+                            <PlainText>true</PlainText>
+                        </Password>
+                        <Description>Vagrant user</Description>
+                        <DisplayName>vagrant</DisplayName>
+                        <Group>Administrators</Group>
+                        <Name>vagrant</Name>
                     </LocalAccount>
 		</LocalAccounts>
             </UserAccounts>
