@@ -12,6 +12,7 @@ echo -------------------
 
 sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 \
 -keyout $FQDN.key -out $FQDN.crt \
--subj '/C=US/ST=CA/L=SFO/O=myorg/CN=$FQDN'
+-subj "/C=US/ST=CA/L=SFO/O=myorg/CN=$FQDN"
 
 cat $FQDN.crt $FQDN.key | sudo tee -a $FQDN.pem
+openssl x509 -noout -subject -in /etc/pki/tls/certs/$FQDN.crt
