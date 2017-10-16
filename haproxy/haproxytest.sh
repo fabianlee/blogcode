@@ -18,7 +18,9 @@ while true;
     service haproxy $1
     echo done with haproxy $1 using sysv, again in $2 seconds... 
   elif [ "$dist" == "xenial" ]; then
-    systemctl $1 haproxy.service
+    # we always do 'restart', have to change service file and haproxy.cfg to 
+    # change behavior to legacy reload or socket reload
+    systemctl restart haproxy.service
     echo done with haproxy.service $1 using systemd, again in $2 seconds... 
   else
     echo this script is meant for trusty/xenial to determine whether sysv or systemd is in place. Modify accordingly
