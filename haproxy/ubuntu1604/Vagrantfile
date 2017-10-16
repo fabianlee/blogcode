@@ -1,0 +1,98 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.hostname = "haproxy1604"
+  config.vm.network "public_network", ip: "192.168.2.124", bridge: "eth0"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "haproxy1604"
+    v.customize ["modifyvm", :id, "--memory","1024" ]
+    v.customize ["modifyvm", :id, "--cpus","1" ]
+  end
+
+  config.vm.synced_folder "/home/fabian/Documents", "/Documents"
+
+  config.vm.provision :salt do |salt|
+    salt.minion_config = "../minion"
+    salt.install_master = false
+    salt.run_highstate = false
+    salt.verbose = true
+    salt.temp_config_dir = "/tmp"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+apt-get install python-software-properties software-properties-common -y
+add-apt-repository ppa:vbernat/haproxy-1.7 -y
+apt-get update
+apt-cache policy haproxy
+apt-get install haproxy -y
+haproxy -v
+which haproxy
+
+
+apt-get install build-essential libssl-dev -y
+cd /usr/src
+
+sudo wget http://www.haproxy.org/download/1.8/src/snapshot/haproxy-ss-LATEST.tar.gz
+
+sudo tar xfz haproxy-ss-LATEST.tar.gz
+sudo mv haproxy-ss-20171014 haproxy
+
+cd haproxy
+
+cat VERSION
+chmod ugo+w VERSION
+echo "1.8-dev2mymod" > VERSION
+
+sudo make TARGET=linux2628 CPU=native USE_LIBCRYPT=1 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1 USE_OPENSSL=1 USE_LIBPCRE=1
+make install
+/usr/local/sbin/haproxy -v
+
+./haproxy -v
+
+systemctl stop haproxy.service
+cp ./haproxy /usr/sbin/haproxy
+
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1604/haproxy.service -O /lib/systemd/system/haproxy.service
+systemctl enable haproxy.service
+systemctl daemon-reload
+
+echo RELOADOPTS="-x /run/haproxy/admin.sock" >> /etc/default/haproxy
+
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/selfsigned.sh
+sudo chmod 755 selfsigned.sh
+./selfsigned.sh
+
+cd /etc/haproxy
+touch haproxy.config
+cp haproxy.cfg haproxy.cfg.orig
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/haproxy.cfg -O haproxy.cfg
+sed -i "s/REPLACEME/`hostname -f`/" haproxy.cfg
+
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/haproxytest.sh -O /usr/sbin/haproxytest.sh
+chmod 755 /usr/sbin/haproxytest.sh
+
+touch /var/log/haproxy.log
+chown haproxy:haproxy /var/log/haproxy.log
+chmod ug+r+w /var/log/haproxy.log
+
+sed -i '/load=\"imudp\"/s/^#//' /etc/rsyslog.conf
+sed -i '/type=\"imudp\"/s/^#//' /etc/rsyslog.conf
+systemctl restart rsyslog
+
+apt-get install nodejs nodejs-legacy -y
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/server.js -O /tmp/server.js
+ufw allow 9000:9002/tcp
+touch /tmp/server.log
+chmod ugo+r+w /tmp/server.log
+nohup node /tmp/server.js 9000 > /tmp/server.log &
+
+systemctl restart haproxy.service
+apt-get install curl -y
+curl https://localhost --insecure
+
+SHELL
+
+end
