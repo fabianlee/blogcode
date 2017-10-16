@@ -5,13 +5,18 @@ StartLimitBurst=0
 After=network.target
 
 [Service]
-# You can point the environment variable HAPROXY_STATS_SOCKET to a stats
-# socket if you want seamless reloads.
 Environment="CONFIG=/etc/haproxy/haproxy.cfg" "PIDFILE=/run/haproxy.pid"
 EnvironmentFile=-/etc/default/haproxy
 ExecStartPre=/usr/local/sbin/haproxy -f $CONFIG -c -q
 ExecStart=/usr/local/sbin/haproxy -W -f $CONFIG -p $PIDFILE
-ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q
+
+# legacy reload, errors if high load or frequent reload
+#ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q
+
+# reload with socket transfer, should be no errors
+# requires 'expose-fd listeners' in haproxy.cfg
+ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q -x /run/haproxy/admin.sock
+
 ExecReload=/bin/kill -USR2 $MAINPID
 KillMode=mixed
 Restart=always
