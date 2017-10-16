@@ -12,6 +12,8 @@ EnvironmentFile=-/etc/default/haproxy
 ExecStartPre=/usr/local/sbin/haproxy -f $CONFIG -c -q
 ExecStart=/usr/local/sbin/haproxy -W -f $CONFIG -p $PIDFILE $EXTRAOPTS
 
+# note that the master worker mode obsoletes the old haproxy-systemd-wrapper
+#
 # add RELOADOPTS to /etc/default/haproxy if you want seamless reload
 ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS $RELOADOPTS
 
