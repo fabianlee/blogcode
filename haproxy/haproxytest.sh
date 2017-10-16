@@ -18,8 +18,8 @@ while true;
     service haproxy $1
     echo done with haproxy $1 using sysv, again in $2 seconds... 
   elif [ "$dist" == "xenial" ]; then
-    systemctl $1 haproxy
-    echo done with haproxy $1 using systemd, again in $2 seconds... 
+    systemctl $1 haproxy.service
+    echo done with haproxy.service $1 using systemd, again in $2 seconds... 
   else
     echo this script is meant for trusty/xenial to determine whether sysv or systemd is in place. Modify accordingly
   fi
