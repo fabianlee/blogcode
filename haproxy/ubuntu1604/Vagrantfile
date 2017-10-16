@@ -93,6 +93,9 @@ systemctl restart haproxy.service
 apt-get install curl -y
 curl https://localhost --insecure
 
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1604/switchhaproxy.sh -O /usr/sbin/switchhaproxy.sh
+chmod 755 /usr/sbin/switchhaproxy.sh
+
 SHELL
 
 end
