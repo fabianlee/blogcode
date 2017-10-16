@@ -10,9 +10,8 @@ EnvironmentFile=-/etc/default/haproxy
 ExecStartPre=/usr/local/sbin/haproxy -f $CONFIG -c -q
 ExecStart=/usr/local/sbin/haproxy -W -f $CONFIG -p $PIDFILE
 
-# reload with socket transfer, should be no errors
-# requires 'expose-fd listeners' in haproxy.cfg
-ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q -x /run/haproxy/admin.sock
+# legacy reload, errors if high traffic or frequent reload
+ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q
 
 ExecReload=/bin/kill -USR2 $MAINPID
 KillMode=mixed
