@@ -1,0 +1,22 @@
+[Unit]
+Description=HAProxy Load Balancer
+StartLimitInterval=0
+StartLimitBurst=0
+After=network.target
+
+[Service]
+# You can point the environment variable HAPROXY_STATS_SOCKET to a stats
+# socket if you want seamless reloads.
+Environment="CONFIG=/etc/haproxy/haproxy.cfg" "PIDFILE=/run/haproxy.pid"
+EnvironmentFile=-/etc/default/haproxy
+ExecStartPre=/usr/local/sbin/haproxy -f $CONFIG -c -q
+ExecStart=/usr/local/sbin/haproxy -W -f $CONFIG -p $PIDFILE
+ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q
+ExecReload=/bin/kill -USR2 $MAINPID
+KillMode=mixed
+Restart=always
+Type=forking
+
+[Install]
+WantedBy=multi-user.target
+
