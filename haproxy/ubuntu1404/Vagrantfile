@@ -14,14 +14,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.synced_folder "/home/fabian/Documents", "/Documents"
 
-  config.vm.provision :salt do |salt|
-    salt.minion_config = "../minion"
-    salt.install_master = false
-    salt.run_highstate = false
-    salt.verbose = true
-    salt.temp_config_dir = "/tmp"
-  end
-
   config.vm.provision "shell", inline: <<-SHELL
 apt-get install python-software-properties software-properties-common -y
 add-apt-repository ppa:vbernat/haproxy-1.7 -y
@@ -35,18 +27,25 @@ which haproxy
 apt-get install build-essential libssl-dev -y
 cd /usr/src
 
-sudo wget http://www.haproxy.org/download/1.8/src/snapshot/haproxy-ss-LATEST.tar.gz
+wget http://www.haproxy.org/download/1.8/src/snapshot/haproxy-ss-LATEST.tar.gz
 
-sudo tar xfz haproxy-ss-LATEST.tar.gz
-sudo mv haproxy-ss-20171014 haproxy
+tar xfz haproxy-ss-LATEST.tar.gz
+# directory name varies based on snapshot day, rename dir to 'haproxy'
+timestampDir=`find . -name "haproxy-ss-*" -type d`
+for f in $timestampDir; do
+  dirName="${f:2}"
+  mv $dirName haproxy
+done
 
 cd haproxy
 
 cat VERSION
 chmod ugo+w VERSION
-echo "1.8-dev2mymod" > VERSION
+ver=`cat VERSION`
+found version $ver
+echo "${ver}mymod" > VERSION
 
-sudo make TARGET=linux2628 CPU=native USE_LIBCRYPT=1 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1 USE_OPENSSL=1 USE_LIBPCRE=1
+make TARGET=linux2628 CPU=native USE_LIBCRYPT=1 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1 USE_OPENSSL=1 USE_LIBPCRE=1 -s
 make install
 /usr/local/sbin/haproxy -v
 
@@ -60,7 +59,7 @@ chmod 755 /etc/init.d/haproxy
 
 
 wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/selfsigned.sh
-sudo chmod 755 selfsigned.sh
+chmod 755 selfsigned.sh
 ./selfsigned.sh
 
 cd /etc/haproxy
