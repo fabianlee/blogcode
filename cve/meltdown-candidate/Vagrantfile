@@ -21,10 +21,10 @@ sudo apt-get update -q
 sudo add-apt-repository ppa:canonical-kernel-team/pti -y
 sudo apt-get update -q
 
-sudo apt-cache search linux-headers-4.4.0-108-generic
-sudo apt-cache search linux-image-4.4.0-108-generic
+sudo apt-cache search linux-headers-4.4.0-109-generic
+sudo apt-cache search linux-image-4.4.0-109-generic
 
-sudo apt-get install linux-headers-4.4.0-108-generic linux-image-4.4.0-108-generic -y
+sudo apt-get install linux-headers-4.4.0-109-generic linux-image-4.4.0-109-generic -y
 
 sudo apt-get install git build-essential -y
 cd /home/vagrant
