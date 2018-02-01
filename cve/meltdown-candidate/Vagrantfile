@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.hostname = "meltdown1"
+  config.vm.network  "private_network", type: "dhcp"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "meltdown1"
+    v.customize ["modifyvm", :id, "--memory","1024" ]
+    v.customize ["modifyvm", :id, "--cpus","1" ]
+  end
+ 
+  config.vm.provision "file", source: "testMeltdown.sh", destination: "/home/ubuntu/testMeltdown.sh"
+
+  config.vm.provision "shell", inline: <<-SHELL
+uname -r > /tmp/kernel-orig.txt
+sudo apt-get update -q
+
+sudo add-apt-repository ppa:canonical-kernel-team/pti -y
+sudo apt-get update -q
+
+sudo apt-cache search linux-headers-4.4.0-109-generic
+sudo apt-cache search linux-image-4.4.0-109-generic
+
+sudo apt-get install linux-headers-4.4.0-109-generic linux-image-4.4.0-109-generic -y
+
+sudo apt-get install git build-essential -y
+cd /home/vagrant
+git clone https://github.com/raphaelsc/Am-I-affected-by-Meltdown.git
+cd Am-I-affected-by-Meltdown
+make
+
+sudo init 6
+
+SHELL
+
+end
