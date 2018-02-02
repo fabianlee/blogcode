@@ -1,6 +1,7 @@
 package org.fabianlee.xmladaptertest.domain;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -13,6 +14,7 @@ public class AddressEntry {
 	protected String name;
 	
 	@XmlAttribute(required=false)
+	@XmlJavaTypeAdapter(org.fabianlee.xmladaptertest.adapters.GenderEnumAdapter.class)
 	protected Gender gender;
 	
 	@XmlElement(name="avatarIcon",required=false)
