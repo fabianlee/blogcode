@@ -9,6 +9,7 @@ After=network.target
 Environment="CONFIG=/etc/haproxy/haproxy.cfg" "PIDFILE=/run/haproxy.pid"
 # EXTRAOPTS and RELOADOPS come from this default file
 EnvironmentFile=-/etc/default/haproxy
+
 ExecStartPre=/usr/local/sbin/haproxy -f $CONFIG -c -q
 ExecStart=/usr/local/sbin/haproxy -Ws -f $CONFIG -p $PIDFILE $EXTRAOPTS
 
@@ -16,8 +17,8 @@ ExecStart=/usr/local/sbin/haproxy -Ws -f $CONFIG -p $PIDFILE $EXTRAOPTS
 #
 # add RELOADOPTS to /etc/default/haproxy if you want seamless reload
 ExecReload=/usr/local/sbin/haproxy -f $CONFIG -c -q $EXTRAOPTS $RELOADOPTS
-
 ExecReload=/bin/kill -USR2 $MAINPID
+
 KillMode=mixed
 Restart=always
 Type=forking
