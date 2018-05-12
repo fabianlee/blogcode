@@ -16,7 +16,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
 apt-get install python-software-properties software-properties-common -y
-add-apt-repository ppa:vbernat/haproxy-1.7 -y
+add-apt-repository ppa:vbernat/haproxy-1.8 -y
 apt-get update
 apt-cache policy haproxy
 apt-get install haproxy -y
@@ -24,35 +24,35 @@ haproxy -v
 which haproxy
 
 
-apt-get install build-essential libssl-dev -y
-cd /usr/src
+#apt-get install build-essential libssl-dev -y
+#cd /usr/src
 
-wget http://www.haproxy.org/download/1.8/src/snapshot/haproxy-ss-LATEST.tar.gz
+#wget http://www.haproxy.org/download/1.8/src/snapshot/haproxy-ss-LATEST.tar.gz
 
-tar xfz haproxy-ss-LATEST.tar.gz
+#tar xfz haproxy-ss-LATEST.tar.gz
 # directory name varies based on snapshot day, rename dir to 'haproxy'
-timestampDir=`find . -name "haproxy-ss-*" -type d`
-for f in $timestampDir; do
-  dirName="${f:2}"
-  mv $dirName haproxy
-done
+#timestampDir=`find . -name "haproxy-ss-*" -type d`
+#for f in $timestampDir; do
+#  dirName="${f:2}"
+#  mv $dirName haproxy
+#done
 
-cd haproxy
+#cd haproxy
 
-cat VERSION
-chmod ugo+w VERSION
-ver=`cat VERSION`
-found version $ver
-echo "${ver}mymod" > VERSION
+#cat VERSION
+#chmod ugo+w VERSION
+#ver=`cat VERSION`
+#found version $ver
+#echo "${ver}mymod" > VERSION
 
-make TARGET=linux2628 CPU=native USE_LIBCRYPT=1 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1 USE_OPENSSL=1 USE_LIBPCRE=1 -s
-make install
-/usr/local/sbin/haproxy -v
+#make TARGET=linux2628 CPU=native USE_LIBCRYPT=1 USE_LINUX_SPLICE=1 USE_LINUX_TPROXY=1 USE_OPENSSL=1 USE_LIBPCRE=1 -s
+#make install
+#/usr/local/sbin/haproxy -v
 
-./haproxy -v
+#./haproxy -v
 
-service haproxy stop
-cp ./haproxy /usr/sbin/haproxy
+#service haproxy stop
+#cp ./haproxy /usr/sbin/haproxy
 
 wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1404/haproxy -O /etc/init.d/haproxy
 chmod 755 /etc/init.d/haproxy
