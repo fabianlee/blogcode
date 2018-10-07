@@ -1,3 +1,9 @@
+# Script to prepopulate the saved sessions for PuTTy on Windows
+#
+# 1. reads in text file where each line is: <name>,<FQDN|IP>
+# 2. uses template registry file to create registry file specific to target host
+# 3. imports .reg
+#
 param($file="puttyhosts.txt",$templateFile="template.reg")
 
 # ensure list of hosts exists
