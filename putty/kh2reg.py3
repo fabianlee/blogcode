@@ -253,12 +253,10 @@ for line in fileinput.input(args):
                    keyparams))
                 if output_type == 'unix':
                     # Unix format.
-                    print ("unix format!!!!")
                     sys.stdout.write('"%s %s"\n' % (key, value))
                 else:
                     # Windows format.
                     # XXX: worry about double quotes?
-                    print ("windows format!!!!")
                     sys.stdout.write("\"%s\"=\"%s\"\n"
                                      % (winmungestr(key), value))
 
