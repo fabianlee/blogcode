@@ -9,13 +9,13 @@ def setup
     # options
     options = Selenium::WebDriver::Chrome::Options.new
     options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    #options.add_argument('--remote-debugging-port=9222')
 
     # capabilities
     caps = Selenium::WebDriver::Remote::Capabilities.new
     caps["screen_resolution"] = "600x768"
     caps["record_network"] = "true"
-    #options.add_argument('--disable-gpu')
-    #options.add_argument('--remote-debugging-port=9222')
 
     # create driver using options and capabilities
     @driver = Selenium::WebDriver.for :chrome, options: options, desired_capabilities: caps
