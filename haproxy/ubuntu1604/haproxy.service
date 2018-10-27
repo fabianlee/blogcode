@@ -11,7 +11,8 @@ Environment="CONFIG=/etc/haproxy/haproxy.cfg" "PIDFILE=/run/haproxy.pid"
 EnvironmentFile=-/etc/default/haproxy
 
 ExecStartPre=/usr/sbin/haproxy -f $CONFIG -c -q
-ExecStart=/usr/sbin/haproxy -W -f $CONFIG -p $PIDFILE $EXTRAOPTS
+# -Ws for master worker with systemd notify
+ExecStart=/usr/sbin/haproxy -Ws -f $CONFIG -p $PIDFILE $EXTRAOPTS
 
 # note that the master worker mode obsoletes the old haproxy-systemd-wrapper
 #
@@ -21,7 +22,8 @@ ExecReload=/bin/kill -USR2 $MAINPID
 
 KillMode=mixed
 Restart=always
-Type=forking
+# use notify for newer 1.8 versions, and no longer forking
+Type=notify
 
 [Install]
 WantedBy=multi-user.target

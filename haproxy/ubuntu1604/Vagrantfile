@@ -23,7 +23,9 @@ apt-get install haproxy -y
 haproxy -v
 which haproxy
 
-
+####################
+# PPA is sufficient now, no need to build
+#####################
 #apt-get install build-essential libssl-dev -y
 #cd /usr/src
 
@@ -54,7 +56,10 @@ which haproxy
 #systemctl stop haproxy.service
 #cp ./haproxy /usr/sbin/haproxy
 
-wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1604/haproxy.service -O /lib/systemd/system/haproxy.service
+########################
+# systemd file that comes with ppa is sufficient now
+#######################
+#wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1604/haproxy.service -O /lib/systemd/system/haproxy.service
 systemctl enable haproxy.service
 systemctl daemon-reload
 
@@ -65,7 +70,7 @@ chmod 755 selfsigned.sh
 ./selfsigned.sh
 
 cd /etc/haproxy
-touch haproxy.config
+touch haproxy.cfg
 cp haproxy.cfg haproxy.cfg.orig
 wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/haproxy.cfg -O haproxy.cfg
 sed -i "s/REPLACEME/`hostname -f`/" haproxy.cfg
