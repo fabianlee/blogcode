@@ -21,6 +21,7 @@ apt-get update
 apt-cache policy haproxy
 apt-get install haproxy -y
 haproxy -v
+usermod -a -G syslog haproxy
 which haproxy
 
 
@@ -72,7 +73,7 @@ wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/haproxy
 chmod 755 /usr/sbin/haproxytest.sh
 
 touch /var/log/haproxy.log
-chown haproxy:haproxy /var/log/haproxy.log
+chown haproxy:syslog /var/log/haproxy.log
 chmod ug+r+w /var/log/haproxy.log
 
 sed -i '/ModLoad imudp/s/^#//' /etc/rsyslog.conf
