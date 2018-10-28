@@ -87,6 +87,8 @@ touch /tmp/server.log
 chmod ugo+r+w /tmp/server.log
 nohup node /tmp/server.js 9000 > /tmp/server.log &
 
+wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1604/switchhaproxy.sh -O /usr/sbin/switchhaproxy.sh
+chmod 755 /usr/sbin/switchhaproxy.sh
 
 service haproxy restart
 apt-get install curl -y
