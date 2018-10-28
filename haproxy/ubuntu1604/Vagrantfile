@@ -21,6 +21,8 @@ apt-get update
 apt-cache policy haproxy
 apt-get install haproxy -y
 haproxy -v
+# haproxy user needs to be part of syslog group for writing to /var/log
+usermod -a -G syslog haproxy
 which haproxy
 
 ####################
@@ -57,9 +59,10 @@ which haproxy
 #cp ./haproxy /usr/sbin/haproxy
 
 ########################
-# systemd file that comes with ppa is sufficient now
+# systemd file that comes with ppa just needs tweak now
 #######################
 #wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ubuntu1604/haproxy.service -O /lib/systemd/system/haproxy.service
+sed -i '/After=network.target/i StartLimitInterval=0\nStartLimitBurst=0' /lib/systemd/system/haproxy.service
 systemctl enable haproxy.service
 systemctl daemon-reload
 
@@ -79,7 +82,7 @@ wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/haproxy
 chmod 755 /usr/sbin/haproxytest.sh
 
 touch /var/log/haproxy.log
-chown haproxy:haproxy /var/log/haproxy.log
+chown haproxy:syslog /var/log/haproxy.log
 chmod ug+r+w /var/log/haproxy.log
 
 sed -i '/load=\"imudp\"/s/^#//' /etc/rsyslog.conf
