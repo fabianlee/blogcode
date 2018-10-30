@@ -3,7 +3,7 @@
 # create script that developers can use in sudo
 cat >/tmp/developersDecrypt.sh <<'EOL'
 #!/bin/bash
-echo "$0 invoked as user '${USER}' which is member of groups:"
+echo "$0 invoked as user '${SUDO_USER}' which is member of groups:"
 groups
 echo "script being run as user id $EUID"
 if [[ $EUID -ne 0 ]] ; then echo "EXPECT ERROR!!! this script must be run as root/sudo" ; exit 1 ; fi
