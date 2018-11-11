@@ -5,7 +5,7 @@ sudo useradd -u 20001 -m alice
 
 # set static password and ensure group definition added to /etc/group
 phash=$(openssl passwd -1 -salt mysalt alicepass)
-sudo usermod -a -G deployers -p "$phash" alice
+sudo usermod -p "$phash" alice
 
 # alice gets full sudo privileges
 echo "alice ALL=(ALL) ALL" | sudo tee /etc/sudoers.d/alice
