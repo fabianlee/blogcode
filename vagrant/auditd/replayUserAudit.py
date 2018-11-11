@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import logging
 import sys
@@ -9,6 +9,7 @@ import pwd
 from datetime import date,timedelta,datetime
 import subprocess
 from pprint import pprint
+import locale
 
 # argument check
 if len(sys.argv)<2:
@@ -65,8 +66,8 @@ def parseRecordList(rawList):
   output = rawList
   recList = []
 
-  # iterate through record set
-  recordlist = output.split('----')
+  # iterate through record set, decode() necessary for python3
+  recordlist = output.decode().split('----')
   for record in recordlist:
 
     # go through each line in a record
@@ -76,7 +77,7 @@ def parseRecordList(rawList):
       if line.strip()=="----" or line.strip()=="" :
         continue
       if line.startswith("type="):
-        typestr = line[6:line.find(' ')]
+        typestr = line[5:line.find(' ')]
         auditrec.type = typestr
       if line.startswith("time->"):
         line = line[6:]
@@ -86,6 +87,7 @@ def parseRecordList(rawList):
         dict = splitAndMakeDict(line,' ','=')
         auditrec.execve_fullcmd = concatDictArgs(dict,'a')
       if line.startswith("type=USER_CMD"):
+        #print ("LINE {}".format(line))
         dict = splitAndMakeDict(line,' ','=')
         if 'uid' in dict:
           auditrec.user_uid = dict['uid']
@@ -96,17 +98,41 @@ def parseRecordList(rawList):
         if 'auid' in dict:
           auditrec.user_auid = dict['auid']
         if 'res' in dict:
+          #print ("found 'res' {}".format(dict['res']))
           auditrec.user_res = dict['res']
+          # chop off last char if single quote
+          if auditrec.user_res.endswith("'"):
+            auditrec.user_res = auditrec.user_res[:-1]
         if 'cmd' in dict:
-          try:
-            auditrec.user_cmd = dict['cmd'].decode("hex")
-          except:
-            auditrec.user_cmd = dict['cmd']          
+          # cmd needs to be parsed manually
+          index1 = line.index("cmd=")
+          # up to next field with =
+          index2 = line.index("=",index1+5)
+          auditrec.user_cmd = line[index1:index2]
+          # still need to chop off last field
+          lastspace = auditrec.user_cmd.rindex(' ')
+          auditrec.user_cmd = auditrec.user_cmd[:lastspace]
+
+          # used when not using '-i'
+          #try:
+          #  auditrec.user_cmd = dict['cmd'].decode("hex")
+          #except:
+          #  auditrec.user_cmd = dict['cmd']
+        if "msg=audit(" in line:
+          # timestamp needs to be parsed manually
+          index1 = line.index("msg=audit(")
+          index2 = line.index(")",index1+10)
+          auditrec.ts = line[index1+10:index2]
       if line.startswith("type=SYSCALL"):
         dict = splitAndMakeDict(line,' ','=')
 
     #pprint(vars(auditrec))
-    recList.append(auditrec)
+    #if hasattr(auditrec,'type'):
+    #  print ("AUDIT REC.type: {}".format(auditrec.type))
+  
+    isNotUserAuth = hasattr(auditrec,'type') and not auditrec.type.startswith("USER_AUTH") 
+    if( isNotUserAuth ):
+      recList.append(auditrec)
 
   return recList
 
@@ -117,9 +143,15 @@ def parseRecordList(rawList):
 # use today startdate if not specified
 username = sys.argv[1]
 if len(sys.argv)<3:
+  curlocale = locale.getdefaultlocale()
+  locale.setlocale(locale.LC_TIME, curlocale)
+
   today = date.today()
-  todaystr = today.strftime('%Y-%m-%d')
-  startDate = todaystr
+  # hardcoding this date format means other locale would not work
+  #startDate = today.strftime('%m/%d/%Y')
+  startDate = time.strftime('%x')
+
+  print ("Getting today date {} based on locale {}".format(startDate,curlocale))
 else:
   startDate = sys.argv[2]
 print ("startDate: " + startDate)
@@ -138,12 +170,21 @@ except:
 print ("Going to trace commands for user {} with id {}".format(username,userid))
 
 # search audit trail for userid
-cmdstr="sudo ausearch -ui {}".format(userid)
+cmdstr="sudo ausearch -ui {} -i -ts {}".format(userid,startDate)
 (output, pstatus, err) = callProcess(cmdstr)
-print ("Command return code: ", pstatus)
+#print ("Command return code: ", pstatus)
 
 # iterate through record list 
+print ("----Commands by {} starting at {}-----".format(username,startDate))
 recList = parseRecordList(output)
+for p in recList:
+  isUserCmd = hasattr(p,'type') and p.type.startswith("USER_CMD")
+  if isUserCmd:
+    #pprint(vars(p))
+    print ("COMMAND {} at {} by {}/{} executing {}".format(p.user_res,p.ts,p.user_auid,p.user_uid,p.user_cmd))
+
+sys.exit(4)
+
 for rec in recList:
   pprint(vars(rec))
 
@@ -155,7 +196,8 @@ for rec in recList:
     print ("PROCESS")
     pList = parseRecordList(output)
     for p in pList:
-      pprint(vars(p))
+      #pprint(vars(p))
+      print ("{} by {}/{} executing {}".format(p.user_res,p.ts,p.auid,p.uid,p.user_cmd))
   except AttributeError:
     pass # ok if pid does not exist for record
 
