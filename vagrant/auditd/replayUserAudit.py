@@ -22,14 +22,18 @@ class AuditRecord:
   def __init__(self):
     ts = date.today()
     type = ""
-    user_pid = 0
-    user_ppid = 0
-    user_euid = 0
-    user_auid = 0
+    pid = 0
+    ppid = 0
+    euid = 0
+    auid = 0
+    # USER_CMD has response code and full command
     user_res = ""
     user_cmd = ""
+    # EXECVE has full command
     execve_fullcmd = ""
-    syscall_success = 0
+    # SYSCALL has success (yes|no) and exit code
+    # if success=no, then no EXECVE
+    syscall_success = ""
     syscall_exit = 0
 
 def callProcess(cmdstr):
@@ -76,9 +80,6 @@ def parseRecordList(rawList):
     for line in linelist:
       if line.strip()=="----" or line.strip()=="" :
         continue
-      if line.startswith("type="):
-        typestr = line[5:line.find(' ')]
-        auditrec.type = typestr
       if line.startswith("time->"):
         line = line[6:]
         datetime_object = datetime.strptime(line,'%a %b %d %H:%M:%S %Y')
@@ -86,23 +87,34 @@ def parseRecordList(rawList):
       if line.startswith("type=EXECVE"):
         dict = splitAndMakeDict(line,' ','=')
         auditrec.execve_fullcmd = concatDictArgs(dict,'a')
-      if line.startswith("type=USER_CMD"):
+      if line.startswith("type=USER_CMD") or line.startswith("type=SYSCALL") or line.startswith("type=USER_AUTH"):
         #print ("LINE {}".format(line))
         dict = splitAndMakeDict(line,' ','=')
+        auditrec.type = dict['type']
+
         if 'uid' in dict:
-          auditrec.user_uid = dict['uid']
+          auditrec.uid = dict['uid']
         if 'pid' in dict:
-          auditrec.user_pid = dict['pid']
+          auditrec.pid = dict['pid']
         if 'ppid' in dict:
-          auditrec.user_ppid = dict['ppid']
+          auditrec.ppid = dict['ppid']
         if 'auid' in dict:
-          auditrec.user_auid = dict['auid']
+          auditrec.auid = dict['auid']
         if 'res' in dict:
+          # USER_CMD success code
           #print ("found 'res' {}".format(dict['res']))
           auditrec.user_res = dict['res']
           # chop off last char if single quote
           if auditrec.user_res.endswith("'"):
             auditrec.user_res = auditrec.user_res[:-1]
+        if 'success' in dict:
+          auditrec.syscall_success = dict['success']
+          if auditrec.syscall_success=="yes":
+            auditrec.syscall_success = "success"
+          elif auditrec.syscall_success=="no":
+            auditrec.syscall_success = "fail" 
+        if 'exit' in dict:
+          auditrec.syscall_exit = dict['exit']
         if 'cmd' in dict:
           # cmd needs to be parsed manually
           index1 = line.index("cmd=")
@@ -123,16 +135,21 @@ def parseRecordList(rawList):
           index1 = line.index("msg=audit(")
           index2 = line.index(")",index1+10)
           auditrec.ts = line[index1+10:index2]
-      if line.startswith("type=SYSCALL"):
-        dict = splitAndMakeDict(line,' ','=')
 
-    #pprint(vars(auditrec))
-    #if hasattr(auditrec,'type'):
-    #  print ("AUDIT REC.type: {}".format(auditrec.type))
-  
-    isNotUserAuth = hasattr(auditrec,'type') and not auditrec.type.startswith("USER_AUTH") 
-    if( isNotUserAuth ):
-      recList.append(auditrec)
+
+      if False: #line.startswith("type=SYSCALL"):
+        # only SYSCALL, and no EXECVE if failure
+        auditrec.type = "SYSCALL"
+        dict = splitAndMakeDict(line,' ','=')
+        auditrec.syscall_success = dict['success']
+        if auditrec.syscall_success=="yes":
+          auditrec.syscall_success = "success"
+        elif auditrec.syscall_success=="no":
+          auditrec.syscall_success = "fail" 
+        auditrec.syscall_exit = dict['exit']
+ 
+    # add record to returning list 
+    recList.append(auditrec)
 
   return recList
 
@@ -178,10 +195,16 @@ cmdstr="sudo ausearch -ui {} -i -ts {}".format(userid,startDate)
 print ("----Commands by {} starting at {}-----".format(username,startDate))
 recList = parseRecordList(output)
 for p in recList:
-  isUserCmd = hasattr(p,'type') and p.type.startswith("USER_CMD")
-  if isUserCmd:
-    #pprint(vars(p))
-    print ("COMMAND {} at {} by {}/{} executing {}".format(p.user_res,p.ts,p.user_auid,p.user_uid,p.user_cmd))
+  if not hasattr(p,'type'):
+    continue
+  #pprint(vars(p))
+  if p.type.startswith("USER_CMD"):
+    print ("{:10s} {:10s} at {} by {}/{} executing {}".format(p.type,p.user_res,p.ts,p.auid,p.uid,p.user_cmd))
+  elif p.type.startswith("SYSCALL"):
+    print ("{:10s} {:10s} at {} by {}/{} executing {}".format(p.type,p.syscall_success,p.ts,p.auid,p.uid,p.execve_fullcmd if hasattr(p,"execve_fullcmd") else "?"))
+  elif p.type.startswith("USER_AUTH"):
+    print ("{:10s} {:10s} at {} by {}/{}".format(p.type,p.user_res,p.ts,p.auid,p.uid))
+
 
 sys.exit(4)
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # create alice user
-sudo useradd -u 20001 -m alice
+sudo useradd -u 20001 -m alice -s /bin/bash
 
 # set static password and ensure group definition added to /etc/group
 phash=$(openssl passwd -1 -salt mysalt alicepass)
