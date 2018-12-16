@@ -10,6 +10,9 @@ else
  PVER="3"
 fi
 
+# start in home directory
+cd ~
+
 sudo apt-get install python${PVER}  python${PVER}-dev python${PVER}-pip -y
 echo ===PYTHON=====================================
 python${PVER} --version
