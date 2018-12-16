@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+#
+#
+vmname = 'awscli1604'
+boxname = 'ubuntu/xenial64'
+
+Vagrant.configure(2) do |config|
+  config.vm.hostname = "#{vmname}"
+  config.vm.box = "#{boxname}"
+  config.vm.network "private_network", type: "dhcp"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "#{vmname}"
+    v.customize ["modifyvm", :id, "--memory","1024" ]
+    v.customize ["modifyvm", :id, "--cpus","1" ]
+  end
+
+  # optionally pass in AWS IAM id and secret key
+  # AWS_ACCESS_KEY_ID=AK... AWS_ACCESS_KEY_ID="..." vagrant up
+  config.vm.provision "shell", path: "awscli.sh", privileged: false, env: {AWS_ACCESS_KEY_ID:ENV['AWS_ACCESS_KEY_ID'],AWS_SECRET_ACCESS_KEY:ENV['AWS_SECRET_ACCESS_KEY'],AWS_REGION:ENV['AWS_REGION']}
+
+  config.vm.provision "shell", inline: <<-SHELL
+
+echo "SUCCESS!"
+
+echo ==FINAL ENV======================================
+echo AWS_ACCESS_KEY_ID is #{ENV['AWS_ACCESS_KEY_ID']}
+echo Using AWS REGION/FORMAT: #{ENV['AWS_REGION']},#{ENV['$AWS_FORMAT']}
+
+SHELL
+
+end
