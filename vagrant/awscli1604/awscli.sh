@@ -38,6 +38,9 @@ source awscli/bin/activate
 pip install --upgrade awscli
 aws --version
 
+# exit virtualenv
+deactivate
+
 
 # if ENV vars not set for these values, then assign defaults
 if [ -z $AWS_ACCESS_KEY_ID ]; then
@@ -74,6 +77,5 @@ EOL
 # set permissions for config/credentials
 chmod 600 .aws/credentials
 chmod 600 .aws/config
-
 
 
