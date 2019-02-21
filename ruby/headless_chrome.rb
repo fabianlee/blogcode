@@ -13,7 +13,7 @@ def setup
     #options.add_argument('--remote-debugging-port=9222')
 
     # capabilities
-    caps = Selenium::WebDriver::Remote::Capabilities.new
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome
     caps["screen_resolution"] = "600x768"
     caps["record_network"] = "true"
 
