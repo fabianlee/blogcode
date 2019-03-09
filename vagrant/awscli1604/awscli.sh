@@ -3,8 +3,8 @@
 # start in home directory
 cd ~
 
-sudo apt-get update -y
-sudo apt-get install build-essential -y
+sudo apt-get update -yq
+sudo apt-get install build-essential -yq
 
 # decide python version, python3 if xenial or newer
 if [ `lsb_release -cs` == trusty ]; then
@@ -13,7 +13,7 @@ else
  PVER="3"
 fi
 
-sudo apt-get install python${PVER}  python${PVER}-dev python${PVER}-pip -y
+sudo apt-get install python${PVER}  python${PVER}-dev python${PVER}-pip -yq
 echo ===PYTHON=====================================
 python${PVER} --version
 
@@ -73,6 +73,11 @@ cat >.aws/config <<EOL
 region = ${AWS_REGION}
 output = ${AWS_FORMAT}
 EOL
+
+# write AWS vars to profile
+echo export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID >> ~/.bash_profile
+echo export AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" >> ~/.bash_profile
+echo export AWS_REGION=$AWS_REGION >> ~/.bash_profile
 
 # set permissions for config/credentials
 chmod 600 .aws/credentials
