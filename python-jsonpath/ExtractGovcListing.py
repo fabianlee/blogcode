@@ -49,7 +49,7 @@ if not os.path.isfile(filename):
   exit(2)
 
 # read file from disk
-json_file = open("/home/fabian/Documents/govc.json")
+json_file = open(filename)
 json_data=json.load(json_file)
 
 # name of VM
