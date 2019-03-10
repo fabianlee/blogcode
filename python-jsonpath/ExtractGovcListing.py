@@ -32,6 +32,10 @@ def cidr_to_netmask(cidr):
           str( (0x0000ff00 & mask) >> 8)  + '.' +
           str( (0x000000ff & mask)))
 
+# quick test to see if string is IPv4 or IPv6
+def isIPv4(str):
+  return str.count(".")==3
+
 
 ####### MAIN ##########################################################3
 
@@ -54,7 +58,8 @@ json_data=json.load(json_file)
 
 # name of VM
 print("name: {}".format( jp.match1("elements[*].Object.Config.Name",json_data) ))
-print("OS: {}".format( jp.match1("elements[*].Object.Guest.GuestFullName",json_data) ))
+print("State: {}".format( jp.match1("elements[*].Object.Runtime.PowerState",json_data) ) )
+print("OS: {}".format( jp.match1("elements[*].Object.Summary.Config.GuestFullName",json_data) ))
 
 # get path to vm, break apart
 fullPath=jp.match1("elements[*].Path",json_data)
@@ -65,9 +70,18 @@ print("Parent Folder: {}".format( pathsplit[len(pathsplit)-1] ))
 
 # show IP address and cidr/netmask
 print("Default IpAddress: {}".format( jp.match1("elements[*].Object.Guest.IpAddress",json_data) ) )
-for IpAddress in jp.match("elements[*].Object.Guest.Net[*].IpConfig.IpAddress[*]",json_data):
-  cidr=IpAddress['PrefixLength'] 
-  print("IP {} with cidr {} and netmask {}".format( IpAddress['IpAddress'],cidr,cidr_to_netmask(cidr)  ))
+
+hasNet=jp.match1("elements[*].Object.Guest.Net",json_data)
+if hasNet:
+  for IpAddress in jp.match("elements[*].Object.Guest.Net[*].IpConfig.IpAddress[*]",json_data):
+    cidr=IpAddress['PrefixLength'] 
+    if isIPv4(IpAddress['IpAddress']):
+      print("  IPv4 {}/{} netmask {}".format( IpAddress['IpAddress'],cidr,cidr_to_netmask(cidr)  ))
+    else:
+      print(" IPv6 {}/{}".format( IpAddress['IpAddress'],cidr ) )
+
+else:
+  print("There are no network elements in Guest, VM might be powered off")
 
 # memory/cpu
 #print("MaxMemoryUsage: {}".format( jp.match1("elements[*].Object.Runtime.MaxMemoryUsage",json_data) ) )
@@ -80,6 +94,4 @@ for disk in jp.match("elements[*].Object.Config.Hardware.Device[?CapacityInKB>0]
   filestore = disk['Backing']['FileName'].split(' ')
   print("DISK capacity is {}Gb on {}".format( capacityGB,filestore[0] ))
 
-# OS mounts
-#print("Guest.Disk: {}".format( jp.match1("elements[*].Object.Guest.Disk",json_data) ) )
 
