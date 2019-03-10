@@ -46,7 +46,7 @@ print("\nCount members in list: {}".format( len(jp.match("$.members[*]",json_dat
 # use extensions to provide direct count of number of members in array
 print("Count members using len extension: {}".format( jp.match1("$.members.`len`",json_data  ) ))
 
-# lookup array element given element inside array item
+# lookup array element given simple embedded element
 lookFor="Madame Uppercut"
 print("\nPowers of {}".format(lookFor))
 powers = jp.match1("members[?name='" + lookFor + "'].powers",json_data)
@@ -59,7 +59,7 @@ memberHasAliases=jp.match("members[?(aliases)]",json_data)
 for member in memberHasAliases:
   print("{} has aliases: {}".format( member['name'],member['aliases']  ))
 
-# find only array items that have nested element
+# find only array items where embedded structure has matching word
 print("\nDoes anyone have an alias that contains 'Red'?")
 memberHasAliases=jp.match("members[?(aliases[*]~'.*Red.*')]",json_data)
 for member in memberHasAliases:
