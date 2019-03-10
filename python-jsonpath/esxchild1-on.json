@@ -1,2 +1,1670 @@
-{"elements":[{"Path":"/ha-datacenter/vm/esxchild1","Object":{"Self":{"Type":"VirtualMachine","Value":"1"},"Value":null,"AvailableField":null,"Parent":{"Type":"Folder","Value":"ha-folder-vm"},"CustomValue":null,"OverallStatus":"green","ConfigStatus":"green","ConfigIssue":null,"EffectiveRole":[-1],"Permission":null,"Name":"esxchild1","DisabledMethod":["setCustomValue","Destroy_Task","AddTag","RemoveTag","RetrieveCustomValues","RefreshStorageInfo","RetrieveBackupAgent","CreateSnapshotEx_Task","RevertToCurrentSnapshot_Task","UpgradeVM_Task","ExtractOvfEnvironment","PowerOnVM_Task","AnswerVM","CustomizeVM_Task","CheckCustomizationSpec","MigrateVM_Task","RelocateVM_Task","CloneVM_Task","CloneNoSrcPermCheck_Task","InstantClone_Task","CreateForkChild_Task","EnableForkParent_Task","DisableForkParent_Task","RetrieveForkChildren_Task","RetrieveForkParent_Task","CreateImportLease","ExportVm","MarkAsTemplate","MarkAsVirtualMachine","UnregisterVM","ResetGuestInformation","UnmountToolsInstaller","UpgradeTools_Task","UpgradeToolsFromImage_Task","GetConnections","DropConnections","SetScreenResolution","DefragmentAllDisks","CreateSecondaryVM_Task","CreateSecondaryVMEx_Task","TurnOffFaultToleranceForVM_Task","MakePrimaryVM_Task","TerminateFaultTolerantVM_Task","DisableSecondaryVM_Task","EnableSecondaryVM_Task","SetDisplayTopology","StartRecording_Task","StopRecording_Task","StartReplaying_Task","StopReplaying_Task","PromoteDisks_Task","QueryChangedDiskAreas","QueryUnownedFiles","reloadVirtualMachineFromPath_Task","QueryFaultToleranceCompatibility","QueryFaultToleranceCompatibilityEx","InvokeFSR_Task","TerminateVM","IsNativeSnapshotCapable","ConfigureQuorumFilePathPrefix_Task","InjectOvfEnvironment","WipeDisk_Task","ShrinkDisk_Task","SendNMI","ReloadEx_Task","AttachDisk_Task","DetachDisk_Task","ApplyEvcModeVM_Task","QueryPolicyStatus","CryptoUnlock_Task"],"RecentTask":null,"DeclaredAlarmState":null,"TriggeredAlarmState":null,"AlarmActionsEnabled":null,"Tag":null,"Capability":{"SnapshotOperationsSupported":true,"MultipleSnapshotsSupported":true,"SnapshotConfigSupported":true,"PoweredOffSnapshotsSupported":true,"MemorySnapshotsSupported":true,"RevertToSnapshotSupported":true,"QuiescedSnapshotsSupported":true,"DisableSnapshotsSupported":false,"LockSnapshotsSupported":true,"ConsolePreferencesSupported":false,"CpuFeatureMaskSupported":true,"S1AcpiManagementSupported":true,"SettingScreenResolutionSupported":false,"ToolsAutoUpdateSupported":false,"VmNpivWwnSupported":true,"NpivWwnOnNonRdmVmSupported":true,"VmNpivWwnDisableSupported":true,"VmNpivWwnUpdateSupported":true,"SwapPlacementSupported":true,"ToolsSyncTimeSupported":true,"VirtualMmuUsageSupported":false,"DiskSharesSupported":true,"BootOptionsSupported":true,"BootRetryOptionsSupported":true,"SettingVideoRamSizeSupported":true,"SettingDisplayTopologySupported":false,"RecordReplaySupported":false,"ChangeTrackingSupported":true,"MultipleCoresPerSocketSupported":true,"HostBasedReplicationSupported":true,"GuestAutoLockSupported":true,"MemoryReservationLockSupported":true,"FeatureRequirementSupported":true,"PoweredOnMonitorTypeChangeSupported":true,"SeSparseDiskSupported":true,"NestedHVSupported":true,"VPMCSupported":true,"SecureBootSupported":false,"PerVmEvcSupported":true,"VirtualMmuUsageIgnored":true,"VirtualExecUsageIgnored":true,"DiskOnlySnapshotOnSuspendedVMSupported":true},"Config":{"ChangeVersion":"2019-03-10T18:47:32.033309Z","Modified":"1970-01-01T00:00:00Z","Name":"esxchild1","GuestFullName":"Ubuntu Linux (64-bit)","Version":"vmx-14","Uuid":"564d7234-245d-c0f5-b362-e1b18cdc95bb","CreateDate":"2019-02-16T03:48:30.085545Z","InstanceUuid":"526b86bd-32ae-99f7-8f97-03dfedc2098b","NpivNodeWorldWideName":null,"NpivPortWorldWideName":null,"NpivWorldWideNameType":"","NpivDesiredNodeWwns":0,"NpivDesiredPortWwns":0,"NpivTemporaryDisabled":true,"NpivOnNonRdmDisks":null,"LocationId":"564d7234-245d-c0f5-b362-e1b18cdc95bb","Template":false,"GuestId":"ubuntu64Guest","AlternateGuestName":"","Annotation":"","Files":{"VmPathName":"[datastore1] esxchild1/esxchild1.vmx","SnapshotDirectory":"[datastore1] esxchild1","SuspendDirectory":"[datastore1] esxchild1","LogDirectory":"[datastore1] esxchild1","FtMetadataDirectory":""},"Tools":{"ToolsVersion":10304,"ToolsInstallType":"guestToolsTypeOpenVMTools","AfterPowerOn":true,"AfterResume":true,"BeforeGuestStandby":true,"BeforeGuestShutdown":true,"BeforeGuestReboot":null,"ToolsUpgradePolicy":"manual","PendingCustomization":"","CustomizationKeyId":null,"SyncTimeWithHost":false,"LastInstallInfo":{"Counter":0,"Fault":null}},"Flags":{"DisableAcceleration":false,"EnableLogging":true,"UseToe":false,"RunWithDebugInfo":false,"MonitorType":"release","HtSharing":"any","SnapshotDisabled":false,"SnapshotLocked":false,"DiskUuidEnabled":false,"VirtualMmuUsage":"automatic","VirtualExecUsage":"hvAuto","SnapshotPowerOffBehavior":"powerOff","RecordReplayEnabled":false,"FaultToleranceType":"unset","CbrcCacheEnabled":false,"VvtdEnabled":false,"VbsEnabled":false},"ConsolePreferences":null,"DefaultPowerOps":{"PowerOffType":"soft","SuspendType":"soft","ResetType":"soft","DefaultPowerOffType":"soft","DefaultSuspendType":"hard","DefaultResetType":"soft","StandbyAction":"checkpoint"},"Hardware":{"NumCPU":1,"NumCoresPerSocket":1,"MemoryMB":1024,"VirtualICH7MPresent":false,"VirtualSMCPresent":false,"Device":[{"Key":200,"DeviceInfo":{"Label":"IDE 0","Summary":"IDE 0"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":0,"UnitNumber":null,"BusNumber":0,"Device":null},{"Key":201,"DeviceInfo":{"Label":"IDE 1","Summary":"IDE 1"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":0,"UnitNumber":null,"BusNumber":1,"Device":null},{"Key":300,"DeviceInfo":{"Label":"PS2 controller 0","Summary":"PS2 controller 0"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":0,"UnitNumber":null,"BusNumber":0,"Device":[600,700]},{"Key":100,"DeviceInfo":{"Label":"PCI controller 0","Summary":"PCI controller 0"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":0,"UnitNumber":null,"BusNumber":0,"Device":[500,12000,7000,1000,15000,4000]},{"Key":400,"DeviceInfo":{"Label":"SIO controller 0","Summary":"SIO controller 0"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":0,"UnitNumber":null,"BusNumber":0,"Device":null},{"Key":600,"DeviceInfo":{"Label":"Keyboard ","Summary":"Keyboard"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":300,"UnitNumber":0},{"Key":700,"DeviceInfo":{"Label":"Pointing device","Summary":"Pointing device; Device"},"Backing":{"DeviceName":"","UseAutoDetect":false,"HostPointingDevice":"autodetect"},"Connectable":null,"SlotInfo":null,"ControllerKey":300,"UnitNumber":1},{"Key":500,"DeviceInfo":{"Label":"Video card ","Summary":"Video card"},"Backing":null,"Connectable":null,"SlotInfo":null,"ControllerKey":100,"UnitNumber":0,"VideoRamSizeInKB":0,"NumDisplays":1,"UseAutoDetect":true,"Enable3DSupport":false,"Use3dRenderer":"automatic","GraphicsMemorySizeInKB":262144},{"Key":12000,"DeviceInfo":{"Label":"VMCI device","Summary":"Device on the virtual machine PCI bus that provides support for the virtual machine communication interface"},"Backing":null,"Connectable":null,"SlotInfo":{"PciSlotNumber":34},"ControllerKey":100,"UnitNumber":17,"Id":-875374083,"AllowUnrestrictedCommunication":false,"FilterEnable":true,"FilterInfo":null},{"Key":7000,"DeviceInfo":{"Label":"USB controller ","Summary":"Auto connect Disabled"},"Backing":null,"Connectable":null,"SlotInfo":{"PciSlotNumber":32,"EhciPciSlotNumber":33},"ControllerKey":100,"UnitNumber":22,"BusNumber":0,"Device":null,"AutoConnectDevices":false,"EhciEnabled":true},{"Key":1000,"DeviceInfo":{"Label":"SCSI controller 0","Summary":"VMware paravirtual SCSI"},"Backing":null,"Connectable":null,"SlotInfo":{"PciSlotNumber":192},"ControllerKey":100,"UnitNumber":3,"BusNumber":0,"Device":[2000],"HotAddRemove":true,"SharedBus":"noSharing","ScsiCtlrUnitNumber":7},{"Key":15000,"DeviceInfo":{"Label":"SATA controller 0","Summary":"AHCI"},"Backing":null,"Connectable":null,"SlotInfo":{"PciSlotNumber":35},"ControllerKey":100,"UnitNumber":24,"BusNumber":0,"Device":[16000]},{"Key":16000,"DeviceInfo":{"Label":"CD/DVD drive 1","Summary":"ISO [datastore1] mini.iso"},"Backing":{"FileName":"[datastore1] mini.iso","Datastore":{"Type":"Datastore","Value":"5c6761bc-71c9a798-fe45-525400dd89ff"},"BackingObjectId":""},"Connectable":{"MigrateConnect":"","StartConnected":true,"AllowGuestControl":true,"Connected":true,"Status":"ok"},"SlotInfo":null,"ControllerKey":15000,"UnitNumber":0},{"Key":2000,"DeviceInfo":{"Label":"Hard disk 1","Summary":"16,777,216 KB"},"Backing":{"FileName":"[datastore1] esxchild1/esxchild1.vmdk","Datastore":{"Type":"Datastore","Value":"5c6761bc-71c9a798-fe45-525400dd89ff"},"BackingObjectId":"","DiskMode":"persistent","Split":false,"WriteThrough":false,"ThinProvisioned":false,"EagerlyScrub":null,"Uuid":"6000C299-6d4e-67f6-4dda-0be94093f58b","ContentId":"f0ba6c3fa3149c95345e8052fffffffe","ChangeId":"","Parent":null,"DeltaDiskFormat":"","DigestEnabled":false,"DeltaGrainSize":0,"DeltaDiskFormatVariant":"","Sharing":"sharingNone","KeyId":null},"Connectable":null,"SlotInfo":null,"ControllerKey":1000,"UnitNumber":0,"CapacityInKB":16777216,"CapacityInBytes":17179869184,"Shares":{"Shares":1000,"Level":"normal"},"StorageIOAllocation":{"Limit":-1,"Shares":{"Shares":1000,"Level":"normal"},"Reservation":0},"DiskObjectId":"1-2000","VFlashCacheConfigInfo":null,"Iofilter":null,"VDiskId":null,"NativeUnmanagedLinkedClone":false},{"Key":4000,"DeviceInfo":{"Label":"Network adapter 1","Summary":"VM Network"},"Backing":{"DeviceName":"VM Network","UseAutoDetect":false,"Network":{"Type":"Network","Value":"HaNetwork-VM Network"},"InPassthroughMode":null},"Connectable":{"MigrateConnect":"unset","StartConnected":true,"AllowGuestControl":true,"Connected":true,"Status":"ok"},"SlotInfo":{"PciSlotNumber":160},"ControllerKey":100,"UnitNumber":7,"AddressType":"generated","MacAddress":"00:0c:29:dc:95:bb","WakeOnLanEnabled":false,"ResourceAllocation":{"Reservation":0,"Share":{"Shares":50,"Level":"normal"},"Limit":-1},"ExternalId":"","UptCompatibilityEnabled":true}]},"CpuAllocation":{"Reservation":0,"ExpandableReservation":null,"Limit":-1,"Shares":{"Shares":1000,"Level":"normal"},"OverheadLimit":null},"MemoryAllocation":{"Reservation":0,"ExpandableReservation":null,"Limit":-1,"Shares":{"Shares":10240,"Level":"normal"},"OverheadLimit":null},"LatencySensitivity":{"Level":"normal","Sensitivity":0},"MemoryHotAddEnabled":false,"CpuHotAddEnabled":false,"CpuHotRemoveEnabled":false,"HotPlugMemoryLimit":1024,"HotPlugMemoryIncrementSize":0,"CpuAffinity":null,"MemoryAffinity":null,"NetworkShaper":null,"ExtraConfig":[{"Key":"tools.guest.desktop.autolock","Value":"FALSE"},{"Key":"nvram","Value":"esxchild1.nvram"},{"Key":"pciBridge0.present","Value":"TRUE"},{"Key":"svga.present","Value":"TRUE"},{"Key":"pciBridge4.present","Value":"TRUE"},{"Key":"pciBridge4.virtualDev","Value":"pcieRootPort"},{"Key":"pciBridge4.functions","Value":"8"},{"Key":"pciBridge5.present","Value":"TRUE"},{"Key":"pciBridge5.virtualDev","Value":"pcieRootPort"},{"Key":"pciBridge5.functions","Value":"8"},{"Key":"pciBridge6.present","Value":"TRUE"},{"Key":"pciBridge6.virtualDev","Value":"pcieRootPort"},{"Key":"pciBridge6.functions","Value":"8"},{"Key":"pciBridge7.present","Value":"TRUE"},{"Key":"pciBridge7.virtualDev","Value":"pcieRootPort"},{"Key":"pciBridge7.functions","Value":"8"},{"Key":"hpet0.present","Value":"TRUE"},{"Key":"RemoteDisplay.maxConnections","Value":"-1"},{"Key":"sched.cpu.latencySensitivity","Value":"normal"},{"Key":"svga.autodetect","Value":"TRUE"},{"Key":"numa.autosize.cookie","Value":"10001"},{"Key":"numa.autosize.vcpu.maxPerVirtualNode","Value":"1"},{"Key":"sched.swap.derivedName","Value":"/vmfs/volumes/5c6761bc-71c9a798-fe45-525400dd89ff/esxchild1/esxchild1-e0e5ae9b.vswp"},{"Key":"pciBridge0.pciSlotNumber","Value":"17"},{"Key":"pciBridge4.pciSlotNumber","Value":"21"},{"Key":"pciBridge5.pciSlotNumber","Value":"22"},{"Key":"pciBridge6.pciSlotNumber","Value":"23"},{"Key":"pciBridge7.pciSlotNumber","Value":"24"},{"Key":"scsi0.pciSlotNumber","Value":"192"},{"Key":"usb.pciSlotNumber","Value":"32"},{"Key":"ethernet0.pciSlotNumber","Value":"160"},{"Key":"ehci.pciSlotNumber","Value":"33"},{"Key":"vmci0.pciSlotNumber","Value":"34"},{"Key":"sata0.pciSlotNumber","Value":"35"},{"Key":"ethernet0.generatedAddressOffset","Value":"0"},{"Key":"monitor.phys_bits_used","Value":"43"},{"Key":"vmotion.checkpointFBSize","Value":"16777216"},{"Key":"vmotion.checkpointSVGAPrimarySize","Value":"16777216"},{"Key":"softPowerOff","Value":"FALSE"},{"Key":"usb:1.speed","Value":"2"},{"Key":"usb:1.present","Value":"TRUE"},{"Key":"usb:1.deviceType","Value":"hub"},{"Key":"usb:1.port","Value":"1"},{"Key":"usb:1.parent","Value":"-1"},{"Key":"tools.remindInstall","Value":"TRUE"},{"Key":"scsi0.sasWWID","Value":"50 05 05 64 24 5d c0 f0"},{"Key":"scsi0:0.redo","Value":""},{"Key":"usb:0.present","Value":"TRUE"},{"Key":"usb:0.deviceType","Value":"hid"},{"Key":"usb:0.port","Value":"0"},{"Key":"usb:0.parent","Value":"-1"},{"Key":"svga.guestBackedPrimaryAware","Value":"TRUE"},{"Key":"guestinfo.vmtools.description","Value":"open-vm-tools 10.2.0 build 7253323"},{"Key":"guestinfo.vmtools.versionString","Value":"10.2.0"},{"Key":"guestinfo.vmtools.versionNumber","Value":"10304"},{"Key":"guestinfo.vmtools.buildNumber","Value":"7253323"},{"Key":"vmware.tools.internalversion","Value":"10304"},{"Key":"vmware.tools.requiredversion","Value":"10304"},{"Key":"migrate.hostLogState","Value":"none"},{"Key":"migrate.migrationId","Value":"0"},{"Key":"migrate.hostLog","Value":"./esxchild1-e0e5ae9b.hlog"}],"CpuFeatureMask":[{"Level":0,"Vendor":"","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":0,"Vendor":"amd","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":1,"Vendor":"","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":1,"Vendor":"amd","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":-2147483648,"Vendor":"","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":-2147483648,"Vendor":"amd","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":-2147483647,"Vendor":"","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":-2147483647,"Vendor":"amd","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":-2147483640,"Vendor":"","Eax":"","Ebx":"","Ecx":"","Edx":""},{"Level":-2147483640,"Vendor":"amd","Eax":"","Ebx":"","Ecx":"","Edx":""}],"DatastoreUrl":[{"Name":"datastore1","Url":"/vmfs/volumes/5c6761bc-71c9a798-fe45-525400dd89ff/"}],"SwapPlacement":"inherit","BootOptions":{"BootDelay":0,"EnterBIOSSetup":false,"EfiSecureBootEnabled":false,"BootRetryEnabled":false,"BootRetryDelay":10,"BootOrder":null,"NetworkBootProtocol":"ipv4"},"FtInfo":null,"RepConfig":null,"VAppConfig":null,"VAssertsEnabled":false,"ChangeTrackingEnabled":false,"Firmware":"bios","MaxMksConnections":-1,"GuestAutoLockEnabled":false,"ManagedBy":null,"MemoryReservationLockedToMax":false,"InitialOverhead":{"InitialMemoryReservation":52989952,"InitialSwapReservation":255541248},"NestedHVEnabled":false,"VPMCEnabled":false,"ScheduledHardwareUpgradeInfo":{"UpgradePolicy":"never","VersionKey":"","ScheduledHardwareUpgradeStatus":"none","Fault":null},"ForkConfigInfo":null,"VFlashCacheReservation":0,"VmxConfigChecksum":"d2tWYWZuM2phZ2tJOXhnR0NyRERacXYxM1o0PQ==","MessageBusTunnelEnabled":false,"VmStorageObjectId":"","SwapStorageObjectId":"","KeyId":null,"GuestIntegrityInfo":{"Enabled":false},"MigrateEncryption":"opportunistic"},"Layout":{"ConfigFile":["esxchild1.nvram","esxchild1.vmsd"],"LogFile":["vmware-1.log","vmware.log"],"Disk":[{"Key":2000,"DiskFile":["[datastore1] esxchild1/esxchild1.vmdk"]}],"Snapshot":null,"SwapFile":"[datastore1] esxchild1/esxchild1-e0e5ae9b.vswp"},"LayoutEx":{"File":[{"Key":0,"Name":"[datastore1] esxchild1/esxchild1.vmx","Type":"config","Size":0,"UniqueSize":0,"BackingObjectId":"","Accessible":true},{"Key":1,"Name":"[datastore1] esxchild1/esxchild1.nvram","Type":"nvram","Size":8684,"UniqueSize":8684,"BackingObjectId":"","Accessible":true},{"Key":2,"Name":"[datastore1] esxchild1/esxchild1.vmsd","Type":"snapshotList","Size":0,"UniqueSize":0,"BackingObjectId":"","Accessible":true},{"Key":3,"Name":"[datastore1] esxchild1/esxchild1.vmdk","Type":"diskDescriptor","Size":0,"UniqueSize":0,"BackingObjectId":"","Accessible":true},{"Key":4,"Name":"[datastore1] esxchild1/esxchild1-flat.vmdk","Type":"diskExtent","Size":17179869184,"UniqueSize":17179869184,"BackingObjectId":"","Accessible":true},{"Key":5,"Name":"[datastore1] esxchild1/vmware-1.log","Type":"log","Size":38734,"UniqueSize":38734,"BackingObjectId":"","Accessible":true},{"Key":6,"Name":"[datastore1] esxchild1/vmware.log","Type":"log","Size":173578,"UniqueSize":173578,"BackingObjectId":"","Accessible":true},{"Key":7,"Name":"[datastore1] esxchild1/esxchild1-e0e5ae9b.vswp","Type":"swap","Size":1073741824,"UniqueSize":1073741824,"BackingObjectId":"","Accessible":true},{"Key":8,"Name":"[datastore1] esxchild1/vmx-esxchild1-3773148827-1.vswp","Type":"uwswap","Size":115343360,"UniqueSize":115343360,"BackingObjectId":"","Accessible":true}],"Disk":[{"Key":2000,"Chain":[{"FileKey":[3,4]}]}],"Snapshot":null,"Timestamp":"2019-03-10T18:47:34.76018Z"},"Storage":{"PerDatastoreUsage":[{"Datastore":{"Type":"Datastore","Value":"5c6761bc-71c9a798-fe45-525400dd89ff"},"Committed":18369175364,"Uncommitted":449,"Unshared":18369175364}],"Timestamp":"2019-03-10T18:47:34.760203Z"},"EnvironmentBrowser":{"Type":"EnvironmentBrowser","Value":"1-envmgr"},"ResourcePool":{"Type":"ResourcePool","Value":"ha-root-pool"},"ParentVApp":null,"ResourceConfig":{"Entity":{"Type":"VirtualMachine","Value":"1"},"ChangeVersion":"","LastModified":null,"CpuAllocation":{"Reservation":0,"ExpandableReservation":null,"Limit":-1,"Shares":{"Shares":1000,"Level":"normal"},"OverheadLimit":null},"MemoryAllocation":{"Reservation":0,"ExpandableReservation":null,"Limit":-1,"Shares":{"Shares":10240,"Level":"normal"},"OverheadLimit":null}},"Runtime":{"Device":[{"RuntimeState":{"VmDirectPathGen2Active":false,"VmDirectPathGen2InactiveReasonVm":null,"VmDirectPathGen2InactiveReasonOther":["vmNptIncompatibleNetwork"],"VmDirectPathGen2InactiveReasonExtended":"","ReservationStatus":"","AttachmentStatus":"","FeatureRequirement":null},"Key":4000}],"Host":{"Type":"HostSystem","Value":"ha-host"},"ConnectionState":"connected","PowerState":"poweredOn","FaultToleranceState":"notConfigured","DasVmProtection":null,"ToolsInstallerMounted":false,"SuspendTime":null,"BootTime":"2019-03-10T18:47:34.661943Z","SuspendInterval":0,"Question":null,"MemoryOverhead":0,"MaxCpuUsage":2593,"MaxMemoryUsage":1024,"NumMksConnections":1,"RecordReplayState":"inactive","CleanPowerOff":null,"NeedSecondaryReason":"","OnlineStandby":false,"MinRequiredEVCModeKey":"","ConsolidationNeeded":false,"OfflineFeatureRequirement":[{"Key":"cpuid.lm","FeatureName":"cpuid.lm","Value":"Bool:Min:1"}],"FeatureRequirement":[{"Key":"cpuid.SSE3","FeatureName":"cpuid.SSE3","Value":"Bool:Min:1"},{"Key":"cpuid.PCLMULQDQ","FeatureName":"cpuid.PCLMULQDQ","Value":"Bool:Min:1"},{"Key":"cpuid.SSSE3","FeatureName":"cpuid.SSSE3","Value":"Bool:Min:1"},{"Key":"cpuid.CMPXCHG16B","FeatureName":"cpuid.CMPXCHG16B","Value":"Bool:Min:1"},{"Key":"cpuid.PCID","FeatureName":"cpuid.PCID","Value":"Bool:Min:1"},{"Key":"cpuid.SSE41","FeatureName":"cpuid.SSE41","Value":"Bool:Min:1"},{"Key":"cpuid.SSE42","FeatureName":"cpuid.SSE42","Value":"Bool:Min:1"},{"Key":"cpuid.POPCNT","FeatureName":"cpuid.POPCNT","Value":"Bool:Min:1"},{"Key":"cpuid.AES","FeatureName":"cpuid.AES","Value":"Bool:Min:1"},{"Key":"cpuid.XSAVE","FeatureName":"cpuid.XSAVE","Value":"Bool:Min:1"},{"Key":"cpuid.AVX","FeatureName":"cpuid.AVX","Value":"Bool:Min:1"},{"Key":"cpuid.SS","FeatureName":"cpuid.SS","Value":"Bool:Min:1"},{"Key":"cpuid.XCR0_MASTER_SSE","FeatureName":"cpuid.XCR0_MASTER_SSE","Value":"Bool:Min:1"},{"Key":"cpuid.XCR0_MASTER_YMM_H","FeatureName":"cpuid.XCR0_MASTER_YMM_H","Value":"Bool:Min:1"},{"Key":"cpuid.LAHF64","FeatureName":"cpuid.LAHF64","Value":"Bool:Min:1"},{"Key":"cpuid.NX","FeatureName":"cpuid.NX","Value":"Bool:Min:1"},{"Key":"cpuid.RDTSCP","FeatureName":"cpuid.RDTSCP","Value":"Bool:Min:1"},{"Key":"cpuid.LM","FeatureName":"cpuid.LM","Value":"Bool:Min:1"},{"Key":"cpuid.Intel","FeatureName":"cpuid.Intel","Value":"Bool:Min:1"},{"Key":"cpuid.IBRS","FeatureName":"cpuid.IBRS","Value":"Bool:Min:1"},{"Key":"cpuid.IBPB","FeatureName":"cpuid.IBPB","Value":"Bool:Min:1"},{"Key":"misc.cpuidFaulting","FeatureName":"misc.cpuidFaulting","Value":"Bool:Min:1"}],"FeatureMask":null,"VFlashCacheAllocation":0,"Paused":false,"SnapshotInBackground":false,"QuiescedForkParent":null,"InstantCloneFrozen":false,"CryptoState":""},"Guest":{"ToolsStatus":"toolsOk","ToolsVersionStatus":"guestToolsUnmanaged","ToolsVersionStatus2":"guestToolsUnmanaged","ToolsRunningStatus":"guestToolsRunning","ToolsVersion":"10304","ToolsInstallType":"guestToolsTypeOpenVMTools","GuestId":"ubuntu64Guest","GuestFamily":"linuxGuest","GuestFullName":"Ubuntu Linux (64-bit)","HostName":"esxchild1","IpAddress":"192.168.122.254","Net":[{"Network":"VM Network","IpAddress":["192.168.122.254","fe80::20c:29ff:fedc:95bb"],"MacAddress":"00:0c:29:dc:95:bb","Connected":true,"DeviceConfigId":4000,"DnsConfig":null,"IpConfig":{"IpAddress":[{"IpAddress":"192.168.122.254","PrefixLength":24,"Origin":"","State":"preferred","Lifetime":null},{"IpAddress":"fe80::20c:29ff:fedc:95bb","PrefixLength":64,"Origin":"","State":"unknown","Lifetime":null}],"Dhcp":null,"AutoConfigurationEnabled":null},"NetBIOSConfig":null}],"IpStack":[{"DnsConfig":{"Dhcp":false,"HostName":"esxchild1","DomainName":"","IpAddress":["192.168.122.1"],"SearchDomain":[""]},"IpRouteConfig":{"IpRoute":[{"Network":"0.0.0.0","PrefixLength":0,"Gateway":{"IpAddress":"192.168.122.1","Device":"0"}},{"Network":"192.168.122.0","PrefixLength":24,"Gateway":{"IpAddress":"","Device":"0"}},{"Network":"fe80::","PrefixLength":64,"Gateway":{"IpAddress":"","Device":"0"}},{"Network":"ff00::","PrefixLength":8,"Gateway":{"IpAddress":"","Device":"0"}}]},"IpStackConfig":null,"DhcpConfig":null}],"Disk":[{"DiskPath":"/","Capacity":15766306816,"FreeSpace":13392801792}],"Screen":{"Width":800,"Height":600},"GuestState":"running","AppHeartbeatStatus":"appStatusGray","GuestKernelCrashed":false,"AppState":"none","GuestOperationsReady":true,"InteractiveGuestOperationsReady":false,"GuestStateChangeSupported":true,"GenerationInfo":null},"Summary":{"Vm":{"Type":"VirtualMachine","Value":"1"},"Runtime":{"Device":[{"RuntimeState":{"VmDirectPathGen2Active":false,"VmDirectPathGen2InactiveReasonVm":null,"VmDirectPathGen2InactiveReasonOther":["vmNptIncompatibleNetwork"],"VmDirectPathGen2InactiveReasonExtended":"","ReservationStatus":"","AttachmentStatus":"","FeatureRequirement":null},"Key":4000}],"Host":{"Type":"HostSystem","Value":"ha-host"},"ConnectionState":"connected","PowerState":"poweredOn","FaultToleranceState":"notConfigured","DasVmProtection":null,"ToolsInstallerMounted":false,"SuspendTime":null,"BootTime":"2019-03-10T18:47:34.661943Z","SuspendInterval":0,"Question":null,"MemoryOverhead":0,"MaxCpuUsage":2593,"MaxMemoryUsage":1024,"NumMksConnections":1,"RecordReplayState":"inactive","CleanPowerOff":null,"NeedSecondaryReason":"","OnlineStandby":false,"MinRequiredEVCModeKey":"","ConsolidationNeeded":false,"OfflineFeatureRequirement":[{"Key":"cpuid.lm","FeatureName":"cpuid.lm","Value":"Bool:Min:1"}],"FeatureRequirement":[{"Key":"cpuid.SSE3","FeatureName":"cpuid.SSE3","Value":"Bool:Min:1"},{"Key":"cpuid.PCLMULQDQ","FeatureName":"cpuid.PCLMULQDQ","Value":"Bool:Min:1"},{"Key":"cpuid.SSSE3","FeatureName":"cpuid.SSSE3","Value":"Bool:Min:1"},{"Key":"cpuid.CMPXCHG16B","FeatureName":"cpuid.CMPXCHG16B","Value":"Bool:Min:1"},{"Key":"cpuid.PCID","FeatureName":"cpuid.PCID","Value":"Bool:Min:1"},{"Key":"cpuid.SSE41","FeatureName":"cpuid.SSE41","Value":"Bool:Min:1"},{"Key":"cpuid.SSE42","FeatureName":"cpuid.SSE42","Value":"Bool:Min:1"},{"Key":"cpuid.POPCNT","FeatureName":"cpuid.POPCNT","Value":"Bool:Min:1"},{"Key":"cpuid.AES","FeatureName":"cpuid.AES","Value":"Bool:Min:1"},{"Key":"cpuid.XSAVE","FeatureName":"cpuid.XSAVE","Value":"Bool:Min:1"},{"Key":"cpuid.AVX","FeatureName":"cpuid.AVX","Value":"Bool:Min:1"},{"Key":"cpuid.SS","FeatureName":"cpuid.SS","Value":"Bool:Min:1"},{"Key":"cpuid.XCR0_MASTER_SSE","FeatureName":"cpuid.XCR0_MASTER_SSE","Value":"Bool:Min:1"},{"Key":"cpuid.XCR0_MASTER_YMM_H","FeatureName":"cpuid.XCR0_MASTER_YMM_H","Value":"Bool:Min:1"},{"Key":"cpuid.LAHF64","FeatureName":"cpuid.LAHF64","Value":"Bool:Min:1"},{"Key":"cpuid.NX","FeatureName":"cpuid.NX","Value":"Bool:Min:1"},{"Key":"cpuid.RDTSCP","FeatureName":"cpuid.RDTSCP","Value":"Bool:Min:1"},{"Key":"cpuid.LM","FeatureName":"cpuid.LM","Value":"Bool:Min:1"},{"Key":"cpuid.Intel","FeatureName":"cpuid.Intel","Value":"Bool:Min:1"},{"Key":"cpuid.IBRS","FeatureName":"cpuid.IBRS","Value":"Bool:Min:1"},{"Key":"cpuid.IBPB","FeatureName":"cpuid.IBPB","Value":"Bool:Min:1"},{"Key":"misc.cpuidFaulting","FeatureName":"misc.cpuidFaulting","Value":"Bool:Min:1"}],"FeatureMask":null,"VFlashCacheAllocation":0,"Paused":false,"SnapshotInBackground":false,"QuiescedForkParent":null,"InstantCloneFrozen":false,"CryptoState":""},"Guest":{"GuestId":"ubuntu64Guest","GuestFullName":"Ubuntu Linux (64-bit)","ToolsStatus":"toolsOk","ToolsVersionStatus":"guestToolsUnmanaged","ToolsVersionStatus2":"guestToolsUnmanaged","ToolsRunningStatus":"guestToolsRunning","HostName":"esxchild1","IpAddress":"192.168.122.254"},"Config":{"Name":"esxchild1","Template":false,"VmPathName":"[datastore1] esxchild1/esxchild1.vmx","MemorySizeMB":1024,"CpuReservation":0,"MemoryReservation":0,"NumCpu":1,"NumEthernetCards":1,"NumVirtualDisks":1,"Uuid":"564d7234-245d-c0f5-b362-e1b18cdc95bb","InstanceUuid":"526b86bd-32ae-99f7-8f97-03dfedc2098b","GuestId":"ubuntu64Guest","GuestFullName":"Ubuntu Linux (64-bit)","Annotation":"","Product":null,"InstallBootRequired":null,"FtInfo":null,"ManagedBy":null,"TpmPresent":false,"NumVmiopBackings":0},"Storage":{"Committed":18369175364,"Uncommitted":449,"Unshared":18369175364,"Timestamp":"2019-03-10T18:47:34.760203Z"},"QuickStats":{"OverallCpuUsage":1439,"OverallCpuDemand":0,"GuestMemoryUsage":389,"HostMemoryUsage":1068,"GuestHeartbeatStatus":"green","DistributedCpuEntitlement":0,"DistributedMemoryEntitlement":0,"StaticCpuEntitlement":0,"StaticMemoryEntitlement":0,"PrivateMemory":0,"SharedMemory":0,"SwappedMemory":0,"BalloonedMemory":0,"ConsumedOverheadMemory":44,"FtLogBandwidth":0,"FtSecondaryLatency":0,"FtLatencyStatus":"","CompressedMemory":0,"UptimeSeconds":2025,"SsdSwappedMemory":0},"OverallStatus":"green","CustomValue":null},"Datastore":[{"Type":"Datastore","Value":"5c6761bc-71c9a798-fe45-525400dd89ff"}],"Network":[{"Type":"Network","Value":"HaNetwork-VM Network"}],"Snapshot":null,"RootSnapshot":null,"GuestHeartbeatStatus":"green"}}]}
-
+﻿{
+  "elements": [
+    {
+      "Path": "/ha-datacenter/vm/esxchild1",
+      "Object": {
+        "Self": {
+          "Type": "VirtualMachine",
+          "Value": "1"
+        },
+        "Value": null,
+        "AvailableField": null,
+        "Parent": {
+          "Type": "Folder",
+          "Value": "ha-folder-vm"
+        },
+        "CustomValue": null,
+        "OverallStatus": "green",
+        "ConfigStatus": "green",
+        "ConfigIssue": null,
+        "EffectiveRole": [
+          -1
+        ],
+        "Permission": null,
+        "Name": "esxchild1",
+        "DisabledMethod": [
+          "setCustomValue",
+          "Destroy_Task",
+          "AddTag",
+          "RemoveTag",
+          "RetrieveCustomValues",
+          "RefreshStorageInfo",
+          "RetrieveBackupAgent",
+          "CreateSnapshotEx_Task",
+          "RevertToCurrentSnapshot_Task",
+          "UpgradeVM_Task",
+          "ExtractOvfEnvironment",
+          "PowerOnVM_Task",
+          "AnswerVM",
+          "CustomizeVM_Task",
+          "CheckCustomizationSpec",
+          "MigrateVM_Task",
+          "RelocateVM_Task",
+          "CloneVM_Task",
+          "CloneNoSrcPermCheck_Task",
+          "InstantClone_Task",
+          "CreateForkChild_Task",
+          "EnableForkParent_Task",
+          "DisableForkParent_Task",
+          "RetrieveForkChildren_Task",
+          "RetrieveForkParent_Task",
+          "CreateImportLease",
+          "ExportVm",
+          "MarkAsTemplate",
+          "MarkAsVirtualMachine",
+          "UnregisterVM",
+          "ResetGuestInformation",
+          "UnmountToolsInstaller",
+          "UpgradeTools_Task",
+          "UpgradeToolsFromImage_Task",
+          "GetConnections",
+          "DropConnections",
+          "SetScreenResolution",
+          "DefragmentAllDisks",
+          "CreateSecondaryVM_Task",
+          "CreateSecondaryVMEx_Task",
+          "TurnOffFaultToleranceForVM_Task",
+          "MakePrimaryVM_Task",
+          "TerminateFaultTolerantVM_Task",
+          "DisableSecondaryVM_Task",
+          "EnableSecondaryVM_Task",
+          "SetDisplayTopology",
+          "StartRecording_Task",
+          "StopRecording_Task",
+          "StartReplaying_Task",
+          "StopReplaying_Task",
+          "PromoteDisks_Task",
+          "QueryChangedDiskAreas",
+          "QueryUnownedFiles",
+          "reloadVirtualMachineFromPath_Task",
+          "QueryFaultToleranceCompatibility",
+          "QueryFaultToleranceCompatibilityEx",
+          "InvokeFSR_Task",
+          "TerminateVM",
+          "IsNativeSnapshotCapable",
+          "ConfigureQuorumFilePathPrefix_Task",
+          "InjectOvfEnvironment",
+          "WipeDisk_Task",
+          "ShrinkDisk_Task",
+          "SendNMI",
+          "ReloadEx_Task",
+          "AttachDisk_Task",
+          "DetachDisk_Task",
+          "ApplyEvcModeVM_Task",
+          "QueryPolicyStatus",
+          "CryptoUnlock_Task"
+        ],
+        "RecentTask": null,
+        "DeclaredAlarmState": null,
+        "TriggeredAlarmState": null,
+        "AlarmActionsEnabled": null,
+        "Tag": null,
+        "Capability": {
+          "SnapshotOperationsSupported": true,
+          "MultipleSnapshotsSupported": true,
+          "SnapshotConfigSupported": true,
+          "PoweredOffSnapshotsSupported": true,
+          "MemorySnapshotsSupported": true,
+          "RevertToSnapshotSupported": true,
+          "QuiescedSnapshotsSupported": true,
+          "DisableSnapshotsSupported": false,
+          "LockSnapshotsSupported": true,
+          "ConsolePreferencesSupported": false,
+          "CpuFeatureMaskSupported": true,
+          "S1AcpiManagementSupported": true,
+          "SettingScreenResolutionSupported": false,
+          "ToolsAutoUpdateSupported": false,
+          "VmNpivWwnSupported": true,
+          "NpivWwnOnNonRdmVmSupported": true,
+          "VmNpivWwnDisableSupported": true,
+          "VmNpivWwnUpdateSupported": true,
+          "SwapPlacementSupported": true,
+          "ToolsSyncTimeSupported": true,
+          "VirtualMmuUsageSupported": false,
+          "DiskSharesSupported": true,
+          "BootOptionsSupported": true,
+          "BootRetryOptionsSupported": true,
+          "SettingVideoRamSizeSupported": true,
+          "SettingDisplayTopologySupported": false,
+          "RecordReplaySupported": false,
+          "ChangeTrackingSupported": true,
+          "MultipleCoresPerSocketSupported": true,
+          "HostBasedReplicationSupported": true,
+          "GuestAutoLockSupported": true,
+          "MemoryReservationLockSupported": true,
+          "FeatureRequirementSupported": true,
+          "PoweredOnMonitorTypeChangeSupported": true,
+          "SeSparseDiskSupported": true,
+          "NestedHVSupported": true,
+          "VPMCSupported": true,
+          "SecureBootSupported": false,
+          "PerVmEvcSupported": true,
+          "VirtualMmuUsageIgnored": true,
+          "VirtualExecUsageIgnored": true,
+          "DiskOnlySnapshotOnSuspendedVMSupported": true
+        },
+        "Config": {
+          "ChangeVersion": "2019-03-10T18:47:32.033309Z",
+          "Modified": "1970-01-01T00:00:00Z",
+          "Name": "esxchild1",
+          "GuestFullName": "Ubuntu Linux (64-bit)",
+          "Version": "vmx-14",
+          "Uuid": "564d7234-245d-c0f5-b362-e1b18cdc95bb",
+          "CreateDate": "2019-02-16T03:48:30.085545Z",
+          "InstanceUuid": "526b86bd-32ae-99f7-8f97-03dfedc2098b",
+          "NpivNodeWorldWideName": null,
+          "NpivPortWorldWideName": null,
+          "NpivWorldWideNameType": "",
+          "NpivDesiredNodeWwns": 0,
+          "NpivDesiredPortWwns": 0,
+          "NpivTemporaryDisabled": true,
+          "NpivOnNonRdmDisks": null,
+          "LocationId": "564d7234-245d-c0f5-b362-e1b18cdc95bb",
+          "Template": false,
+          "GuestId": "ubuntu64Guest",
+          "AlternateGuestName": "",
+          "Annotation": "",
+          "Files": {
+            "VmPathName": "[datastore1] esxchild1/esxchild1.vmx",
+            "SnapshotDirectory": "[datastore1] esxchild1",
+            "SuspendDirectory": "[datastore1] esxchild1",
+            "LogDirectory": "[datastore1] esxchild1",
+            "FtMetadataDirectory": ""
+          },
+          "Tools": {
+            "ToolsVersion": 10304,
+            "ToolsInstallType": "guestToolsTypeOpenVMTools",
+            "AfterPowerOn": true,
+            "AfterResume": true,
+            "BeforeGuestStandby": true,
+            "BeforeGuestShutdown": true,
+            "BeforeGuestReboot": null,
+            "ToolsUpgradePolicy": "manual",
+            "PendingCustomization": "",
+            "CustomizationKeyId": null,
+            "SyncTimeWithHost": false,
+            "LastInstallInfo": {
+              "Counter": 0,
+              "Fault": null
+            }
+          },
+          "Flags": {
+            "DisableAcceleration": false,
+            "EnableLogging": true,
+            "UseToe": false,
+            "RunWithDebugInfo": false,
+            "MonitorType": "release",
+            "HtSharing": "any",
+            "SnapshotDisabled": false,
+            "SnapshotLocked": false,
+            "DiskUuidEnabled": false,
+            "VirtualMmuUsage": "automatic",
+            "VirtualExecUsage": "hvAuto",
+            "SnapshotPowerOffBehavior": "powerOff",
+            "RecordReplayEnabled": false,
+            "FaultToleranceType": "unset",
+            "CbrcCacheEnabled": false,
+            "VvtdEnabled": false,
+            "VbsEnabled": false
+          },
+          "ConsolePreferences": null,
+          "DefaultPowerOps": {
+            "PowerOffType": "soft",
+            "SuspendType": "soft",
+            "ResetType": "soft",
+            "DefaultPowerOffType": "soft",
+            "DefaultSuspendType": "hard",
+            "DefaultResetType": "soft",
+            "StandbyAction": "checkpoint"
+          },
+          "Hardware": {
+            "NumCPU": 1,
+            "NumCoresPerSocket": 1,
+            "MemoryMB": 1024,
+            "VirtualICH7MPresent": false,
+            "VirtualSMCPresent": false,
+            "Device": [
+              {
+                "Key": 200,
+                "DeviceInfo": {
+                  "Label": "IDE 0",
+                  "Summary": "IDE 0"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 0,
+                "UnitNumber": null,
+                "BusNumber": 0,
+                "Device": null
+              },
+              {
+                "Key": 201,
+                "DeviceInfo": {
+                  "Label": "IDE 1",
+                  "Summary": "IDE 1"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 0,
+                "UnitNumber": null,
+                "BusNumber": 1,
+                "Device": null
+              },
+              {
+                "Key": 300,
+                "DeviceInfo": {
+                  "Label": "PS2 controller 0",
+                  "Summary": "PS2 controller 0"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 0,
+                "UnitNumber": null,
+                "BusNumber": 0,
+                "Device": [
+                  600,
+                  700
+                ]
+              },
+              {
+                "Key": 100,
+                "DeviceInfo": {
+                  "Label": "PCI controller 0",
+                  "Summary": "PCI controller 0"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 0,
+                "UnitNumber": null,
+                "BusNumber": 0,
+                "Device": [
+                  500,
+                  12000,
+                  7000,
+                  1000,
+                  15000,
+                  4000
+                ]
+              },
+              {
+                "Key": 400,
+                "DeviceInfo": {
+                  "Label": "SIO controller 0",
+                  "Summary": "SIO controller 0"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 0,
+                "UnitNumber": null,
+                "BusNumber": 0,
+                "Device": null
+              },
+              {
+                "Key": 600,
+                "DeviceInfo": {
+                  "Label": "Keyboard ",
+                  "Summary": "Keyboard"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 300,
+                "UnitNumber": 0
+              },
+              {
+                "Key": 700,
+                "DeviceInfo": {
+                  "Label": "Pointing device",
+                  "Summary": "Pointing device; Device"
+                },
+                "Backing": {
+                  "DeviceName": "",
+                  "UseAutoDetect": false,
+                  "HostPointingDevice": "autodetect"
+                },
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 300,
+                "UnitNumber": 1
+              },
+              {
+                "Key": 500,
+                "DeviceInfo": {
+                  "Label": "Video card ",
+                  "Summary": "Video card"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 100,
+                "UnitNumber": 0,
+                "VideoRamSizeInKB": 0,
+                "NumDisplays": 1,
+                "UseAutoDetect": true,
+                "Enable3DSupport": false,
+                "Use3dRenderer": "automatic",
+                "GraphicsMemorySizeInKB": 262144
+              },
+              {
+                "Key": 12000,
+                "DeviceInfo": {
+                  "Label": "VMCI device",
+                  "Summary": "Device on the virtual machine PCI bus that provides support for the virtual machine communication interface"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": {
+                  "PciSlotNumber": 34
+                },
+                "ControllerKey": 100,
+                "UnitNumber": 17,
+                "Id": -875374083,
+                "AllowUnrestrictedCommunication": false,
+                "FilterEnable": true,
+                "FilterInfo": null
+              },
+              {
+                "Key": 7000,
+                "DeviceInfo": {
+                  "Label": "USB controller ",
+                  "Summary": "Auto connect Disabled"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": {
+                  "PciSlotNumber": 32,
+                  "EhciPciSlotNumber": 33
+                },
+                "ControllerKey": 100,
+                "UnitNumber": 22,
+                "BusNumber": 0,
+                "Device": null,
+                "AutoConnectDevices": false,
+                "EhciEnabled": true
+              },
+              {
+                "Key": 1000,
+                "DeviceInfo": {
+                  "Label": "SCSI controller 0",
+                  "Summary": "VMware paravirtual SCSI"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": {
+                  "PciSlotNumber": 192
+                },
+                "ControllerKey": 100,
+                "UnitNumber": 3,
+                "BusNumber": 0,
+                "Device": [
+                  2000
+                ],
+                "HotAddRemove": true,
+                "SharedBus": "noSharing",
+                "ScsiCtlrUnitNumber": 7
+              },
+              {
+                "Key": 15000,
+                "DeviceInfo": {
+                  "Label": "SATA controller 0",
+                  "Summary": "AHCI"
+                },
+                "Backing": null,
+                "Connectable": null,
+                "SlotInfo": {
+                  "PciSlotNumber": 35
+                },
+                "ControllerKey": 100,
+                "UnitNumber": 24,
+                "BusNumber": 0,
+                "Device": [
+                  16000
+                ]
+              },
+              {
+                "Key": 16000,
+                "DeviceInfo": {
+                  "Label": "CD/DVD drive 1",
+                  "Summary": "ISO [datastore1] mini.iso"
+                },
+                "Backing": {
+                  "FileName": "[datastore1] mini.iso",
+                  "Datastore": {
+                    "Type": "Datastore",
+                    "Value": "5c6761bc-71c9a798-fe45-525400dd89ff"
+                  },
+                  "BackingObjectId": ""
+                },
+                "Connectable": {
+                  "MigrateConnect": "",
+                  "StartConnected": true,
+                  "AllowGuestControl": true,
+                  "Connected": true,
+                  "Status": "ok"
+                },
+                "SlotInfo": null,
+                "ControllerKey": 15000,
+                "UnitNumber": 0
+              },
+              {
+                "Key": 2000,
+                "DeviceInfo": {
+                  "Label": "Hard disk 1",
+                  "Summary": "16,777,216 KB"
+                },
+                "Backing": {
+                  "FileName": "[datastore1] esxchild1/esxchild1.vmdk",
+                  "Datastore": {
+                    "Type": "Datastore",
+                    "Value": "5c6761bc-71c9a798-fe45-525400dd89ff"
+                  },
+                  "BackingObjectId": "",
+                  "DiskMode": "persistent",
+                  "Split": false,
+                  "WriteThrough": false,
+                  "ThinProvisioned": false,
+                  "EagerlyScrub": null,
+                  "Uuid": "6000C299-6d4e-67f6-4dda-0be94093f58b",
+                  "ContentId": "f0ba6c3fa3149c95345e8052fffffffe",
+                  "ChangeId": "",
+                  "Parent": null,
+                  "DeltaDiskFormat": "",
+                  "DigestEnabled": false,
+                  "DeltaGrainSize": 0,
+                  "DeltaDiskFormatVariant": "",
+                  "Sharing": "sharingNone",
+                  "KeyId": null
+                },
+                "Connectable": null,
+                "SlotInfo": null,
+                "ControllerKey": 1000,
+                "UnitNumber": 0,
+                "CapacityInKB": 16777216,
+                "CapacityInBytes": 17179869184,
+                "Shares": {
+                  "Shares": 1000,
+                  "Level": "normal"
+                },
+                "StorageIOAllocation": {
+                  "Limit": -1,
+                  "Shares": {
+                    "Shares": 1000,
+                    "Level": "normal"
+                  },
+                  "Reservation": 0
+                },
+                "DiskObjectId": "1-2000",
+                "VFlashCacheConfigInfo": null,
+                "Iofilter": null,
+                "VDiskId": null,
+                "NativeUnmanagedLinkedClone": false
+              },
+              {
+                "Key": 4000,
+                "DeviceInfo": {
+                  "Label": "Network adapter 1",
+                  "Summary": "VM Network"
+                },
+                "Backing": {
+                  "DeviceName": "VM Network",
+                  "UseAutoDetect": false,
+                  "Network": {
+                    "Type": "Network",
+                    "Value": "HaNetwork-VM Network"
+                  },
+                  "InPassthroughMode": null
+                },
+                "Connectable": {
+                  "MigrateConnect": "unset",
+                  "StartConnected": true,
+                  "AllowGuestControl": true,
+                  "Connected": true,
+                  "Status": "ok"
+                },
+                "SlotInfo": {
+                  "PciSlotNumber": 160
+                },
+                "ControllerKey": 100,
+                "UnitNumber": 7,
+                "AddressType": "generated",
+                "MacAddress": "00:0c:29:dc:95:bb",
+                "WakeOnLanEnabled": false,
+                "ResourceAllocation": {
+                  "Reservation": 0,
+                  "Share": {
+                    "Shares": 50,
+                    "Level": "normal"
+                  },
+                  "Limit": -1
+                },
+                "ExternalId": "",
+                "UptCompatibilityEnabled": true
+              }
+            ]
+          },
+          "CpuAllocation": {
+            "Reservation": 0,
+            "ExpandableReservation": null,
+            "Limit": -1,
+            "Shares": {
+              "Shares": 1000,
+              "Level": "normal"
+            },
+            "OverheadLimit": null
+          },
+          "MemoryAllocation": {
+            "Reservation": 0,
+            "ExpandableReservation": null,
+            "Limit": -1,
+            "Shares": {
+              "Shares": 10240,
+              "Level": "normal"
+            },
+            "OverheadLimit": null
+          },
+          "LatencySensitivity": {
+            "Level": "normal",
+            "Sensitivity": 0
+          },
+          "MemoryHotAddEnabled": false,
+          "CpuHotAddEnabled": false,
+          "CpuHotRemoveEnabled": false,
+          "HotPlugMemoryLimit": 1024,
+          "HotPlugMemoryIncrementSize": 0,
+          "CpuAffinity": null,
+          "MemoryAffinity": null,
+          "NetworkShaper": null,
+          "ExtraConfig": [
+            {
+              "Key": "tools.guest.desktop.autolock",
+              "Value": "FALSE"
+            },
+            {
+              "Key": "nvram",
+              "Value": "esxchild1.nvram"
+            },
+            {
+              "Key": "pciBridge0.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "svga.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "pciBridge4.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "pciBridge4.virtualDev",
+              "Value": "pcieRootPort"
+            },
+            {
+              "Key": "pciBridge4.functions",
+              "Value": "8"
+            },
+            {
+              "Key": "pciBridge5.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "pciBridge5.virtualDev",
+              "Value": "pcieRootPort"
+            },
+            {
+              "Key": "pciBridge5.functions",
+              "Value": "8"
+            },
+            {
+              "Key": "pciBridge6.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "pciBridge6.virtualDev",
+              "Value": "pcieRootPort"
+            },
+            {
+              "Key": "pciBridge6.functions",
+              "Value": "8"
+            },
+            {
+              "Key": "pciBridge7.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "pciBridge7.virtualDev",
+              "Value": "pcieRootPort"
+            },
+            {
+              "Key": "pciBridge7.functions",
+              "Value": "8"
+            },
+            {
+              "Key": "hpet0.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "RemoteDisplay.maxConnections",
+              "Value": "-1"
+            },
+            {
+              "Key": "sched.cpu.latencySensitivity",
+              "Value": "normal"
+            },
+            {
+              "Key": "svga.autodetect",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "numa.autosize.cookie",
+              "Value": "10001"
+            },
+            {
+              "Key": "numa.autosize.vcpu.maxPerVirtualNode",
+              "Value": "1"
+            },
+            {
+              "Key": "sched.swap.derivedName",
+              "Value": "/vmfs/volumes/5c6761bc-71c9a798-fe45-525400dd89ff/esxchild1/esxchild1-e0e5ae9b.vswp"
+            },
+            {
+              "Key": "pciBridge0.pciSlotNumber",
+              "Value": "17"
+            },
+            {
+              "Key": "pciBridge4.pciSlotNumber",
+              "Value": "21"
+            },
+            {
+              "Key": "pciBridge5.pciSlotNumber",
+              "Value": "22"
+            },
+            {
+              "Key": "pciBridge6.pciSlotNumber",
+              "Value": "23"
+            },
+            {
+              "Key": "pciBridge7.pciSlotNumber",
+              "Value": "24"
+            },
+            {
+              "Key": "scsi0.pciSlotNumber",
+              "Value": "192"
+            },
+            {
+              "Key": "usb.pciSlotNumber",
+              "Value": "32"
+            },
+            {
+              "Key": "ethernet0.pciSlotNumber",
+              "Value": "160"
+            },
+            {
+              "Key": "ehci.pciSlotNumber",
+              "Value": "33"
+            },
+            {
+              "Key": "vmci0.pciSlotNumber",
+              "Value": "34"
+            },
+            {
+              "Key": "sata0.pciSlotNumber",
+              "Value": "35"
+            },
+            {
+              "Key": "ethernet0.generatedAddressOffset",
+              "Value": "0"
+            },
+            {
+              "Key": "monitor.phys_bits_used",
+              "Value": "43"
+            },
+            {
+              "Key": "vmotion.checkpointFBSize",
+              "Value": "16777216"
+            },
+            {
+              "Key": "vmotion.checkpointSVGAPrimarySize",
+              "Value": "16777216"
+            },
+            {
+              "Key": "softPowerOff",
+              "Value": "FALSE"
+            },
+            {
+              "Key": "usb:1.speed",
+              "Value": "2"
+            },
+            {
+              "Key": "usb:1.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "usb:1.deviceType",
+              "Value": "hub"
+            },
+            {
+              "Key": "usb:1.port",
+              "Value": "1"
+            },
+            {
+              "Key": "usb:1.parent",
+              "Value": "-1"
+            },
+            {
+              "Key": "tools.remindInstall",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "scsi0.sasWWID",
+              "Value": "50 05 05 64 24 5d c0 f0"
+            },
+            {
+              "Key": "scsi0:0.redo",
+              "Value": ""
+            },
+            {
+              "Key": "usb:0.present",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "usb:0.deviceType",
+              "Value": "hid"
+            },
+            {
+              "Key": "usb:0.port",
+              "Value": "0"
+            },
+            {
+              "Key": "usb:0.parent",
+              "Value": "-1"
+            },
+            {
+              "Key": "svga.guestBackedPrimaryAware",
+              "Value": "TRUE"
+            },
+            {
+              "Key": "guestinfo.vmtools.description",
+              "Value": "open-vm-tools 10.2.0 build 7253323"
+            },
+            {
+              "Key": "guestinfo.vmtools.versionString",
+              "Value": "10.2.0"
+            },
+            {
+              "Key": "guestinfo.vmtools.versionNumber",
+              "Value": "10304"
+            },
+            {
+              "Key": "guestinfo.vmtools.buildNumber",
+              "Value": "7253323"
+            },
+            {
+              "Key": "vmware.tools.internalversion",
+              "Value": "10304"
+            },
+            {
+              "Key": "vmware.tools.requiredversion",
+              "Value": "10304"
+            },
+            {
+              "Key": "migrate.hostLogState",
+              "Value": "none"
+            },
+            {
+              "Key": "migrate.migrationId",
+              "Value": "0"
+            },
+            {
+              "Key": "migrate.hostLog",
+              "Value": "./esxchild1-e0e5ae9b.hlog"
+            }
+          ],
+          "CpuFeatureMask": [
+            {
+              "Level": 0,
+              "Vendor": "",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": 0,
+              "Vendor": "amd",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": 1,
+              "Vendor": "",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": 1,
+              "Vendor": "amd",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": -2147483648,
+              "Vendor": "",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": -2147483648,
+              "Vendor": "amd",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": -2147483647,
+              "Vendor": "",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": -2147483647,
+              "Vendor": "amd",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": -2147483640,
+              "Vendor": "",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            },
+            {
+              "Level": -2147483640,
+              "Vendor": "amd",
+              "Eax": "",
+              "Ebx": "",
+              "Ecx": "",
+              "Edx": ""
+            }
+          ],
+          "DatastoreUrl": [
+            {
+              "Name": "datastore1",
+              "Url": "/vmfs/volumes/5c6761bc-71c9a798-fe45-525400dd89ff/"
+            }
+          ],
+          "SwapPlacement": "inherit",
+          "BootOptions": {
+            "BootDelay": 0,
+            "EnterBIOSSetup": false,
+            "EfiSecureBootEnabled": false,
+            "BootRetryEnabled": false,
+            "BootRetryDelay": 10,
+            "BootOrder": null,
+            "NetworkBootProtocol": "ipv4"
+          },
+          "FtInfo": null,
+          "RepConfig": null,
+          "VAppConfig": null,
+          "VAssertsEnabled": false,
+          "ChangeTrackingEnabled": false,
+          "Firmware": "bios",
+          "MaxMksConnections": -1,
+          "GuestAutoLockEnabled": false,
+          "ManagedBy": null,
+          "MemoryReservationLockedToMax": false,
+          "InitialOverhead": {
+            "InitialMemoryReservation": 52989952,
+            "InitialSwapReservation": 255541248
+          },
+          "NestedHVEnabled": false,
+          "VPMCEnabled": false,
+          "ScheduledHardwareUpgradeInfo": {
+            "UpgradePolicy": "never",
+            "VersionKey": "",
+            "ScheduledHardwareUpgradeStatus": "none",
+            "Fault": null
+          },
+          "ForkConfigInfo": null,
+          "VFlashCacheReservation": 0,
+          "VmxConfigChecksum": "d2tWYWZuM2phZ2tJOXhnR0NyRERacXYxM1o0PQ==",
+          "MessageBusTunnelEnabled": false,
+          "VmStorageObjectId": "",
+          "SwapStorageObjectId": "",
+          "KeyId": null,
+          "GuestIntegrityInfo": {
+            "Enabled": false
+          },
+          "MigrateEncryption": "opportunistic"
+        },
+        "Layout": {
+          "ConfigFile": [
+            "esxchild1.nvram",
+            "esxchild1.vmsd"
+          ],
+          "LogFile": [
+            "vmware-1.log",
+            "vmware.log"
+          ],
+          "Disk": [
+            {
+              "Key": 2000,
+              "DiskFile": [
+                "[datastore1] esxchild1/esxchild1.vmdk"
+              ]
+            }
+          ],
+          "Snapshot": null,
+          "SwapFile": "[datastore1] esxchild1/esxchild1-e0e5ae9b.vswp"
+        },
+        "LayoutEx": {
+          "File": [
+            {
+              "Key": 0,
+              "Name": "[datastore1] esxchild1/esxchild1.vmx",
+              "Type": "config",
+              "Size": 0,
+              "UniqueSize": 0,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 1,
+              "Name": "[datastore1] esxchild1/esxchild1.nvram",
+              "Type": "nvram",
+              "Size": 8684,
+              "UniqueSize": 8684,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 2,
+              "Name": "[datastore1] esxchild1/esxchild1.vmsd",
+              "Type": "snapshotList",
+              "Size": 0,
+              "UniqueSize": 0,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 3,
+              "Name": "[datastore1] esxchild1/esxchild1.vmdk",
+              "Type": "diskDescriptor",
+              "Size": 0,
+              "UniqueSize": 0,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 4,
+              "Name": "[datastore1] esxchild1/esxchild1-flat.vmdk",
+              "Type": "diskExtent",
+              "Size": 17179869184,
+              "UniqueSize": 17179869184,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 5,
+              "Name": "[datastore1] esxchild1/vmware-1.log",
+              "Type": "log",
+              "Size": 38734,
+              "UniqueSize": 38734,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 6,
+              "Name": "[datastore1] esxchild1/vmware.log",
+              "Type": "log",
+              "Size": 173578,
+              "UniqueSize": 173578,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 7,
+              "Name": "[datastore1] esxchild1/esxchild1-e0e5ae9b.vswp",
+              "Type": "swap",
+              "Size": 1073741824,
+              "UniqueSize": 1073741824,
+              "BackingObjectId": "",
+              "Accessible": true
+            },
+            {
+              "Key": 8,
+              "Name": "[datastore1] esxchild1/vmx-esxchild1-3773148827-1.vswp",
+              "Type": "uwswap",
+              "Size": 115343360,
+              "UniqueSize": 115343360,
+              "BackingObjectId": "",
+              "Accessible": true
+            }
+          ],
+          "Disk": [
+            {
+              "Key": 2000,
+              "Chain": [
+                {
+                  "FileKey": [
+                    3,
+                    4
+                  ]
+                }
+              ]
+            }
+          ],
+          "Snapshot": null,
+          "Timestamp": "2019-03-10T18:47:34.76018Z"
+        },
+        "Storage": {
+          "PerDatastoreUsage": [
+            {
+              "Datastore": {
+                "Type": "Datastore",
+                "Value": "5c6761bc-71c9a798-fe45-525400dd89ff"
+              },
+              "Committed": 18369175364,
+              "Uncommitted": 449,
+              "Unshared": 18369175364
+            }
+          ],
+          "Timestamp": "2019-03-10T18:47:34.760203Z"
+        },
+        "EnvironmentBrowser": {
+          "Type": "EnvironmentBrowser",
+          "Value": "1-envmgr"
+        },
+        "ResourcePool": {
+          "Type": "ResourcePool",
+          "Value": "ha-root-pool"
+        },
+        "ParentVApp": null,
+        "ResourceConfig": {
+          "Entity": {
+            "Type": "VirtualMachine",
+            "Value": "1"
+          },
+          "ChangeVersion": "",
+          "LastModified": null,
+          "CpuAllocation": {
+            "Reservation": 0,
+            "ExpandableReservation": null,
+            "Limit": -1,
+            "Shares": {
+              "Shares": 1000,
+              "Level": "normal"
+            },
+            "OverheadLimit": null
+          },
+          "MemoryAllocation": {
+            "Reservation": 0,
+            "ExpandableReservation": null,
+            "Limit": -1,
+            "Shares": {
+              "Shares": 10240,
+              "Level": "normal"
+            },
+            "OverheadLimit": null
+          }
+        },
+        "Runtime": {
+          "Device": [
+            {
+              "RuntimeState": {
+                "VmDirectPathGen2Active": false,
+                "VmDirectPathGen2InactiveReasonVm": null,
+                "VmDirectPathGen2InactiveReasonOther": [
+                  "vmNptIncompatibleNetwork"
+                ],
+                "VmDirectPathGen2InactiveReasonExtended": "",
+                "ReservationStatus": "",
+                "AttachmentStatus": "",
+                "FeatureRequirement": null
+              },
+              "Key": 4000
+            }
+          ],
+          "Host": {
+            "Type": "HostSystem",
+            "Value": "ha-host"
+          },
+          "ConnectionState": "connected",
+          "PowerState": "poweredOn",
+          "FaultToleranceState": "notConfigured",
+          "DasVmProtection": null,
+          "ToolsInstallerMounted": false,
+          "SuspendTime": null,
+          "BootTime": "2019-03-10T18:47:34.661943Z",
+          "SuspendInterval": 0,
+          "Question": null,
+          "MemoryOverhead": 0,
+          "MaxCpuUsage": 2593,
+          "MaxMemoryUsage": 1024,
+          "NumMksConnections": 1,
+          "RecordReplayState": "inactive",
+          "CleanPowerOff": null,
+          "NeedSecondaryReason": "",
+          "OnlineStandby": false,
+          "MinRequiredEVCModeKey": "",
+          "ConsolidationNeeded": false,
+          "OfflineFeatureRequirement": [
+            {
+              "Key": "cpuid.lm",
+              "FeatureName": "cpuid.lm",
+              "Value": "Bool:Min:1"
+            }
+          ],
+          "FeatureRequirement": [
+            {
+              "Key": "cpuid.SSE3",
+              "FeatureName": "cpuid.SSE3",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.PCLMULQDQ",
+              "FeatureName": "cpuid.PCLMULQDQ",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.SSSE3",
+              "FeatureName": "cpuid.SSSE3",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.CMPXCHG16B",
+              "FeatureName": "cpuid.CMPXCHG16B",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.PCID",
+              "FeatureName": "cpuid.PCID",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.SSE41",
+              "FeatureName": "cpuid.SSE41",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.SSE42",
+              "FeatureName": "cpuid.SSE42",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.POPCNT",
+              "FeatureName": "cpuid.POPCNT",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.AES",
+              "FeatureName": "cpuid.AES",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.XSAVE",
+              "FeatureName": "cpuid.XSAVE",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.AVX",
+              "FeatureName": "cpuid.AVX",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.SS",
+              "FeatureName": "cpuid.SS",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.XCR0_MASTER_SSE",
+              "FeatureName": "cpuid.XCR0_MASTER_SSE",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.XCR0_MASTER_YMM_H",
+              "FeatureName": "cpuid.XCR0_MASTER_YMM_H",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.LAHF64",
+              "FeatureName": "cpuid.LAHF64",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.NX",
+              "FeatureName": "cpuid.NX",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.RDTSCP",
+              "FeatureName": "cpuid.RDTSCP",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.LM",
+              "FeatureName": "cpuid.LM",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.Intel",
+              "FeatureName": "cpuid.Intel",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.IBRS",
+              "FeatureName": "cpuid.IBRS",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "cpuid.IBPB",
+              "FeatureName": "cpuid.IBPB",
+              "Value": "Bool:Min:1"
+            },
+            {
+              "Key": "misc.cpuidFaulting",
+              "FeatureName": "misc.cpuidFaulting",
+              "Value": "Bool:Min:1"
+            }
+          ],
+          "FeatureMask": null,
+          "VFlashCacheAllocation": 0,
+          "Paused": false,
+          "SnapshotInBackground": false,
+          "QuiescedForkParent": null,
+          "InstantCloneFrozen": false,
+          "CryptoState": ""
+        },
+        "Guest": {
+          "ToolsStatus": "toolsOk",
+          "ToolsVersionStatus": "guestToolsUnmanaged",
+          "ToolsVersionStatus2": "guestToolsUnmanaged",
+          "ToolsRunningStatus": "guestToolsRunning",
+          "ToolsVersion": "10304",
+          "ToolsInstallType": "guestToolsTypeOpenVMTools",
+          "GuestId": "ubuntu64Guest",
+          "GuestFamily": "linuxGuest",
+          "GuestFullName": "Ubuntu Linux (64-bit)",
+          "HostName": "esxchild1",
+          "IpAddress": "192.168.122.254",
+          "Net": [
+            {
+              "Network": "VM Network",
+              "IpAddress": [
+                "192.168.122.254",
+                "fe80::20c:29ff:fedc:95bb"
+              ],
+              "MacAddress": "00:0c:29:dc:95:bb",
+              "Connected": true,
+              "DeviceConfigId": 4000,
+              "DnsConfig": null,
+              "IpConfig": {
+                "IpAddress": [
+                  {
+                    "IpAddress": "192.168.122.254",
+                    "PrefixLength": 24,
+                    "Origin": "",
+                    "State": "preferred",
+                    "Lifetime": null
+                  },
+                  {
+                    "IpAddress": "fe80::20c:29ff:fedc:95bb",
+                    "PrefixLength": 64,
+                    "Origin": "",
+                    "State": "unknown",
+                    "Lifetime": null
+                  }
+                ],
+                "Dhcp": null,
+                "AutoConfigurationEnabled": null
+              },
+              "NetBIOSConfig": null
+            }
+          ],
+          "IpStack": [
+            {
+              "DnsConfig": {
+                "Dhcp": false,
+                "HostName": "esxchild1",
+                "DomainName": "",
+                "IpAddress": [
+                  "192.168.122.1"
+                ],
+                "SearchDomain": [
+                  ""
+                ]
+              },
+              "IpRouteConfig": {
+                "IpRoute": [
+                  {
+                    "Network": "0.0.0.0",
+                    "PrefixLength": 0,
+                    "Gateway": {
+                      "IpAddress": "192.168.122.1",
+                      "Device": "0"
+                    }
+                  },
+                  {
+                    "Network": "192.168.122.0",
+                    "PrefixLength": 24,
+                    "Gateway": {
+                      "IpAddress": "",
+                      "Device": "0"
+                    }
+                  },
+                  {
+                    "Network": "fe80::",
+                    "PrefixLength": 64,
+                    "Gateway": {
+                      "IpAddress": "",
+                      "Device": "0"
+                    }
+                  },
+                  {
+                    "Network": "ff00::",
+                    "PrefixLength": 8,
+                    "Gateway": {
+                      "IpAddress": "",
+                      "Device": "0"
+                    }
+                  }
+                ]
+              },
+              "IpStackConfig": null,
+              "DhcpConfig": null
+            }
+          ],
+          "Disk": [
+            {
+              "DiskPath": "/",
+              "Capacity": 15766306816,
+              "FreeSpace": 13392801792
+            }
+          ],
+          "Screen": {
+            "Width": 800,
+            "Height": 600
+          },
+          "GuestState": "running",
+          "AppHeartbeatStatus": "appStatusGray",
+          "GuestKernelCrashed": false,
+          "AppState": "none",
+          "GuestOperationsReady": true,
+          "InteractiveGuestOperationsReady": false,
+          "GuestStateChangeSupported": true,
+          "GenerationInfo": null
+        },
+        "Summary": {
+          "Vm": {
+            "Type": "VirtualMachine",
+            "Value": "1"
+          },
+          "Runtime": {
+            "Device": [
+              {
+                "RuntimeState": {
+                  "VmDirectPathGen2Active": false,
+                  "VmDirectPathGen2InactiveReasonVm": null,
+                  "VmDirectPathGen2InactiveReasonOther": [
+                    "vmNptIncompatibleNetwork"
+                  ],
+                  "VmDirectPathGen2InactiveReasonExtended": "",
+                  "ReservationStatus": "",
+                  "AttachmentStatus": "",
+                  "FeatureRequirement": null
+                },
+                "Key": 4000
+              }
+            ],
+            "Host": {
+              "Type": "HostSystem",
+              "Value": "ha-host"
+            },
+            "ConnectionState": "connected",
+            "PowerState": "poweredOn",
+            "FaultToleranceState": "notConfigured",
+            "DasVmProtection": null,
+            "ToolsInstallerMounted": false,
+            "SuspendTime": null,
+            "BootTime": "2019-03-10T18:47:34.661943Z",
+            "SuspendInterval": 0,
+            "Question": null,
+            "MemoryOverhead": 0,
+            "MaxCpuUsage": 2593,
+            "MaxMemoryUsage": 1024,
+            "NumMksConnections": 1,
+            "RecordReplayState": "inactive",
+            "CleanPowerOff": null,
+            "NeedSecondaryReason": "",
+            "OnlineStandby": false,
+            "MinRequiredEVCModeKey": "",
+            "ConsolidationNeeded": false,
+            "OfflineFeatureRequirement": [
+              {
+                "Key": "cpuid.lm",
+                "FeatureName": "cpuid.lm",
+                "Value": "Bool:Min:1"
+              }
+            ],
+            "FeatureRequirement": [
+              {
+                "Key": "cpuid.SSE3",
+                "FeatureName": "cpuid.SSE3",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.PCLMULQDQ",
+                "FeatureName": "cpuid.PCLMULQDQ",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.SSSE3",
+                "FeatureName": "cpuid.SSSE3",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.CMPXCHG16B",
+                "FeatureName": "cpuid.CMPXCHG16B",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.PCID",
+                "FeatureName": "cpuid.PCID",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.SSE41",
+                "FeatureName": "cpuid.SSE41",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.SSE42",
+                "FeatureName": "cpuid.SSE42",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.POPCNT",
+                "FeatureName": "cpuid.POPCNT",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.AES",
+                "FeatureName": "cpuid.AES",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.XSAVE",
+                "FeatureName": "cpuid.XSAVE",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.AVX",
+                "FeatureName": "cpuid.AVX",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.SS",
+                "FeatureName": "cpuid.SS",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.XCR0_MASTER_SSE",
+                "FeatureName": "cpuid.XCR0_MASTER_SSE",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.XCR0_MASTER_YMM_H",
+                "FeatureName": "cpuid.XCR0_MASTER_YMM_H",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.LAHF64",
+                "FeatureName": "cpuid.LAHF64",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.NX",
+                "FeatureName": "cpuid.NX",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.RDTSCP",
+                "FeatureName": "cpuid.RDTSCP",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.LM",
+                "FeatureName": "cpuid.LM",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.Intel",
+                "FeatureName": "cpuid.Intel",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.IBRS",
+                "FeatureName": "cpuid.IBRS",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "cpuid.IBPB",
+                "FeatureName": "cpuid.IBPB",
+                "Value": "Bool:Min:1"
+              },
+              {
+                "Key": "misc.cpuidFaulting",
+                "FeatureName": "misc.cpuidFaulting",
+                "Value": "Bool:Min:1"
+              }
+            ],
+            "FeatureMask": null,
+            "VFlashCacheAllocation": 0,
+            "Paused": false,
+            "SnapshotInBackground": false,
+            "QuiescedForkParent": null,
+            "InstantCloneFrozen": false,
+            "CryptoState": ""
+          },
+          "Guest": {
+            "GuestId": "ubuntu64Guest",
+            "GuestFullName": "Ubuntu Linux (64-bit)",
+            "ToolsStatus": "toolsOk",
+            "ToolsVersionStatus": "guestToolsUnmanaged",
+            "ToolsVersionStatus2": "guestToolsUnmanaged",
+            "ToolsRunningStatus": "guestToolsRunning",
+            "HostName": "esxchild1",
+            "IpAddress": "192.168.122.254"
+          },
+          "Config": {
+            "Name": "esxchild1",
+            "Template": false,
+            "VmPathName": "[datastore1] esxchild1/esxchild1.vmx",
+            "MemorySizeMB": 1024,
+            "CpuReservation": 0,
+            "MemoryReservation": 0,
+            "NumCpu": 1,
+            "NumEthernetCards": 1,
+            "NumVirtualDisks": 1,
+            "Uuid": "564d7234-245d-c0f5-b362-e1b18cdc95bb",
+            "InstanceUuid": "526b86bd-32ae-99f7-8f97-03dfedc2098b",
+            "GuestId": "ubuntu64Guest",
+            "GuestFullName": "Ubuntu Linux (64-bit)",
+            "Annotation": "",
+            "Product": null,
+            "InstallBootRequired": null,
+            "FtInfo": null,
+            "ManagedBy": null,
+            "TpmPresent": false,
+            "NumVmiopBackings": 0
+          },
+          "Storage": {
+            "Committed": 18369175364,
+            "Uncommitted": 449,
+            "Unshared": 18369175364,
+            "Timestamp": "2019-03-10T18:47:34.760203Z"
+          },
+          "QuickStats": {
+            "OverallCpuUsage": 1439,
+            "OverallCpuDemand": 0,
+            "GuestMemoryUsage": 389,
+            "HostMemoryUsage": 1068,
+            "GuestHeartbeatStatus": "green",
+            "DistributedCpuEntitlement": 0,
+            "DistributedMemoryEntitlement": 0,
+            "StaticCpuEntitlement": 0,
+            "StaticMemoryEntitlement": 0,
+            "PrivateMemory": 0,
+            "SharedMemory": 0,
+            "SwappedMemory": 0,
+            "BalloonedMemory": 0,
+            "ConsumedOverheadMemory": 44,
+            "FtLogBandwidth": 0,
+            "FtSecondaryLatency": 0,
+            "FtLatencyStatus": "",
+            "CompressedMemory": 0,
+            "UptimeSeconds": 2025,
+            "SsdSwappedMemory": 0
+          },
+          "OverallStatus": "green",
+          "CustomValue": null
+        },
+        "Datastore": [
+          {
+            "Type": "Datastore",
+            "Value": "5c6761bc-71c9a798-fe45-525400dd89ff"
+          }
+        ],
+        "Network": [
+          {
+            "Type": "Network",
+            "Value": "HaNetwork-VM Network"
+          }
+        ],
+        "Snapshot": null,
+        "RootSnapshot": null,
+        "GuestHeartbeatStatus": "green"
+      }
+    }
+  ]
+}

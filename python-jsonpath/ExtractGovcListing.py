@@ -78,7 +78,7 @@ if hasNet:
     if isIPv4(IpAddress['IpAddress']):
       print("  IPv4 {}/{} netmask {}".format( IpAddress['IpAddress'],cidr,cidr_to_netmask(cidr)  ))
     else:
-      print(" IPv6 {}/{}".format( IpAddress['IpAddress'],cidr ) )
+      print("  IPv6 {}/{}".format( IpAddress['IpAddress'],cidr ) )
 
 else:
   print("There are no network elements in Guest, VM might be powered off")
