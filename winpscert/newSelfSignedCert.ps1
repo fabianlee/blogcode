@@ -1,3 +1,4 @@
+# https://fabianlee.org/2019/09/08/powershell-creating-a-self-signed-certificate-using-powershell-without-makecert-or-iis/
 #requires -version 4
 #requires -runasadministrator
 param ([string] $cn=$null,[string] $pw=$null)
