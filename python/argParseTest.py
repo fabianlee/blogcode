@@ -24,7 +24,7 @@ def showMathResult(a,b,op="add"):
 
 def main(argv):
 
-#  # define arguments
+  # define arguments
   ap = argparse.ArgumentParser(description="Example using ArgParse library")
   ap.add_argument('a',type=int,help="first integer")
   ap.add_argument('b',type=int,help="second integer")
