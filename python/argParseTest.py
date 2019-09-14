@@ -4,6 +4,10 @@
 #
 # https://fabianlee.org/2019/09/14/python-parsing-command-line-arguments-with-argparse/
 #
+# USAGE
+# ./argParseTest2.py 3 4
+# ./argParseTest2.py 3 4 --op=mul
+#
 import sys
 import argparse
 
