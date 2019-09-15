@@ -3,18 +3,30 @@
 # shows live output from invoked subprocess
 # usually you only get output once process completes
 #
+# https://github.com/fabianlee/blogcode/blob/master/python/runProcessWithLiveOutput.py
+#
 import sys
 import argparse
 import subprocess
 import shlex
 
 
-# runs subprocess with poll so that live output is shown
-def invoke_process_live_output(command,shellType=False,stdoutType=subprocess.PIPE):
+# runs subprocess with Popen, but output only returned when process complete
+def invoke_process_popen_blocking(command,shellType=False,stdoutType=subprocess.PIPE):
+  try:
+    process = subprocess.Popen(shlex.split(command),shell=shellType,stdout=stdoutType)
+    (stdout,stderr) = process.communicate()
+    print(stdout)
+  except:
+    print("ERROR {} while running {}".format(sys.exc_info()[1],command))
+
+
+# runs subprocess with Popen/poll so that live stdout is shown
+def invoke_process_popen_poll_live(command,shellType=False,stdoutType=subprocess.PIPE):
   try:
     process = subprocess.Popen(shlex.split(command),shell=shellType,stdout=stdoutType)
   except:
-    print("ERROR while running {}".format(command))
+    print("ERROR {} while running {}".format(sys.exc_info()[1],command))
     return None
   while True:
     output = process.stdout.readline()
@@ -26,15 +38,6 @@ def invoke_process_live_output(command,shellType=False,stdoutType=subprocess.PIP
   return rc
 
 
-# runs subprocess, output returned when process exits
-def invoke_process(command,shellType=False,stdoutType=subprocess.PIPE):
-  try:
-    process = subprocess.Popen(shlex.split(command),shell=shellType,stdout=stdoutType)
-    stdout,stderr = process.communicate()
-    print(stdout)
-  except:
-    print("ERROR while running {}".format(command))
-
 
 def main(argv):
   while True:
@@ -42,11 +45,11 @@ def main(argv):
     if "quit"==cmd: break
     if ""==cmd: cmd="./loopWithSleep.sh"
 
-    print("== invoke_process  ==============")
-    invoke_process(cmd)
+    print("== invoke_process_popen_blocking  ==============")
+    invoke_process_popen_blocking(cmd)
     
-    print("== invoke_process_live_output  ==============")
-    invoke_process_live_output(cmd)
+    print("== invoke_process_popen_poll_live  ==============")
+    invoke_process_popen_poll_live(cmd)
 
 
 
