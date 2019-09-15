@@ -16,7 +16,7 @@ def invoke_process_popen_blocking(command,shellType=False,stdoutType=subprocess.
   try:
     process = subprocess.Popen(shlex.split(command),shell=shellType,stdout=stdoutType)
     (stdout,stderr) = process.communicate()
-    print(stdout)
+    print(stdout.decode())
   except:
     print("ERROR {} while running {}".format(sys.exc_info()[1],command))
 
@@ -30,10 +30,13 @@ def invoke_process_popen_poll_live(command,shellType=False,stdoutType=subprocess
     return None
   while True:
     output = process.stdout.readline()
-    if output == '' and process.poll() is not None:
+    # used to check for empty output in Python2, but seems
+    # to work with just poll in 2.7.12 and 3.5.2 
+    #if output == '' and process.poll() is not None:
+    if process.poll() is not None:
       break
     if output:
-      print output.strip()
+      print(output.strip().decode())
   rc = process.poll()
   return rc
 
@@ -41,7 +44,13 @@ def invoke_process_popen_poll_live(command,shellType=False,stdoutType=subprocess
 
 def main(argv):
   while True:
-    cmd = raw_input("Execute which commmand [./loopWithSleep.sh]: ")
+
+    # python2 uses raw_input(), python3 uses input()
+    prompt = "Execute which commmand [./loopWithSleep.sh]: "
+    try:
+      cmd = raw_input(prompt)
+    except NameError:
+      cmd = input(prompt)
     if "quit"==cmd: break
     if ""==cmd: cmd="./loopWithSleep.sh"
 
