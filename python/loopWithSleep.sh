@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in $(seq 1 10); do
+for i in $(seq 1 5); do
    echo "iteration" $i
    sleep 1
 done
