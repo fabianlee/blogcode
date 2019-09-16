@@ -29,7 +29,7 @@ def main(argv):
   ap = argparse.ArgumentParser(description="Example using ArgParse library")
   ap.add_argument('a',type=int,help="first integer")
   ap.add_argument('b',type=int,help="second integer")
-  ap.add_argument('-o','--op',default="add",choices=['add','mul'],help="operation=add|mul")
+  ap.add_argument('-o','--op',default="add",choices=['add','mul'],help="add or multiply")
   ap.add_argument('-u','--upper',action="store_true",help="show uppercase")
 
   # parse args
