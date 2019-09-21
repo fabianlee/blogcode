@@ -2,7 +2,7 @@
 #
 # Use introspection to see the arguments passed to a function
 #
-# https://fabianlee.org/2019/09/20/
+# https://fabianlee.org/2019/09/21/python-using-inspection-to-view-the-parameters-of-a-function/
 #
 #
 import sys
