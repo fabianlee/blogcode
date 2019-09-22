@@ -12,15 +12,13 @@ import inspect
 
 # inspect function name, parameters
 def inspect_simple(frame):
-  # pull tuple from frame
-  args,args_paramname,kwargs_paramname,values = inspect.getargvalues(frame)
-
-  # stack param could be used to pull function name
-  #funcname = stack[0][3]
   funcname = frame.f_code.co_name
   print("function {}()".format(funcname))
 
-  # show static parameters
+  # pull tuple from frame
+  args,args_paramname,kwargs_paramname,values = inspect.getargvalues(frame)
+
+  # show formal parameters
   for i in (args if not args is None else []):
     print("\t{}={}".format(i,values[i]))
 
@@ -42,7 +40,7 @@ def showHelloWorldBasic(name="World"):
   myframe = inspect.currentframe()
   args,_,_,values = inspect.getargvalues(myframe)
   # function name could also have been pulled from stack
-  # inspect.stack()[0][3])
+  # inspect.stack()[0][3]
   funcname = myframe.f_code.co_name
   print("function {}()".format(funcname))
   for i in (args if not args is None else []):
