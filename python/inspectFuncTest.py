@@ -58,37 +58,28 @@ def showMathResult(a,b,showLower=True):
   inspect_simple(inspect.currentframe())
   opDisplay = "plus" if showLower else "PLUS"
   print("{} {} {} = {}".format(a,opDisplay,b,a+b))
+  return sum
 
 
 # perform math operation, variable number of positional args
-def showMathResultVarPositionalArgs(a,b,*args):
+def addVarPositionalArgs(a,b,*args):
   inspect_simple(inspect.currentframe())
 
   sum = a + b
-  sys.stdout.write("{} + {}".format(a,b))
-
   for n in args:
-    sys.stdout.write(" + " + str(n))
     sum += n
 
-  sys.stdout.write(" = " + str(sum))
-  sys.stdout.write("\n")
-  sys.stdout.flush()
+  return sum
 
 # perform math operation, variable number of named args
-def showMathResultVarNamedArgs(a,b,**kwargs):
+def addVarNamedArgs(a,b,**kwargs):
   inspect_simple(inspect.currentframe())
 
   sum = a + b
-  sys.stdout.write("{} + {}".format(a,b))
-
   for key,value in sorted(kwargs.items()):
-    sys.stdout.write(" + " + str(value))
     sum += value 
 
-  sys.stdout.write(" = " + str(sum))
-  sys.stdout.write("\n")
-  sys.stdout.flush()
+  return sum
 
 
 
@@ -113,11 +104,13 @@ def main(argv):
   
   # function wth variable number of positional args
   print("")
-  showMathResultVarPositionalArgs(args.a,args.b,4,5,6)
+  res = addVarPositionalArgs(args.a,args.b,4,5,6)
+  print("final sum = {}".format(res))
 
   # function with variable number of named args
   print("")
-  showMathResultVarNamedArgs(args.a,args.b,c=4,d=5,e=6)
+  res = addVarNamedArgs(args.a,args.b,c=4,d=5,e=6)
+  print("final sum = {}".format(res))
 
 
 

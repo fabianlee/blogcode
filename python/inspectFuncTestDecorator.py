@@ -2,23 +2,23 @@
 #
 # Use Decorators and introspection to see the arguments passed to a function
 #
-#
+# https://fabianlee.org/2019/09/22/python-using-a-custom-decorator-to-inspect-function-arguments/
 #
 import sys
 import argparse
 import inspect
 import functools
 
-# decorator that injects itself into each function
+# custom decorator
 def showargs_decorator(func):
 
     # updates special attributes e.g. __name__,__doc__
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-      # call inspection logic
+      # call custom inspection logic
       inspect_decorator(func,args,kwargs)
       # calls original function
-      func(*args, **kwargs)
+      return func(*args, **kwargs)
 
     return wrapper
 
@@ -27,12 +27,13 @@ def inspect_decorator(func,args,kwargs):
   funcname = func.__name__
   print("function {}()".format(funcname))
 
-  # python3
+  # py3 vs py2
   if sys.version_info >= (3, 0):
     co = func.__code__ # py3
   else:
     co = func.func_code # py2
 
+  # get description of function parameters expected
   argspec = inspect.getargspec(func)
 
   # go through each position based argument        
@@ -67,45 +68,37 @@ def showHelloWorld():
 @showargs_decorator
 def showMathResult(a,b,showLower=True):
   opDisplay = "plus" if showLower else "PLUS"
-  print("{} {} {} = {}".format(a,opDisplay,b,a+b))
+  return a+b
 
 
 # perform math operation, variable number of positional args
 @showargs_decorator
-def showMathResultVarPositionalArgs(a,b,*args):
+def addVarPositionalArgs(a,b,*args):
+  # does not work unless decorator used functools.wrap
+  #print("func name inside {}".format(showMathResultVarPositionalArgs.__name__))
 
   sum = a + b
-  sys.stdout.write("{} + {}".format(a,b))
-
   for n in args:
-    sys.stdout.write(" + " + str(n))
     sum += n
 
-  sys.stdout.write(" = " + str(sum))
-  sys.stdout.write("\n")
-  sys.stdout.flush()
+  return sum
 
 # perform math operation, variable number of named args
 @showargs_decorator
-def showMathResultVarNamedArgs(a,b,**kwargs):
+def addVarNamedArgs(a,b,**kwargs):
 
   sum = a + b
-  sys.stdout.write("{} + {}".format(a,b))
-
   for key,value in sorted(kwargs.items()):
-    sys.stdout.write(" + " + str(value))
     sum += value 
 
-  sys.stdout.write(" = " + str(sum))
-  sys.stdout.write("\n")
-  sys.stdout.flush()
+  return sum
 
 
 
 def main(argv):
 
   # parse arguments
-  ap = argparse.ArgumentParser(description="Example using introspection")
+  ap = argparse.ArgumentParser(description="introspection using decorator")
   ap.add_argument('a',type=int,help="first integer")
   ap.add_argument('b',type=int,help="second integer")
   args = ap.parse_args()
@@ -116,13 +109,16 @@ def main(argv):
 
   # function with ints and optional params
   print("")
-  showMathResult(args.a,args.b)
+  res = showMathResult(args.a,args.b)
+  print("final sum = {}".format(res))
 
   print("")
-  showMathResultVarPositionalArgs(args.a,args.b,4,5,6)
+  res = addVarPositionalArgs(args.a,args.b,4,5,6)
+  print("final sum = {}".format(res))
 
   print("")
-  showMathResultVarNamedArgs(args.a,args.b,c=4,d=5,e=6)
+  res = addVarNamedArgs(args.a,args.b,c=4,d=5,e=6)
+  print("final sum = {}".format(res))
 
 
 
