@@ -29,16 +29,18 @@ def main(argv):
     ap = argparse.ArgumentParser(description="Example using ArgParse library")
     ap.add_argument('a', type=int, help="first integer")
     ap.add_argument('b', type=int, help="second integer")
+    # use nargs for optional positional args or var args
+    #ap.add_argument('c', type=int, nargs='?', help="third integer")
     ap.add_argument('-o', '--op', default="add",
                     choices=['add', 'mul'], help="add or multiply")
     ap.add_argument(
-        '-u', '--upper', action="store_true", help="show uppercase")
+        '-u', '--to-upper', action="store_true", help="show uppercase")
 
     # parse args
     args = ap.parse_args()
 
     # print results of math operation
-    show_math_result(args.a, args.b, args.op, args.upper)
+    show_math_result(args.a, args.b, args.op, args.to_upper)
 
 
 if __name__ == '__main__':
