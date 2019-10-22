@@ -1,0 +1,4 @@
+.vscode/
+credentials.json
+*.pickle
+
