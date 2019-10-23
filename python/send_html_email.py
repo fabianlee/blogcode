@@ -126,7 +126,7 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
             msg_att = MIMEImage(fp.read(), _subtype=sub_type)
             fp.close()
             # encode as base64
-            email.encoders.encode_base64(msg_att)
+            #email.encoders.encode_base64(msg_att)
         else:
             fp = open(attachment_file, 'rb')
             msg_att = MIMEBase(main_type, sub_type)
@@ -202,12 +202,12 @@ def main():
     ap.add_argument("subject", help="email subject line")
     ap.add_argument("name", help="name of person receiving email")
     ap.add_argument("smtp", help="SMTP server")
+    ap.add_argument("attach", nargs='*', help="variable list of files to attach" )
     ap.add_argument("--port", type=int, default=25, help="SMTP port")
     ap.add_argument("-t","--tls",help="use TLS",action="store_true")
     ap.add_argument("-u","--user",help="smtp user")
     ap.add_argument("-p","--password",help="smtp password")
     ap.add_argument("--debug",help="show verbose message envelope",action="store_true")
-    ap.add_argument("--attach", nargs="*", help="list of files to attach" )
     args = ap.parse_args()
     sender = args.sender
     to_csv = args.to_csv
@@ -245,9 +245,6 @@ def main():
     # text message, would use mako templating in real scenario
     msg_plain = ("Hello {}:\n\n" + \
         " As our valued customer, we would like to invite you to our annual sale!").format(name)
-
-    #attachment_file_list = None #[ "attachments/testdocument.pdf", "attachments/testdocument.docx", 
-        #"attachments/test.txt", "attachments/pixabay-stock-art-free-presentation.png"]
 
     # create message object
     message = create_message_with_attachment(sender, to_csv, subject, msg_html, msg_plain, attachment_file_list)
