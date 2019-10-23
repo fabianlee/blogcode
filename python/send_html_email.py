@@ -21,20 +21,17 @@ When sending with optional attachments:
         [attachment1]
         [attachment2]
 
-You don't see many modern emails with embedded cid/inline images
-not enough client devices will by default show (e.g. Outlook,mobile,etc.)
 
-
-Example Usage sending via google api:
+Example Usage sending via Google Gmail api:
     python3 send_html_email.py me send.to@gmail.com thesubject John google.com \
         --attach attachments/test.txt attachments/testdocument.pdf
 
 Example Usage sending via open unauthenticated relay:
-    python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
+    python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relay> \
         --attach attachments/test.txt attachments/testdocument.pdf
 
 Example Usage sending via authenticated relay:
-    python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
+    python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relay> \
         --port=587 --tls --user=myuser@domain.com --password=MyP4ss! \
         --attach attachments/test.txt attachments/testdocument.pdf
 
@@ -155,9 +152,10 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
     return message
 
 
-def send_message_via_relay(message, smtp, port, use_tls, smtp_user, smtp_pass, sender, to_csv):
+def send_message_via_relay(message, smtp, port, use_tls, smtp_user, smtp_pass, sender, to_csv, debug):
     server = smtplib.SMTP(smtp, port)
-    # server.set_debuglevel(9)
+    if debug:
+        server.set_debuglevel(9)
     server.ehlo()
     if use_tls:
         print("Using TLS for SMTP to {}".format(port))
@@ -171,6 +169,10 @@ def send_message_via_relay(message, smtp, port, use_tls, smtp_user, smtp_pass, s
 
 
 def send_message_to_google(message, sender):
+    """
+    Requires local 'credentials.json' for Gmail API
+    https://developers.google.com/gmail/api/quickstart/python
+    """
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
@@ -192,18 +194,15 @@ def send_message_to_google(message, sender):
             pickle.dump(creds, token)
 
     service = build('gmail', 'v1', credentials=creds)
-    send_message_internal(
-        service, sender, {'raw': base64.urlsafe_b64encode(message.as_string().encode()).decode()})
-
-
-def send_message_internal(service, user_id, message):
+    msg_raw = {'raw': base64.urlsafe_b64encode(message.as_string().encode()).decode()}
     try:
-        message = (service.users().messages().send(userId=user_id, body=message).execute())
+        message = (service.users().messages().send(userId=sender, body=msg_raw).execute())
         print("Message Id: {}".format(message['id']))
         return message
     except Exception as e:
         print("An error occurred: {}".format(e))
         raise e
+
 
 
 def main():
@@ -267,8 +266,9 @@ def main():
     # send message
     if smtp_server == "google.com":
         send_message_to_google(message, sender)
-    elif smtp_user and smtp_password:
-        send_message_via_relay(message, smtp_server, smtp_port, use_tls, smtp_user, smtp_password, sender, to_csv)
+    else:
+        send_message_via_relay(message, smtp_server, smtp_port, 
+                               use_tls, smtp_user, smtp_password, sender, to_csv, debug)
 
     print("\nSUCCESS: email sent to {}".format(to_csv))
 
