@@ -3,10 +3,10 @@
  Sending rich html email with optional attachments
 
 PREREQUISITE for sending email via googleapi and oauth2
-sudo pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
-Also must place 'credentials.json' file from Google into same directory
+    1. sudo pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+    2. Must place 'credentials.json' file from Google into same directory
 
-When sending without attachments, the most modern way of sending mail 
+When sending without attachments, the most modern way of sending mail
 that works across devices is to send:
     multipart/alternative
         text/plain
@@ -22,31 +22,26 @@ When sending with optional attachments:
         [attachment2]
 
 You don't see many modern emails with embedded cid/inline images
-not enough client devices will allow these modes (e.g. Outlook,mobile,etc.)
+not enough client devices will by default show (e.g. Outlook,mobile,etc.)
+
 
 Example Usage sending via google api:
     python3 send_html_email.py me send.to@gmail.com thesubject John google.com \
-        attachments/test.txt attachments/testdocument.pdf
+        --attach attachments/test.txt attachments/testdocument.pdf
 
 Example Usage sending via open unauthenticated relay:
     python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
-        attachments/test.txt attachments/testdocument.pdf \
+        --attach attachments/test.txt attachments/testdocument.pdf
 
 Example Usage sending via authenticated relay:
     python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
-        attachments/test.txt attachments/testdocument.pdf \
-        --port=587 --tls --user=myuser@domain.com --password=MyP4ss!
+        --port=587 --tls --user=myuser@domain.com --password=MyP4ss! \
+        --attach attachments/test.txt attachments/testdocument.pdf
 
 """
 import sys
 import argparse
 import base64
-import argparse
-import shlex
-import re
-import json
-import time
-import datetime
 import os
 
 # mail
@@ -65,18 +60,20 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 
-scriptPath = os.path.dirname(os.path.abspath(__file__))
+script_path = os.path.dirname(os.path.abspath(__file__))
+
 
 def add_embedded_image_to_related(message_related):
     """ add embedded image
-    not typically used because modern email clients don't display
+    not typically used because modern email clients don't display by default
     Returns: image cid to use as href, <img src="cid:${image_cid}"/>
     """
-    # image_cid looks like <long.random.number@xyz.com>, strip first and last char
+    # image_cid looks like <long.random.number@xyz.com>, strip first and last
+    # char
     image_cid = email.utils.make_msgid(domain='foo.com')[1:-1]
-    with open('attachments/pixabay-stock-art-free-presentation.png','rb') as img:
-        maintype,subtype = mimetypes.guess_type(img.name)
-        message_related.attach(MIMEImage(img.read(),subtype,cid=image_cid))
+    with open('attachments/pixabay-stock-art-free-presentation.png', 'rb') as img:
+        maintype, subtype = mimetypes.guess_type(img.name)
+        message_related.attach(MIMEImage(img.read(), subtype, cid=image_cid))
     return image_cid
 
 
@@ -113,7 +110,7 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
     message_rel = MIMEMultipart('related')
     message_rel.attach(MIMEText(msg_html, 'html'))
     # we are not adding an embedded image
-    #add_embedded_image_to_related(message_rel)
+    # add_embedded_image_to_related(message_rel)
     # attach related to alternative
     message_alt.attach(message_rel)
 
@@ -128,7 +125,7 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
         if content_type is None or encoding is not None:
             content_type = 'application/octet-stream'
         main_type, sub_type = content_type.split('/', 1)
-        #print("main/sub={}/{}".format(main_type,sub_type))
+        # print("main/sub={}/{}".format(main_type,sub_type))
 
         msg_att = None
         if main_type == 'text':
@@ -151,7 +148,8 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
 
         # attach to main message
         filename = os.path.basename(attachment_file)
-        msg_att.add_header('Content-Disposition', 'attachment', filename=filename)
+        msg_att.add_header(
+            'Content-Disposition', 'attachment', filename=filename)
         message.attach(msg_att)
 
     return message
@@ -159,7 +157,7 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
 
 def send_message_via_relay(message, smtp, port, use_tls, smtp_user, smtp_pass, sender, to_csv):
     server = smtplib.SMTP(smtp, port)
-    #server.set_debuglevel(9)
+    # server.set_debuglevel(9)
     server.ehlo()
     if use_tls:
         print("Using TLS for SMTP to {}".format(port))
@@ -172,8 +170,7 @@ def send_message_via_relay(message, smtp, port, use_tls, smtp_user, smtp_pass, s
     server.sendmail(sender, to_csv.split(','), text)
 
 
-
-def send_message_to_google(message,sender,to,subject,msg_html,msg_plain,attachment_file_list):
+def send_message_to_google(message, sender):
     SCOPES = 'https://www.googleapis.com/auth/gmail.send'
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
@@ -195,9 +192,11 @@ def send_message_to_google(message,sender,to,subject,msg_html,msg_plain,attachme
             pickle.dump(creds, token)
 
     service = build('gmail', 'v1', credentials=creds)
-    SendMessageInternal(service, sender, {'raw': base64.urlsafe_b64encode(message.as_string().encode()).decode()} )
+    send_message_internal(
+        service, sender, {'raw': base64.urlsafe_b64encode(message.as_string().encode()).decode()})
 
-def SendMessageInternal(service, user_id, message):
+
+def send_message_internal(service, user_id, message):
     try:
         message = (service.users().messages().send(userId=user_id, body=message).execute())
         print("Message Id: {}".format(message['id']))
@@ -216,12 +215,13 @@ def main():
     ap.add_argument("subject", help="email subject line")
     ap.add_argument("name", help="name of person receiving email")
     ap.add_argument("smtp", help="SMTP server")
-    ap.add_argument("attach", nargs='*', help="variable list of files to attach" )
     ap.add_argument("--port", type=int, default=25, help="SMTP port")
-    ap.add_argument("-t","--tls",help="use TLS",action="store_true")
-    ap.add_argument("-u","--user",help="smtp user")
-    ap.add_argument("-p","--password",help="smtp password")
-    ap.add_argument("--debug",help="show verbose message envelope",action="store_true")
+    ap.add_argument("-t", "--tls", help="use TLS", action="store_true")
+    ap.add_argument("-u", "--user", help="smtp user")
+    ap.add_argument("-p", "--password", help="smtp password")
+    ap.add_argument("--debug", help="show verbose message envelope", action="store_true")
+    ap.add_argument("--attach", nargs='*',help="variable list of files to attach")
+
     args = ap.parse_args()
     sender = args.sender
     to_csv = args.to_csv
@@ -234,7 +234,6 @@ def main():
     smtp_password = args.password
     debug = args.debug
     attachment_file_list = args.attach
-
 
     # HTML message, would use mako templating in real scenario
     msg_html = """
@@ -257,8 +256,8 @@ def main():
     """.format(name)
 
     # text message, would use mako templating in real scenario
-    msg_plain = ("Hello {}:\n\n" + \
-        " As our valued customer, we would like to invite you to our annual sale!").format(name)
+    msg_plain = ("Hello {}:\n\n" +
+                 " As our valued customer, we would like to invite you to our annual sale!").format(name)
 
     # create message object
     message = create_message_with_attachment(sender, to_csv, subject, msg_html, msg_plain, attachment_file_list)
@@ -266,10 +265,10 @@ def main():
         print(message)
 
     # send message
-    if smtp_server=="google.com":
-        send_message_to_google(message,sender,to_csv,subject,msg_html,msg_plain,attachment_file_list)
+    if smtp_server == "google.com":
+        send_message_to_google(message, sender)
     elif smtp_user and smtp_password:
-        send_message_via_relay(message,smtp_server,smtp_port,use_tls,smtp_user,smtp_password,sender,to_csv)
+        send_message_via_relay(message, smtp_server, smtp_port, use_tls, smtp_user, smtp_password, sender, to_csv)
 
     print("\nSUCCESS: email sent to {}".format(to_csv))
 
