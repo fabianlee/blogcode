@@ -2,6 +2,10 @@
 """
  Sending rich html email with optional attachments
 
+PREREQUISITE for sending email via googleapi and oauth2
+sudo pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+Also must place 'credentials.json' file from Google into same directory
+
 When sending without attachments, the most modern way of sending mail 
 that works across devices is to send:
     multipart/alternative
@@ -18,10 +22,16 @@ When sending with optional attachments:
         [attachment2]
 
 You don't see many modern emails with embedded cid/inline images
-not enough client devices will allow these modes (Outlook,mobile,etc.)
+not enough client devices will allow these modes (e.g. Outlook,mobile,etc.)
 
-Prerequisite for sending email via googleapi and oauth2
-sudo pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+Example Usage sending via google api:
+    python3 send_html_email.py me send.to@gmail.com thesubject John google.com \
+        attachments/test.txt attachments/testdocument.pdf
+
+Example Usage sending via authenticated relay:
+    python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
+        attachments/test.txt attachments/testdocument.pdf \
+        --port=587 --tls --user=myuser@domain.com --password=MyP4ss!
 """
 import sys
 import argparse
@@ -120,13 +130,12 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
             fp = open(attachment_file, 'r')
             msg_att = MIMEText(fp.read(), _subtype=sub_type)
             fp.close()
-            # DO NOT encode as base64
+            # DO NOT encode as base64, sent as text
         elif main_type == 'image':
             fp = open(attachment_file, 'rb')
             msg_att = MIMEImage(fp.read(), _subtype=sub_type)
             fp.close()
-            # encode as base64
-            #email.encoders.encode_base64(msg_att)
+            # DO NOT encode as base64, already added as such
         else:
             fp = open(attachment_file, 'rb')
             msg_att = MIMEBase(main_type, sub_type)
