@@ -106,12 +106,13 @@ def create_message_with_attachment(sender, to, subject, msg_html, msg_plain, att
     message_alt.attach(MIMEText(msg_plain, 'plain'))
     message_rel = MIMEMultipart('related')
     message_rel.attach(MIMEText(msg_html, 'html'))
-    # we are not adding an embedded image
-    # add_embedded_image_to_related(message_rel)
-    # attach related to alternative
+    # we are not adding an embedded 'cid:' image
+    #add_embedded_image_to_related(message_rel)
+
+    # on alternative wrapper, add related
     message_alt.attach(message_rel)
 
-    # attach alternate to outer wrapper
+    # on outer wrapper, add alternative
     message.attach(message_alt)
 
     # each attachment
