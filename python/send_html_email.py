@@ -28,10 +28,15 @@ Example Usage sending via google api:
     python3 send_html_email.py me send.to@gmail.com thesubject John google.com \
         attachments/test.txt attachments/testdocument.pdf
 
+Example Usage sending via open unauthenticated relay:
+    python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
+        attachments/test.txt attachments/testdocument.pdf \
+
 Example Usage sending via authenticated relay:
     python send_html_email.py myuser@domain.com sendto@domain.com thesubject John <relayIP> \
         attachments/test.txt attachments/testdocument.pdf \
         --port=587 --tls --user=myuser@domain.com --password=MyP4ss!
+
 """
 import sys
 import argparse
