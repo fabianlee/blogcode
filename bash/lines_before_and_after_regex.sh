@@ -21,6 +21,4 @@ echo "$lines" | sed '0,/^dog.*/d'
 echo ""
 echo "Here are all the lines before dog regex"
 echo "$lines" | sed '/^dog.*/q' | head -n -1
-#| head -n -1
-
 
