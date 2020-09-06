@@ -1,5 +1,7 @@
 #!/bin/bash
 # 
+# supports blog: https://fabianlee.org/2020/09/06/bash-difference-between-two-arrays/
+#
 # Example showing difference of two arrays
 #
 

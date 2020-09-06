@@ -1,5 +1,7 @@
 #!/bin/bash
 # 
+# supports blog: https://fabianlee.org/2020/09/06/bash-output-all-lines-before-after-line-identified-by-regex/
+#
 # example showing how to:
 #   show all the lines before a regex match
 #   show all the lines after a regex match
