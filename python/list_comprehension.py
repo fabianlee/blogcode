@@ -2,6 +2,8 @@
 #
 # Example of python list comprehension
 #
+# Supports blog entry: https://fabianlee.org/2020/09/07/python-examples-of-list-comprehension/
+#
 from pprint import pprint
 
 # array of student records, emulates possible json/yaml data structure
