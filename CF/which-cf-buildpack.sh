@@ -2,7 +2,7 @@
 #
 # Determines exact buildpack details for CloudFoundry app
 # 
-# Supporting blog: https://fabianlee.org
+# Supporting blog: https://fabianlee.org/2020/10/20/cloudfoundry-determining-buildpack-used-by-application/
 #
 app="$1"
 if [ -z "$app" ]; then
