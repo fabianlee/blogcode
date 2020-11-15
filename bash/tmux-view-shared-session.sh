@@ -10,11 +10,16 @@ if [ -c $myid ]; then
 fi
 
 sharedSocket=/tmp/${myid}_tmux_shared
-sudo chmod 777 $sharedSocket
+ls -l $sharedSocket
+if [[ ! -r $sharedSocket || ! -w $sharedSocket || ! -x $sharedSocket ]]; then
+  echo "Need full permission to $sharedSocket to use tmux sharing. Request that $myid runs:"
+  echo "chmod 777 $sharedSocket"
+  exit 9
+fi
 
 echo "==SESSIONS=="
 tmux -S $sharedSocket list-sessions
 
 echo ""
-echo "press <ENTER> to start viewing session, to detatch press CTRL-b d"
+read -p "press <ENTER> to start viewing session, to detatch press CTRL-b d" $dummy
 tmux -S $sharedSocket attach-session -t ${myid}_tmux_shared -r
