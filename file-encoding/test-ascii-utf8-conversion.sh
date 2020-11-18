@@ -2,6 +2,8 @@
 #
 # creates a text file with ascii7 encoding and then utf-8 with embedded unicode character
 #
+# Supporting blog: https://fabianlee.org/2020/11/18/bash-fixing-an-ascii-text-file-changed-with-unicode-character-sequences/
+#
 
 # remove any files from last run
 rm -f test-ascii.txt test-utf8.txt test-bom-utf8.txt
