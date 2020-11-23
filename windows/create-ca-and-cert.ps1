@@ -1,10 +1,13 @@
 #Requires -Version 5.1
 param(
-  [string]$certCN
+  [string]$rootCN,
+  [string]$certCN,
+  [string]$pfxPassword="securepw"
 )
 
-if ( ! $certCN ) {
-  write-host "ERROR need to supply CN for certificate"
+if ( ! ( $certCN -or $certCN ) ) {
+  write-host "ERROR need to supply root and cert CN for certificate"
+  write-host "Example: myCA flee-dc1.fabian.lee 'flee-dc1.fabian.lee,flee-dc1.FABIAN.LEE,flee-dc1.home.lab'"
   exit(1)
 }
 
@@ -15,7 +18,7 @@ New-Item -Path $baseDir -ItemType Directory -Force | out-null
 # https://infiniteloop.io/powershell-self-signed-certificate-via-self-signed-root-ca/
 # https://invoke-automation.blog/2018/09/16/creating-a-local-ssl-certificate-hierarchy
 $params = @{
-  DnsName = "myCA"
+  DnsName = $rootCN
   KeyLength = 2048
   KeyAlgorithm = 'RSA'
   HashAlgorithm = 'SHA256'
@@ -24,9 +27,9 @@ $params = @{
   CertStoreLocation = 'Cert:\LocalMachine\My'
   KeyUsage = 'CertSign','CRLSign' #fixes invalid cert error
 }
-$rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq 'CN=myCA'} | Select -First 1
+$rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$rootCN"} | Select -First 1
 if ($rootCA) {
-  write-host "root CA already created 'CN=myCA' thumbprint $($rootCA.Thumbprint)"
+  write-host "root CA already created 'CN=$rootCN' thumbprint $($rootCA.Thumbprint)"
 }else {
   Try {
     $rootCA = New-SelfSignedCertificate @params
@@ -40,13 +43,15 @@ if ($rootCA) {
 
   # Extra step needed since self-signed cannot be directly shipped to trusted root CA store
   # if you want to silence the cert warnings on other systems you'll need to import the rootCA.crt on them too
-  Export-Certificate -Cert $rootCA -FilePath "$baseDir\rootCA.crt"
-  Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\rootCA.crt"
+  $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
+  Export-Certificate -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
+  Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 }
 
+# ServerAuth key extension not necessary in Win2016, but it is with 2012
 
 $params = @{
-  DnsName = $certCN
+  DnsName = $certCN.Split(',')
   Signer = $rootCA
   KeyLength = 2048
   KeyAlgorithm = 'RSA'
@@ -54,6 +59,7 @@ $params = @{
   KeyExportPolicy = 'Exportable'
   NotAfter = (Get-date).AddYears(2)
   CertStoreLocation = 'Cert:\LocalMachine\My'
+  TextExtension = @("2.5.29.37={text}1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2")
 }
 $theCert = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$certCN" } | Select -First 1
 if ($theCert) {
@@ -62,9 +68,10 @@ if ($theCert) {
   $theCert = New-SelfSignedCertificate @params
 
   # https://stackoverflow.com/questions/23066783/how-to-strip-illegal-characters-before-trying-to-save-filenames
-  $safeName=([char[]]$certCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
+  $safeName=([char[]]$certCN.Split(',')[0] | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
   #write-host "safeName is $safeName"
-  Export-PfxCertificate -Cert $theCert -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText 'securepw' -Force)
+  Export-Certificate -Cert $theCert -FilePath "$baseDir\$safeName.crt"
+  Export-PfxCertificate -Cert $theCert -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
 }
 
 
