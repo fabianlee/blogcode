@@ -59,4 +59,12 @@ if ($theCert) {
 }
 
 
-
+#
+# Do on linux host to convert format
+#
+# convert root ca certificate to pem format
+#echo openssl x509 -inform DER -in rootCA.crt -out rootCA.pem
+# export server private key to pem format
+#openssl pkcs12 -in <cert>.pfx -nocerts -nodes -out <cert>.pem
+# convert server certificate to pem format
+#openssl x509 -inform DER -in <cert>.crt -out <cert>.pem
