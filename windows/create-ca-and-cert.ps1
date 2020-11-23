@@ -1,3 +1,4 @@
+#Requires -Version 5.1
 param(
   [string]$certCN
 )
@@ -30,10 +31,10 @@ if ($rootCA) {
   Try {
     $rootCA = New-SelfSignedCertificate @params
   }Catch {
-    Write-Warning "ERROR creating CA cert, you are probably on an older Powershell/Windows2012R2 host"
-    Write-Warning "need Powershell 5.x for this certificate functionality"
-    Write-Warning "Windows Mmgmt Framework 5.1 download: https://www.microsoft.com/en-us/download/details.aspx?id=54616"
-    $psVersionTable
+    Write-Warning "ERROR creating CA cert, you are probably on an older Windows2012R2 host"
+    Write-Warning (Get-WmiObject -class Win32_OperatingSystem).Caption
+    #Write-Warning "Windows Mmgmt Framework 5.1 download: https://www.microsoft.com/en-us/download/details.aspx?id=54616"
+    $PSVersionTable
     exit 3
   }
 
