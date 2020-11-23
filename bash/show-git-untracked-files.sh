@@ -3,7 +3,7 @@
 # Shows untracked files in git repo
 #
 # more typical would be to simply use 'git status --ignored -s' or 'git ls-files --others'
-# https://fabianlee.org/2020/11/22/bash-identifying-files-that-gitignore-is-purposely-skipping/
+# https://fabianlee.org/2020/11/22/git-identifying-files-that-gitignore-is-purposely-skipping/
 #
 
 global_allfiles=$(mktemp)
