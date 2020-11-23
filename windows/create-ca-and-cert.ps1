@@ -27,7 +27,15 @@ $rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subjec
 if ($rootCA) {
   write-host "root CA already created 'CN=myCA' thumbprint $($rootCA.Thumbprint)"
 }else {
-  $rootCA = New-SelfSignedCertificate @params
+  Try {
+    $rootCA = New-SelfSignedCertificate @params
+  }Catch {
+    Write-Warning "ERROR creating CA cert, you are probably on an older Powershell/Windows2012R2 host"
+    Write-Warning "need Powershell 5.x for this certificate functionality"
+    Write-Warning "Windows Mmgmt Framework 5.1 download: https://www.microsoft.com/en-us/download/details.aspx?id=54616"
+    $psVersionTable
+    exit 3
+  }
 
   # Extra step needed since self-signed cannot be directly shipped to trusted root CA store
   # if you want to silence the cert warnings on other systems you'll need to import the rootCA.crt on them too
