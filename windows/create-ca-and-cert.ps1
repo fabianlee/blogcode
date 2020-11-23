@@ -1,4 +1,10 @@
-#Requires -Version 5.1
+#
+# Creates CA and then cert based on CA with optional SAN
+# Adds root and cert to Personal Certificates of local computer
+#
+# For Secure LDAP on Win2016, root cert needs to be added to NTDS\Trusted Root 
+# of service account "Active Directory Domain Services"
+#
 param(
   [string]$rootCN,
   [string]$certCN,
@@ -28,28 +34,22 @@ $params = @{
   KeyUsage = 'CertSign','CRLSign' #fixes invalid cert error
 }
 $rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$rootCN"} | Select -First 1
+$safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
+
 if ($rootCA) {
   write-host "root CA already created 'CN=$rootCN' thumbprint $($rootCA.Thumbprint)"
+  Export-Certificate -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
 }else {
-  Try {
-    $rootCA = New-SelfSignedCertificate @params
-  }Catch {
-    Write-Warning "ERROR creating CA cert, you are probably on an older Windows2012R2 host"
-    Write-Warning (Get-WmiObject -class Win32_OperatingSystem).Caption
-    #Write-Warning "Windows Mmgmt Framework 5.1 download: https://www.microsoft.com/en-us/download/details.aspx?id=54616"
-    $PSVersionTable
-    exit 3
-  }
+  $rootCA = New-SelfSignedCertificate @params
 
   # Extra step needed since self-signed cannot be directly shipped to trusted root CA store
   # if you want to silence the cert warnings on other systems you'll need to import the rootCA.crt on them too
-  $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
   Export-Certificate -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
   Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 }
 
 # ServerAuth key extension not necessary in Win2016, but it is with 2012
-
+$primaryDnsName = $certCN.Split(',')[0]
 $params = @{
   DnsName = $certCN.Split(',')
   Signer = $rootCA
@@ -61,18 +61,19 @@ $params = @{
   CertStoreLocation = 'Cert:\LocalMachine\My'
   TextExtension = @("2.5.29.37={text}1.3.6.1.5.5.7.3.1,1.3.6.1.5.5.7.3.2")
 }
-$theCert = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$certCN" } | Select -First 1
+$theCert = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$primaryDnsName" } | Select -First 1
 if ($theCert) {
-  write-host "certificate $certCN already created thumbprint $($theCert.Thumbprint)"
+  write-host "certificate $primryDnsName already created thumbprint $($theCert.Thumbprint)"
 }else {
   $theCert = New-SelfSignedCertificate @params
-
-  # https://stackoverflow.com/questions/23066783/how-to-strip-illegal-characters-before-trying-to-save-filenames
-  $safeName=([char[]]$certCN.Split(',')[0] | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
-  #write-host "safeName is $safeName"
-  Export-Certificate -Cert $theCert -FilePath "$baseDir\$safeName.crt"
-  Export-PfxCertificate -Cert $theCert -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
 }
+
+# write pfx/pem cert to file
+# https://stackoverflow.com/questions/23066783/how-to-strip-illegal-characters-before-trying-to-save-filenames
+$safeName=([char[]]$primaryDnsName | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
+#write-host "safeName is $safeName"
+Export-Certificate -Cert $theCert -FilePath "$baseDir\$safeName.crt"
+Export-PfxCertificate -Cert $theCert -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
 
 
 #
