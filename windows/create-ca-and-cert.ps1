@@ -2,9 +2,21 @@
 # Creates CA and then cert based on CA with optional SAN
 # Adds root and cert to Personal Certificates of local computer
 #
-# For Secure LDAP on Win2016, root cert needs to be added to NTDS\Trusted Root 
-# of service account "Active Directory Domain Services"
+# This script is meant to be run on Windows 2016 and higher
+# I would need to use certutil to make this run on Windows 2012 
 #
+# For Secure LDAP on Win2012R2 and Win2016:
+#   root cert needs to be added to NTDS\Trusted Root Certification Authorities
+#     NTDS\Trusted Root Certification Authorities needs root cert
+#   And on local computer:
+#     Personal: needs certificate
+#     Trusted Root Certificates: need ca cert
+#
+#  Windows 2012R2 is pickier about certificate and needs:
+#    'Server Authentication' key extension
+#    SAN name matching uppercase DOMAIN realm
+# 
+
 param(
   [string]$rootCN,
   [string]$certCN,
