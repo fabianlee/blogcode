@@ -64,6 +64,8 @@ EOF
 
 echo ""
 echo ""
-echo "Modify 'ansible-hosts' with a proper remote host and credentials, then run:"
-echo "./run-ansible-ping.sh"
+echo "First run:"
 echo "./run-ansible-playbook.sh"
+echo ""
+echo "Then run:"
+echo "./run-ansible-ping.sh"
