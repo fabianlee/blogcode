@@ -25,8 +25,14 @@ def show_math_result(a, b, op="add", upper=False):
 
 def main(argv):
 
+    examples = '''usage:
+3 5
+4 6 --op add
+5 6 --op mul
+'''
+
     # define arguments
-    ap = argparse.ArgumentParser(description="Example using ArgParse library")
+    ap = argparse.ArgumentParser(description="Example using ArgParse library",epilog=examples,formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('a', type=int, help="first integer")
     ap.add_argument('b', type=int, help="second integer")
     # use nargs for optional positional args or var args
