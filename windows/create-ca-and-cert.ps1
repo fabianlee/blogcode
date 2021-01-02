@@ -6,11 +6,11 @@
 # I would need to use certutil to make this run on Windows 2012 
 #
 # For Secure LDAP on Win2012R2 and Win2016:
-#   root cert needs to be added to NTDS\Trusted Root Certification Authorities
-#     NTDS\Trusted Root Certification Authorities needs root cert
-#   And on local computer:
+#   on local computer:
 #     Personal: needs certificate
 #     Trusted Root Certificates: need ca cert
+#   root cert needs to be added for service account 'Active Dir Domain Services'
+#     NTDS\Trusted Root Certification Authorities needs root cert
 #
 #  Windows 2012R2 is pickier about certificate and needs:
 #    'Server Authentication' key extension
