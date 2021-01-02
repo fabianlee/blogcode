@@ -23,7 +23,7 @@ param(
   [string]$pfxPassword="securepw"
 )
 
-if ( ! ( $certCN -or $certCN ) ) {
+if ( ! ( $rootCN -or $certCN ) ) {
   write-host "ERROR need to supply root and cert CN for certificate"
   write-host "Example: myCA flee-dc1.fabian.lee 'flee-dc1.fabian.lee,flee-dc1.FABIAN.LEE,flee-dc1.home.lab'"
   exit(1)
