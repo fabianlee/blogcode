@@ -1,0 +1,17 @@
+---
+- name: Playbook for testing lineinfile with regex
+  hosts: localhost
+  tasks:
+    - name: Replace values in config file
+      lineinfile:
+        backup: no
+        backrefs: yes
+        state: present
+        path: ./my.yml
+        regexp: '^(\s*)[#]?{{ item.search }}(: )*'
+        line: '\1{{ item.replace }}'
+      with_items:
+        - { search: 'key1', replace: 'key1: NEWvalue1' }
+        - { search: 'key2', replace: 'key2: NEWvalue2' }
+        - { search: '\- elephant', replace: '- heffalump' }
+        - { search: '\- www.ansible.com', replace: '- www.redhat.com' }
