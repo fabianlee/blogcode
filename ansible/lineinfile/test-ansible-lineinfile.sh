@@ -1,8 +1,10 @@
 #!/bin/bash
 # invokes local playbook that exercises Ansible lineinfile
 
+# reset file and show contents
+cp key-value.cfg.bak key-value.cfg
 echo "***ORIGINAL*******************************"
-cat test.cfg
+cat key-value.cfg
 echo "******************************************"
 
 
@@ -12,6 +14,6 @@ ansible-playbook --connection=local --inventory 127.0.0.1 test-lineinfile.yml
 
 # show results and then reset file
 echo "***UPDATED********************************"
-cat test.cfg
+cat key-value.cfg
 echo "******************************************"
-cp test.cfg.bak test.cfg
+cp key-value.cfg.bak key-value.cfg
