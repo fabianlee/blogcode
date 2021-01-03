@@ -2,7 +2,7 @@
 - name: Playbook for testing lineinfile with regex
   hosts: localhost
   tasks:
-    - name: Replace values in config file
+    - name: Replace values in yml file
       lineinfile:
         backup: no
         backrefs: yes
@@ -15,3 +15,15 @@
         - { search: 'key2', replace: 'key2: NEWvalue2' }
         - { search: '\- elephant', replace: '- heffalump' }
         - { search: '\- www.ansible.com', replace: '- www.redhat.com' }
+
+    - name: add item to yml file at correct indentation level
+      lineinfile:
+        backup: no
+        backrefs: yes
+        state: present
+        path: ./my.yml
+        regexp: '^(\s*)[#]?{{ item.search }}(.*)'
+        line: '\1{{ item.search }}\2\n\1{{ item.add }}'
+      with_items:
+        - { search: 'key2', add: 'key3: INSvalue3' }
+        - { search: '- cat', add: '- deer' }
