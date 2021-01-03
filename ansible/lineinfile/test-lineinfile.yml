@@ -1,0 +1,26 @@
+---
+- name: Playbook for testing lineinfile with regex
+  hosts: localhost
+  tasks:
+    - name: Replace values in config file
+      lineinfile:
+        backup: no
+        state: present
+        path: ./test.cfg
+        regexp: '^[# ]*{{ item.search }}\s*=\s*'
+        line: '{{ item.replace }}'
+      with_items:
+        - { search: 'thiskey1', replace: 'thiskey1 = NEWthisval1' }
+        - { search: 'thiskey2', replace: 'thiskey2 = NEWthisval2' }
+        - { search: 'thiskey3', replace: 'thiskey3 = NEWthisval3' }
+        - { search: 'thiskey4', replace: 'thiskey4 = NEWthisval4' }
+        - { search: 'thiskey5', replace: 'thiskey5 = NEWthisval5' }
+        - { search: 'thiskey6', replace: 'thiskey6 = NEWthisval6' }
+        # keys that do not exist get created
+        - { search: 'thiskey7', replace: 'thiskey7 = INSthisnewval7' }
+    
+#    - name: Show new file contents
+#      command: "/bin/cat ./test.cfg"
+#      register: details
+#    
+#    - debug: msg="{{ details.stdout_lines }}"
