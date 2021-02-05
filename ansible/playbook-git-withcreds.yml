@@ -1,0 +1,26 @@
+# Example of using git modle with credentials, will clone if first time and pull latest if exists
+#
+# Allow prompt for variables or specify in --extra-vars
+# ansible-playbook playbook-git-withcreds.yml --extra-vars "git_user=myuser git_pass=Myp4ss!"
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+
+  vars_prompt:
+    - name: git_user
+      private: no
+    - name: git_pass
+      private: yes
+
+  vars:
+    repo_name: local-kvm-cloudimage
+
+  tasks:
+
+  # http://github.com/fabianlee/local-kvm-cloudimage.git
+  - git:
+      repo: "https://{{git_user|urlencode()}}:{{git_pass|urlencode()}}@github.com/fabianlee/{{repo_name}}.git"
+      dest: "/tmp/{{repo_name}}"
+      update: yes
