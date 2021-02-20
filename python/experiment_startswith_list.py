@@ -23,35 +23,48 @@ PRIVATE_IP_LIST = ['10.','172.16.','192.168.']
 ap = argparse.ArgumentParser()
 ap.add_argument('ip', help="IP Address")
 args = ap.parse_args()
+userip=args.ip
 
 
 print("**** TEST USING TUPLE SUPPORT IN str.startswith() *******")
-if args.ip.startswith(tuple(PRIVATE_IP_LIST)):
-  print("YES '{}' is a private IPv4 address".format(args.ip))
+if userip.startswith(tuple(PRIVATE_IP_LIST)):
+  print("YES '{}' is a private IPv4 address".format(userip))
 else:
-  print("NO '{}' is not a private IPv4 address".format(args.ip))
+  print("NO '{}' is not a private IPv4 address".format(userip))
 
 
 print("**** TEST WITH REGEX *******")
 myregex = "^" + "|^".join(PRIVATE_IP_LIST)
-testmatch = re.match(myregex,args.ip)
+testmatch = re.match(myregex,userip)
 if testmatch:
-  print("YES '{}' is a private IPv4 address".format(args.ip))
+  print("YES '{}' is a private IPv4 address".format(userip))
 else:
-  print("NO '{}' is not a private IPv4 address".format(args.ip))
+  print("NO '{}' is not a private IPv4 address".format(userip))
 
 
 print("**** TEST WITH LIST COMPREHENSION FILTER *******")
-cidr_matches = [ cidr for cidr in PRIVATE_IP_LIST if args.ip.startswith(cidr) ]
+cidr_matches = [ cidr for cidr in PRIVATE_IP_LIST if userip.startswith(cidr) ]
 if len(cidr_matches)>0:
-  print("YES '{}' is a private IPv4 address starting with this range: {}".format(args.ip,cidr_matches))
+  print("YES '{}' is a private IPv4 address starting with this range: {}".format(userip,cidr_matches))
 else:
-  print("NO '{}' is not a private IPv4 address".format(args.ip))
+  print("NO '{}' is not a private IPv4 address".format(userip))
 
 
 print("**** TEST WITH LAMBDA FILTER *******")
-cidr_matches = filter(lambda s: args.ip.startswith(s),PRIVATE_IP_LIST)
+cidr_matches = filter(lambda s: userip.startswith(s),PRIVATE_IP_LIST)
 if len(cidr_matches)>0:
-  print("YES '{}' is a private IPv4 address starting with this range: {}".format(args.ip,cidr_matches))
+  print("YES '{}' is a private IPv4 address starting with this range: {}".format(userip,cidr_matches))
 else:
-  print("NO '{}' is not a private IPv4 address".format(args.ip))
+  print("NO '{}' is not a private IPv4 address".format(userip))
+
+
+sys.exit(0)
+
+
+
+print("**** TEST str.find() WITH LIST COMPREHENSION FILTER *******")
+cidr_matches = [ cidr for cidr in PRIVATE_IP_LIST if userip.find(cidr)!=-1 ]
+if len(cidr_matches)>0:
+  print("YES '{}' is a private IPv4 address starting with this range: {}".format(userip,cidr_matches))
+else:
+  print("NO '{}' is not a private IPv4 address".format(userip))
