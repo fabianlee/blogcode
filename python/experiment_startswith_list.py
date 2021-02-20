@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 """
  Example of different ways to check if supplied string starts with list of values
+ Supporting blog entry: 
+   https://fabianlee.org/2021/02/20/python-various-implementations-of-startswith-against-list/
 
  implementations:
    * tuple support of str.startswith
