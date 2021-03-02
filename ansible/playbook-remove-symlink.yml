@@ -9,7 +9,7 @@
   gather_facts: no
 
   vars:
-    link_path: my-link
+    link_path: testlink
 
   tasks:
 
@@ -18,10 +18,12 @@
       register: link
 
     - debug: 
-        msg: "does link {{link_path}} exist? {{link.stat.exists}}"
+        msg: "does path {{link_path}} exist? {{link.stat.exists}} and is it link {{link.stat.islnk|default(false)}}"
 
+    # only deletes if symbolic link
     - name: remove symlink
       file:
         path: "{{link_path}}"
         state: absent
+      when: link.stat.islnk is defined and link.stat.islnk
 
