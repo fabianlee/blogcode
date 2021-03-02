@@ -1,7 +1,10 @@
 # Example of checking for symlink and removing
 #
+# Supporting blog entry:
+# https://fabianlee.org/2021/03/02/ansible-deleting-a-file-path-but-only-if-a-symbolic-link/
+#
 # example:
-#   ansible-playbook playbook-remove-symlink.yml
+#   ansible-playbook playbook-remove-symlink.yml --extra-vars "link_path=testlink"
 #
 ---
 - hosts: all
