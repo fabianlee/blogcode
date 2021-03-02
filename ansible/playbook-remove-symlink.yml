@@ -1,0 +1,27 @@
+# Example of checking for symlink and removing
+#
+# example:
+#   ansible-playbook playbook-remove-symlink.yml
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+
+  vars:
+    link_path: my-link
+
+  tasks:
+
+    - stat: 
+        path: "{{link_path}}"
+      register: link
+
+    - debug: 
+        msg: "does link {{link_path}} exist? {{link.stat.exists}}"
+
+    - name: remove symlink
+      file:
+        path: "{{link_path}}"
+        state: absent
+

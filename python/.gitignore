@@ -1,4 +1,5 @@
 .vscode/
 credentials.json
 *.pickle
+__pycache__
 
