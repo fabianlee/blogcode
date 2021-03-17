@@ -23,6 +23,7 @@
     command: kubectl create configmap test1 --from-file=ConfigMap-test1.yaml
     when: configmap_res.rc != 0
 
+  # using 'shell' because we need to use a pipe
   - name: kubectl to update existing configmap
     shell: 'kubectl create configmap test1 --from-file=ConfigMap-test1.yaml -o yaml --dry-run | kubectl replace -f -'
     when: configmap_res.rc == 0
