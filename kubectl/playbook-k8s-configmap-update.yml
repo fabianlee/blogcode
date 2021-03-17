@@ -1,4 +1,6 @@
 # Example of checking for ConfigMap existence so that create or replace can be used
+# 
+# blog: https://fabianlee.org/2021/03/17/kubernetes-updating-an-existing-configmap-using-kubectl-replace/
 #
 # ansible-playbook playbook-k8s-configmap-update.yml --connection=local
 #
