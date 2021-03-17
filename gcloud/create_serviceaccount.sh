@@ -2,6 +2,8 @@
 #
 # Uses gcloud to create service account, download key, assign IAM roles
 #
+# blog: https://fabianlee.org/2021/03/17/gcp-creating-gcp-service-account-with-iam-roles-using-gcloud/
+#
 
 if [ $# -eq 0 ]; then
   echo "usage: gcpProjectName"
@@ -16,7 +18,7 @@ projectId=$(gcloud projects list --filter="name=$project" --format='value(projec
 echo "project/projectId=$project/$projectId"
 gcloud config set project $projectId
 
-# chekc if service account already exists
+# check if service account already exists
 alreadyExists=$(gcloud iam service-accounts list --filter=$newServiceAccount 2>/dev/null | wc -l)
 [ $alreadyExists -eq 0 ] || { echo "ABORTING the service account $newServiceAccount already exists!"; exit 0; }
 
