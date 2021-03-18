@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 # Example showing how curl can be used in scripting
-
+# blog: 
+#
 # -w used to write out special variables
 # --fail uses exit code for better scripting
 # -s silent, -o output
