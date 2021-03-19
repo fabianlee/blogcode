@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiny-tools
+spec:
+  selector:
+    matchLabels:
+      app: tiny-tools
+  replicas: #nodes
+  template:
+    metadata:
+      labels:
+        app: tiny-tools
+      annotations:
+        # to avoid istio sidecar auto-injection (if applicable)
+        sidecar.istio.io/inject: "false"
+    spec:
+      affinity:
+        # anti-affinity baed on node name
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - tiny-tools
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: tiny-tools
+        # https://github.com/giantswarm/tiny-tools
+        # https://hub.docker.com/r/giantswarm/tiny-tools/
+        image: giantswarm/tiny-tools:3.12
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; date; cho "initializing..."; sleep 30d
+        livenessProbe:
+          exec: 
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          exec: 
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      restartPolicy: OnFailure
