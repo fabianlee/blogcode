@@ -7,7 +7,11 @@ spec:
   selector:
     matchLabels:
       app: tiny-tools
-  replicas: #nodes
+
+  # can scale across all nodes later
+  # kubectl scale --replicas=$(kubectl get nodes | tail -n+2 | wc -l) deployment/tiny-tools
+  replicas: 1
+
   template:
     metadata:
       labels:
