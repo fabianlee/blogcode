@@ -3,6 +3,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tiny-tools
+  # not going to specify namespace, so that 'default' is implied
+  # it can be overridden at command line if necessary
+  # kubectl apply -f tiny-tools-per-node.yaml -n kube-system
+  #namespace: default
 spec:
   selector:
     matchLabels:
