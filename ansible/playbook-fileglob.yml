@@ -1,0 +1,27 @@
+# Example of using 'with_fileglob' from role
+#
+# Supporting blog entry:
+# https://fabianlee.org/2021/03/02/ansible-deleting-a-file-path-but-only-if-a-symbolic-link/
+#
+# example:
+#   ansible-playbook playbook-fileglob.yml --connection=local
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+
+  vars:
+    #foo: bar
+
+  roles:
+    - roles/fileglobtest
+
+  tasks:
+
+     # 'with_fileglob' uses same directory that playbook is located in (regardless of how/where invoked)
+#    - name: each file
+#      debug:
+#        msg: "{{item}}"
+#      with_fileglob: "playbook*.yml"
+

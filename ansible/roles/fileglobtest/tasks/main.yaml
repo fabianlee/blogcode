@@ -1,0 +1,32 @@
+---
+
+  - name: role, list every file in current dir
+    debug:
+      msg: "{{item}}"
+    with_fileglob: "*.*"
+
+  - name: role, list every file in role_path/templates
+    debug:
+      msg: "{{item}}"
+    with_fileglob: "{{role_path}}/templates/*.*"
+
+  - name: role, list every file one directory up and then into templates
+    debug:
+      msg: "{{item}}"
+    with_fileglob: "../templates/*.*"
+
+  - name: create file out of every jinja2 template
+    template:
+      src: "{{item}}"
+      dest: /tmp/{{ item | basename | regex_replace('\.j2$', '') }}
+    with_fileglob: "../templates/*.j2"
+
+  - name: show template output
+    command: cat /tmp/{{ item | basename | regex_replace('\.j2$', '') }}
+    register: stdout
+    with_fileglob: "../templates/*.j2"
+
+  - debug: msg="{{item.cmd | last}}"
+    loop: "{{stdout.results}}"
+    loop_control:
+      label: "{{item.stdout}}"
