@@ -1,7 +1,7 @@
 # Example of using 'with_fileglob' from role
 #
 # Supporting blog entry:
-# https://fabianlee.org/2021/03/02/ansible-deleting-a-file-path-but-only-if-a-symbolic-link/
+# https://fabianlee.org/2021/03/24/ansible-generating-content-for-all-template-files-using-with_fileglob/
 #
 # example:
 #   ansible-playbook playbook-fileglob.yml --connection=local
