@@ -12,7 +12,8 @@
   gather_facts: no
 
   vars:
-    #foo: bar
+    # variable for templates (role has default 'world')
+    #noun: universe
 
   roles:
     - roles/fileglobtest
