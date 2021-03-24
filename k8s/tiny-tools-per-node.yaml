@@ -58,4 +58,5 @@ spec:
             - /tmp/healthy
           initialDelaySeconds: 5
           periodSeconds: 10
-      restartPolicy: OnFailure
+      # this is the only supported value for 'Deployment'
+      restartPolicy: Always
