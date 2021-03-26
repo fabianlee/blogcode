@@ -12,3 +12,8 @@
 [ 1 -eq 1 ] && { echo "1 does indeed equal 1";false; } || echo "1 does not equal 1 !!!"
 
 
+
+# for assertions (file existence, variable population, etc)
+[ 1 -eq 1 ] || { echo "ERROR this test should have been true"; exit 3; }
+
+
