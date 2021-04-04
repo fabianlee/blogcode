@@ -1,0 +1,38 @@
+# 
+# Starts ssh-agent in user mode
+# this per-user process is started when user logs in for first time, 
+# and stops when last session for use is closed
+#
+
+[Unit]
+Description=SSH key agent
+DefaultDependencies=no
+After=network.target
+
+[Service]
+Type=simple
+# not required because running as user
+#User=
+#Group=
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+Environment=KEYFILE=/home/%u/.ssh/id_github
+
+# start in foreground mode (-D), systemd takes care of running in background
+ExecStartPre=/bin/sh -c "echo going to load key $KEYFILE"
+ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+
+# add key and then write identities to output
+ExecStartPost=/bin/sleep 1
+ExecStartPost=/bin/sh -c "/usr/bin/ssh-add $KEYFILE"
+ExecStartPost=/bin/sh -c "/usr/bin/ssh-add -l"
+
+# stop using $MAINPID, provided by systemd
+ExecStop=/bin/sh -c "SSH_AGENT_PID=$MAINPID /usr/bin/ssh-agent -k"
+#ExecStop=/bin/kill -9 $MAINPID
+
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+# note this is not multi-user.target
+WantedBy=default.target
