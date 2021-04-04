@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # check for optional values
 # https://stackoverflow.com/questions/18414054/reading-optarg-for-optional-flags#18414091
 
