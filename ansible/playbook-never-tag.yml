@@ -2,7 +2,7 @@
 # which fallsback to 'all' behavior
 #
 # Supporting blog entry:
-# 
+# https://fabianlee.org/2021/04/05/ansible-action-only-executed-if-tag-set-avoiding-all-behavior-with-never/
 #
 # example:
 #   ansible-playbook playbook-conditional-tasks.yml --connection=local
