@@ -3,6 +3,8 @@
 # this per-user process is started when user logs in for first time, 
 # and stops when last session for use is closed
 #
+# supporting blog: https://fabianlee.org/2021/04/05/ubuntu-loading-a-key-into-ssh-agent-at-login-with-a-user-level-systemd-service/
+#
 
 [Unit]
 Description=SSH key agent
