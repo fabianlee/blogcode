@@ -1,0 +1,4 @@
+---
+
+- name: this is from include_task.yml
+  debug: msg="ok"

@@ -1,0 +1,4 @@
+---
+
+- name: this is from import_task.yml
+  debug: msg="ok"

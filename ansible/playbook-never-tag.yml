@@ -1,0 +1,24 @@
+# Example using 'never' tag to avoid action being executed when called without any tags
+# which fallsback to 'all' behavior
+#
+# Supporting blog entry:
+# 
+#
+# example:
+#   ansible-playbook playbook-conditional-tasks.yml --connection=local
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+
+  #roles:
+  #  - roles/conditional-tasks
+
+  tasks:
+
+    - debug: msg="when tag 'run'"
+      tags: run
+
+    - debug: msg="only when tag is explictly set to 'delete'"
+      tags: ['delete','never']

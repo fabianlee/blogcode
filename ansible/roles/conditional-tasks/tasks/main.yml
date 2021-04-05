@@ -1,0 +1,53 @@
+---
+
+- name: show ansible tags
+  debug: msg="{{ ansible_run_tags|default('') }}"
+  tags: always
+
+# problem: only includes file, but unless commands inside are tagged with 'include', will not execute them
+# https://github.com/ansible/ansible/issues/30882
+#
+#- name: include_task test
+#  include_tasks: include_task.yml
+#  tags: 
+#    - include
+
+# workaround1: include in block
+#- block:
+#  - name: include_task test
+#    include_tasks: include_task.yml
+#  tags: 
+#    - include
+
+# solution: apply tag to all tasks inside
+#- name: include_task test
+#  include_tasks:
+#    file: include_task.yml
+#    apply:
+#     tags:
+#       - include
+#       - always
+#  tags:
+#    - include
+#    - always
+
+- debug: msg="(using when+tag) is tag 'import' set? {{'import' in ansible_run_tags}}"
+  when: "'import' in ansible_run_tags"
+  tags: import
+
+- debug: msg="(using never tag) is tag 'import' set? {{'import' in ansible_run_tags}}"
+  tags:
+    - import
+    - never
+
+- name: import_task test
+  import_tasks: import_task.yml
+  tags: import 
+
+- name: deletion task
+  import_tasks: delete.yml
+  # 'never' (special) do not invoke unless specified
+  # 'delete' invoked if this tag explicitly set
+  tags:
+    - delete
+    - never

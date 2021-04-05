@@ -1,0 +1,5 @@
+---
+
+- name: this is from delete.yml
+  debug: msg="deleted"
+  #tags: delete
