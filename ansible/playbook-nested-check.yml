@@ -1,0 +1,74 @@
+# Example of checking nested dictionary variables when their path may not exist
+#
+# Supporting blog entry:
+#
+# example:
+#   ansible-playbook playbook-nested-check.yml
+#
+# https://stackoverflow.com/questions/35105615/ansible-use-default-if-a-variable-is-not-defined
+# https://github.com/ansible/ansible/issues/35992
+---
+- hosts: all
+  become: no
+  connection: local
+  gather_facts: no
+
+  vars:
+
+    root_name: alice
+
+    nested_simple:
+      name: bob
+
+    nested_root:
+      nested_child: 
+        name: charlie
+        final_level:
+          name: david
+
+  tasks:
+    - name: simple variable does not exist, expected failure
+      debug: 
+        msg: simple variable = {{ root_name_dne }}
+      ignore_errors: yes 
+    - name: nested dictionary value does not exist, expected failure
+      debug: 
+        msg: nested dictionary value = {{ nested_simple.dne }}
+      ignore_errors: yes 
+
+    - debug: 
+        msg: (use var value) root_name = {{ root_name | default('default name') }}
+    - debug: 
+        msg: (no var, use default) root_name_dne = {{ root_name_dne | default('default name') }}
+
+
+    - debug: 
+        msg: (use var value) nested_simple.name = {{ (nested_simple | default({})).name | default('default name') }}
+    - debug: 
+        msg: (no var, use default) nested_simple_dne.name = {{ (nested_simple_dne | default({})).name | default('default name') }}
+
+
+    - debug:
+        msg: (use var value) nested_root.nested_child.name = {{ ( (nested_root | default({})).nested_child ).name | default('default name') }}
+    - debug:
+        msg: (no var, use default) nested_root.nested_child2.name = {{ ( (nested_root | default({})).nested_child2 ).name | default('default name') }}
+    - debug:
+        msg: (no var, use default) nested_root2.nested_child.name = {{ ( (nested_root2 | default({})).nested_child ).name | default('default name') }}
+
+    # pip install jmespath
+    - name: ensure jmespath is installed to support json_query filter
+      become: yes
+      pip:
+        name: jmespath
+
+    - debug:
+        msg: (use var value) nested_root.nested_child.final_level.name = {{ (nested_root | default({})) | json_query('nested_child.final_level.name') | default('default name',true) }}
+    - debug:
+        msg: (not var, use default) nested_root2.nested_child.name = {{ (nested_root2 | default({})) | json_query('nested_child.final_level.name') | default('default name',true) }}
+    - debug:
+        msg: (not var, use default) nested_root.nested_child2.name = {{ (nested_root | default({})) | json_query('nested_child2.final_level.name') | default('default name',true) }}
+
+
+
+
+
