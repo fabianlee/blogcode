@@ -1,6 +1,6 @@
 # Example of checking URL download first, if it fails then use local file
 #
-# Supporting blog entry:
+# Supporting blog entry: https://github.com/fabianlee/blogcode/blob/master/ansible/playbook-try-url-first.yaml
 #
 # example:
 #   ansible-playbook playbook-try-url-first.yml
