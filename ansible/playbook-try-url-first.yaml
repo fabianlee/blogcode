@@ -15,7 +15,7 @@
 
   - name: try file from github first
     get_url:
-      url: https://raw.githubusercontent.com/fabianlee/blogcode/master/README.md2
+      url: https://raw.githubusercontent.com/fabianlee/blogcode/master/README.md
       dest: "/tmp/README.md"
       mode: 0666
     ignore_errors: true
