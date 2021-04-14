@@ -1,0 +1,33 @@
+# Example of checking URL download first, if it fails then use local file
+#
+# Supporting blog entry:
+#
+# example:
+#   ansible-playbook playbook-try-url-first.yml
+#
+---
+- hosts: all
+  become: no
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+  - name: try file from github first
+    get_url:
+      url: https://raw.githubusercontent.com/fabianlee/blogcode/master/README.md2
+      dest: "/tmp/README.md"
+      mode: 0666
+    ignore_errors: true
+    register: gitpull_result
+  - debug: msg="{{gitpull_result}}"
+
+  - name: uses local file when github not available
+    copy: 
+      src: "{{playbook_dir}}/local-README.md"
+      dest: "/tmp/README.md"
+    when: gitpull_result.failed
+
+
+  - debug: msg="the final value of /tmp/README.md is {{lookup('file', '/tmp/README.md') }}"
+
