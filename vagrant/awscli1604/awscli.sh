@@ -57,7 +57,7 @@ if [ -z $AWS_FORMAT ]; then
 fi
 echo ==ENV======================================
 echo AWS_ACCESS_KEY_ID is $AWS_ACCESS_KEY_ID
-echo Using AWS REGION/FORMAT: $AWS_REGION $AWS_FORMAT
+echo Using AWS REGION/FORMAT: $AWS_REGION/$AWS_FORMAT
 
 # write credentials file
 mkdir .aws
