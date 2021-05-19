@@ -1,0 +1,25 @@
+# Example of installing matching linux kernel headers for Ubuntu
+#
+# Supporting blog entry: 
+#
+# example:
+#   ansible-playbook playbook-kernel-headers.yml
+#
+---
+- hosts: all
+  become: yes
+  connection: local
+  gather_facts: yes
+
+  tasks:
+
+  - name: install headers matching kernel
+    apt:
+      pkg:
+      - linux-headers-{{ ansible_kernel }}
+
+  - name: meta package that auto-matches kernel
+    apt: 
+      pkg:
+      - linux-headers-generic
+
