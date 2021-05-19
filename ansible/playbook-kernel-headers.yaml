@@ -1,6 +1,6 @@
 # Example of installing matching linux kernel headers for Ubuntu
 #
-# Supporting blog entry: 
+# Supporting blog entry: https://fabianlee.org/2021/05/19/ansible-installing-linux-headers-matching-kernel-for-ubuntu/
 #
 # example:
 #   ansible-playbook playbook-kernel-headers.yml
