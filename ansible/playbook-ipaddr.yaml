@@ -2,7 +2,7 @@
 # https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters_ipaddr.html
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: true
 
   vars:
   - IP: 172.31.3.13/23
@@ -20,6 +20,7 @@
         pkg:
         - python-netaddr # for ipaddr jinja2 filter used below
         state: present
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
     - debug: msg="___ {{ IP }} ___ ADDRESS {{ IP | ipaddr('address') }}"
     - debug: msg="___ {{ IP }} ___ BROADCAST {{ IP | ipaddr('broadcast') }}"
