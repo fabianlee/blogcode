@@ -1,0 +1,29 @@
+# shows how to use jinja2 ipaddr filter from ansible, needs 'netaddr' pip or package
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters_ipaddr.html
+---
+- hosts: localhost
+  gather_facts: false
+
+  vars:
+  - IP: 172.31.3.13/23
+  - CIDR: 192.168.0.0/16
+  - MAC: 1a:2b:3c:4d:5e:6f
+  - PREFIX: 18
+
+  tasks:
+
+    # make sure pip netaddr package is installed
+    - name: install local packages needed for ipaddr jinja2 filter
+      delegate_to: localhost
+      become: true
+      apt:
+        pkg:
+        - python-netaddr # for ipaddr jinja2 filter used below
+        state: present
+
+    - debug: msg="___ {{ IP }} ___ ADDRESS {{ IP | ipaddr('address') }}"
+    - debug: msg="___ {{ IP }} ___ BROADCAST {{ IP | ipaddr('broadcast') }}"
+    - debug: msg="___ {{ IP }} ___ NETMASK {{ IP | ipaddr('netmask') }}"
+    - debug: msg="___ {{ IP }} ___ NETWORK {{ IP | ipaddr('network') }}"
+    - debug: msg="___ {{ IP }} ___ PREFIX {{ IP | ipaddr('prefix') }}"
+    - debug: msg="___ {{ IP }} ___ SIZE {{ IP | ipaddr('size') }}"
