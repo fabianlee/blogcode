@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-05-23T03:03:28.698Z" agent="5.0 (X11)" etag="wxd5VsZczp2ONRrU6npc" version="14.7.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-23T03:06:25.729Z" agent="5.0 (X11)" etag="mriGP4IbYkJOZijV0gm1" version="14.7.0" type="github">
   <diagram id="69ODIawF1eq9d_DgOKLX" name="Page-1">
-    <mxGraphModel dx="775" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="973" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -94,7 +94,7 @@
         <mxCell id="V-493F1esPn7OcCI-V61-45" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" vertex="1" parent="V-493F1esPn7OcCI-V61-43">
           <mxGeometry x="90" width="110" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="V-493F1esPn7OcCI-V61-56" value="private subnet routing" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;shadow=0;strokeColor=#F58534;strokeWidth=1;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="V-493F1esPn7OcCI-V61-56" value="private subnet routing" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;shadow=0;strokeColor=#F58534;strokeWidth=1;fillColor=#F58534;" vertex="1" parent="1">
           <mxGeometry x="615" y="428.5" width="195" height="150" as="geometry" />
         </mxCell>
         <mxCell id="V-493F1esPn7OcCI-V61-57" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=1;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="V-493F1esPn7OcCI-V61-56">
@@ -138,6 +138,9 @@
         </mxCell>
         <mxCell id="V-493F1esPn7OcCI-V61-87" value="Ephemeral Ext IP" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="405" y="295" width="110" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="V-493F1esPn7OcCI-V61-93" value="" style="rounded=1;arcSize=10;dashed=1;fillColor=none;gradientColor=none;dashPattern=1 1;strokeWidth=2;shadow=0;strokeColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="602.5" y="518.5" width="220" height="51.5" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
