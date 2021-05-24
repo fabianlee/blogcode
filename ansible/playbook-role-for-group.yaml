@@ -1,10 +1,13 @@
+# Example showing multiple 'hosts' sections to support applying role to specific group
+# blog: https://fabianlee.org/2021/05/24/ansible-applying-roles-to-certain-groups-in-a-single-playbook/
 ---
   
 - hosts: all
   gather_facts: yes
   roles: 
-    - { role: echo }
+    - echo
+    - { role: echo, when: "'myrole' in group_names" }
 
 - hosts: myrole
   roles:
-    - { role: echo, noun: 'person from myrole' }
+    - { role: echo }
