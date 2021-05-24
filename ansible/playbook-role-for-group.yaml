@@ -1,0 +1,10 @@
+---
+  
+- hosts: all
+  gather_facts: yes
+  roles: 
+    - { role: echo }
+
+- hosts: myrole
+  roles:
+    - { role: echo, noun: 'person from myrole' }

@@ -1,5 +1,8 @@
 
 localhost ansible_connection=local
 
+[myrole]
+localhost
+
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3

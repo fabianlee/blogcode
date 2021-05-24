@@ -1,0 +1,7 @@
+---
+
+- name: echo
+  command: "echo 'Hello, {{noun}}! this is from {{inventory_hostname}} on dist {{ansible_distribution}}'"
+  register: stdout
+- debug: msg="{{stdout.stdout_lines}}"
+
