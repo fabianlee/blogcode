@@ -1,0 +1,39 @@
+# Example showing retrieval of local and remote file content
+# blog: https://fabianlee.org/2021/05/25/ansible-creating-a-variable-from-a-remote-or-local-file-content/
+---
+  
+- hosts: all
+  gather_facts: yes
+
+  vars:
+    local_path: local-README.md
+    remote_path: /tmp/remote-README.md
+
+  tasks:
+
+    - name: get content of local file
+      set_fact:
+        readme_contents: "{{ lookup('file',playbook_dir + '/' + local_path) }}"
+
+    - debug:
+        msg: "content of local file {{local_path}}: {{readme_contents}}"
+
+
+    - name: create emulated 'remote' file
+      delegate_to: localhost
+      copy:
+        dest: "{{remote_path}}"
+        mode: '0666'
+        content: |
+          This is remote content
+
+    - name: get content of remote file
+      slurp:
+        src: "{{remote_path}}"
+      register: remote_content_encoded
+    - name: decode remote content
+      set_fact:
+        remote_content: "{{remote_content_encoded.content | b64decode}}"
+
+    - debug:
+        msg: "content of remote file {{remote_path}}: {{remote_content}}"
