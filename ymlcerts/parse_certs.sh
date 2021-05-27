@@ -13,6 +13,8 @@ certcount=$(grep -e "-----BEGIN CERTIFICATE-----" allcerts.pem | wc -l)
 for index in $(seq 1 $certcount); do
   echo "==== cert $index"
   awk "/-----BEGIN CERTIFICATE-----/{i++}i==$index" allcerts.pem > $index.crt
-  openssl x509 -in $index.crt -text -noout | grep -E "Subject:|Not After :"
+  openssl x509 -in $index.crt -text -noout | grep -E "Subject:|Not After :|DNS:"
   rm $index.crt
 done
+
+rm allcerts.pem
