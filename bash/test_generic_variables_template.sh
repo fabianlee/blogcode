@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # using sed to replace multiple variables in template
-#
+# blog: https://fabianlee.org/2021/05/29/bash-use-template-to-render-file-from-bash-variables/
 #
 
 # declare variables
