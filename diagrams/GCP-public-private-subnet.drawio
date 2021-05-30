@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-30T21:37:49.529Z" agent="5.0 (X11)" etag="lvGgxyNC1rX3J155TpnW" version="14.7.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-30T21:38:37.105Z" agent="5.0 (X11)" etag="9GIm9HevWkWD2atKOPmG" version="14.7.0" type="github">
   <diagram id="we8GqR12f53UsKGl7fwM" name="Page-1">
     <mxGraphModel dx="973" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -55,7 +55,7 @@
         <mxCell id="3nh1cM0UOaGdx1VRqK5k-10" value="10.0.14.0/24  public vm instance" style="text;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="3nh1cM0UOaGdx1VRqK5k-8">
           <mxGeometry y="56" width="220" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="3nh1cM0UOaGdx1VRqK5k-11" value="182.16.0.0/16   public vm instance" style="text;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="3nh1cM0UOaGdx1VRqK5k-8">
+        <mxCell id="3nh1cM0UOaGdx1VRqK5k-11" value="172.16.0.0/16   public vm instance" style="text;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;" vertex="1" parent="3nh1cM0UOaGdx1VRqK5k-8">
           <mxGeometry y="86" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell id="3nh1cM0UOaGdx1VRqK5k-17" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.internet_3;fillColor=#D2D3D3;gradientColor=none;" vertex="1" parent="1">
