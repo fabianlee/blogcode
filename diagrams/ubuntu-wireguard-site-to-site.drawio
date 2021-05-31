@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-05-30T23:36:45.034Z" agent="5.0 (X11)" etag="dZM7o666NsyFjFPtyE8d" version="14.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-31T01:02:39.543Z" agent="5.0 (X11)" etag="El0-djAGrLWHe_pNFnPX" version="14.7.3" type="github">
   <diagram id="q2G_-PPmdE-SMA_Du7N_" name="Page-1">
-    <mxGraphModel dx="973" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1823" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -69,6 +69,18 @@
         </mxCell>
         <mxCell id="tgCxKbZeOhLsTXyDdAwm-9" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;align=right;strokeColor=#CCCCCC;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="36" y="172" width="174" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="tgCxKbZeOhLsTXyDdAwm-10" value="" style="image;html=1;image=img/lib/clip_art/networking/Cloud_Rack_Private_128x128.png;strokeColor=#CCCCCC;fillColor=none;align=right;" vertex="1" parent="1">
+          <mxGeometry x="580" y="191" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tgCxKbZeOhLsTXyDdAwm-11" value="" style="image;html=1;image=img/lib/clip_art/networking/Cloud_Rack_Private_128x128.png;strokeColor=#CCCCCC;fillColor=none;align=right;" vertex="1" parent="1">
+          <mxGeometry x="1.5" y="170" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="tgCxKbZeOhLsTXyDdAwm-12" value="&lt;div&gt;Private&lt;/div&gt;&lt;div&gt;1722.17.2.129&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="585" y="172" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="tgCxKbZeOhLsTXyDdAwm-13" value="&lt;div&gt;Private&lt;/div&gt;&lt;div&gt;172.16.2.129&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-13.5" y="241" width="90" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
