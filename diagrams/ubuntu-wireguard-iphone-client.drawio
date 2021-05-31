@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-31T18:06:25.217Z" agent="5.0 (X11)" etag="e6Oe2Ma7ec5MIlTrOQej" version="14.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-31T18:14:17.039Z" agent="5.0 (X11)" etag="fleToLeN8zXC6IHywIGL" version="14.7.3" type="github">
   <diagram id="q2G_-PPmdE-SMA_Du7N_" name="Page-1">
     <mxGraphModel dx="973" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -31,7 +31,7 @@
         <mxCell id="lL4FD40Lk23T4WLXlxyA-6" value="10.0.14.0/24" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="290" y="271" width="80" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="lL4FD40Lk23T4WLXlxyA-8" value="10.0.14.10" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#808080;" parent="1" vertex="1">
+        <mxCell id="lL4FD40Lk23T4WLXlxyA-8" value="10.0.14.8" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#808080;" parent="1" vertex="1">
           <mxGeometry x="420" y="262" width="40" height="20" as="geometry" />
         </mxCell>
         <mxCell id="R6EIbLXyK4rClFMooKor-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="R6EIbLXyK4rClFMooKor-10">
@@ -45,13 +45,13 @@
         <mxCell id="lL4FD40Lk23T4WLXlxyA-10" value="&lt;div&gt;private IP&lt;br&gt;&lt;/div&gt;&lt;div&gt;172.16.1.10&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="110" y="300" width="70" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="lL4FD40Lk23T4WLXlxyA-12" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.3/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;serverPrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;clientPublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 10.0.14.10/32&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="lL4FD40Lk23T4WLXlxyA-12" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.3/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;serverPrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;clientPublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 10.0.14.8/32&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="90" y="357" width="180" height="110" as="geometry" />
         </mxCell>
         <mxCell id="lL4FD40Lk23T4WLXlxyA-13" value="&lt;div&gt;&amp;lt;publicIP&amp;gt;:51820/udp&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="180.4" y="200" width="109.6" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="lL4FD40Lk23T4WLXlxyA-16" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.6/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;clientPrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;serverPublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 172.16.0.0/16&lt;/div&gt;&lt;div&gt;Endpoint = &amp;lt;publicIP&amp;gt;:51820&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;perimeterSpacing=0;" parent="1" vertex="1">
+        <mxCell id="lL4FD40Lk23T4WLXlxyA-16" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.8/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;clientPrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;serverPublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 172.16.0.0/16&lt;/div&gt;&lt;div&gt;Endpoint = &amp;lt;publicIP&amp;gt;:51820&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;perimeterSpacing=0;" parent="1" vertex="1">
           <mxGeometry x="380" y="353" width="200" height="137" as="geometry" />
         </mxCell>
         <mxCell id="lL4FD40Lk23T4WLXlxyA-18" value="wg0.conf" style="rounded=0;whiteSpace=wrap;html=1;align=center;strokeColor=#000033;fontColor=#000033;" parent="1" vertex="1">
