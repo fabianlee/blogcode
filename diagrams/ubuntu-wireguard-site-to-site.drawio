@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-31T01:02:39.543Z" agent="5.0 (X11)" etag="El0-djAGrLWHe_pNFnPX" version="14.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-31T01:04:34.112Z" agent="5.0 (X11)" etag="sWgDxkMPx2hz59uT-3Uz" version="14.7.3" type="github">
   <diagram id="q2G_-PPmdE-SMA_Du7N_" name="Page-1">
     <mxGraphModel dx="1823" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -40,14 +40,14 @@
         <mxCell id="lL4FD40Lk23T4WLXlxyA-10" value="&lt;div&gt;private IP&lt;br&gt;&lt;/div&gt;&lt;div&gt;172.16.1.10&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="81.5" y="300" width="70" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="lL4FD40Lk23T4WLXlxyA-12" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.3/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;siteAPrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;siteBPublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 10.0.14.4/32, 172.17.0.0/16&lt;/div&gt;&lt;div&gt;Endpoint = &amp;lt;SiteB-publicIP&amp;gt;:51820&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="90" y="361" width="230" height="110" as="geometry" />
+        <mxCell id="lL4FD40Lk23T4WLXlxyA-12" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.3/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;siteA-PrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;siteB-PublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 10.0.14.4/32, 172.17.0.0/16&lt;/div&gt;&lt;div&gt;Endpoint = &amp;lt;siteB-publicIP&amp;gt;:51820&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="90" y="361" width="230" height="129" as="geometry" />
         </mxCell>
-        <mxCell id="lL4FD40Lk23T4WLXlxyA-13" value="&lt;div&gt;&amp;lt;SiteA-publicIP&amp;gt;:51820/udp&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="lL4FD40Lk23T4WLXlxyA-13" value="&lt;div&gt;&amp;lt;siteA-publicIP&amp;gt;:51820/udp&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="140.4" y="200" width="159.6" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="lL4FD40Lk23T4WLXlxyA-16" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.4/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;siteBPrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;siteAPublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 10.0.14.3/32, 172.16.0.0/16&lt;/div&gt;&lt;div&gt;Endpoint = &amp;lt;siteA-publicIP&amp;gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;perimeterSpacing=0;" parent="1" vertex="1">
-          <mxGeometry x="380" y="359" width="250" height="110" as="geometry" />
+        <mxCell id="lL4FD40Lk23T4WLXlxyA-16" value="&lt;div&gt;[Interface]&lt;/div&gt;&lt;div&gt;Address = 10.0.14.4/24&lt;/div&gt;&lt;div&gt;PrivateKey = &amp;lt;siteB-PrivateKey&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;[Peer]&lt;/div&gt;&lt;div&gt;PublicKey = &amp;lt;siteA-PublicKey&amp;gt;&lt;/div&gt;&lt;div&gt;AllowedIPs = 10.0.14.3/32, 172.16.0.0/16&lt;/div&gt;&lt;div&gt;Endpoint = &amp;lt;siteA-publicIP&amp;gt;:51820&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;perimeterSpacing=0;" parent="1" vertex="1">
+          <mxGeometry x="380" y="359" width="250" height="131" as="geometry" />
         </mxCell>
         <mxCell id="lL4FD40Lk23T4WLXlxyA-18" value="wg0.conf" style="rounded=0;whiteSpace=wrap;html=1;align=center;strokeColor=#000033;fontColor=#000033;" parent="1" vertex="1">
           <mxGeometry x="210" y="336" width="60" height="20" as="geometry" />
@@ -61,7 +61,7 @@
         <mxCell id="tgCxKbZeOhLsTXyDdAwm-2" value="WireGuard SiteB" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontColor=#000033;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="417.5" y="160" width="150" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="tgCxKbZeOhLsTXyDdAwm-3" value="&lt;div&gt;&amp;lt;SiteB-publicIP&amp;gt;:51820/udp&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+        <mxCell id="tgCxKbZeOhLsTXyDdAwm-3" value="&lt;div&gt;&amp;lt;siteB-publicIP&amp;gt;:51820/udp&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="340" y="200" width="169.6" height="20" as="geometry" />
         </mxCell>
         <mxCell id="tgCxKbZeOhLsTXyDdAwm-4" value="&lt;div&gt;private IP&lt;br&gt;&lt;/div&gt;&lt;div&gt;172.17.1.10&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
