@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-31T10:42:12.535Z" agent="5.0 (X11)" etag="mV721PGxPlyGR1W8W7J8" version="14.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-05-31T10:42:36.231Z" agent="5.0 (X11)" etag="Mxh76QBYeZ1VdyjSOH--" version="14.7.3" type="github">
   <diagram id="q2G_-PPmdE-SMA_Du7N_" name="Page-1">
     <mxGraphModel dx="1823" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -35,13 +35,13 @@
           <mxGeometry x="170" y="262" width="70" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lL4FD40Lk23T4WLXlxyA-24" value="WireGuard SiteA" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontColor=#000033;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="1.5" y="70" width="150" height="30" as="geometry" />
+          <mxGeometry y="120" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="tgCxKbZeOhLsTXyDdAwm-1" value="" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image;image=img/lib/active_directory/generic_server.svg;" parent="1" vertex="1">
           <mxGeometry x="469.8" y="172" width="50.4" height="90" as="geometry" />
         </mxCell>
         <mxCell id="tgCxKbZeOhLsTXyDdAwm-2" value="WireGuard SiteB" style="text;html=1;align=right;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontColor=#000033;fontSize=18;" parent="1" vertex="1">
-          <mxGeometry x="520" y="70" width="150" height="30" as="geometry" />
+          <mxGeometry x="518.5" y="120" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell id="tgCxKbZeOhLsTXyDdAwm-4" value="&lt;div&gt;172.17.1.10&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="460" y="262" width="70" height="20" as="geometry" />
