@@ -2,7 +2,7 @@
 # 
 # Shows how to use printf for padding
 #
-# blog: https://fabianlee.org/2021/06/09/bash-using-printf-to-display-strings-with-padding-character/
+# blog: https://fabianlee.org/2021/06/09/bash-using-printf-to-display-fixed-width-padded-string/
 #
 
 # maximum length of label
