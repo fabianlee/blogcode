@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-05-31T18:14:17.039Z" agent="5.0 (X11)" etag="fleToLeN8zXC6IHywIGL" version="14.7.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-12T10:13:13.957Z" agent="5.0 (X11)" etag="_Sn7FthHAuGvktATJ1XT" version="14.7.3" type="github">
   <diagram id="q2G_-PPmdE-SMA_Du7N_" name="Page-1">
     <mxGraphModel dx="973" dy="722" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -34,14 +34,6 @@
         <mxCell id="lL4FD40Lk23T4WLXlxyA-8" value="10.0.14.8" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#808080;" parent="1" vertex="1">
           <mxGeometry x="420" y="262" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="R6EIbLXyK4rClFMooKor-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="R6EIbLXyK4rClFMooKor-10">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="163" y="305" as="sourcePoint" />
-            <Array as="points">
-              <mxPoint x="163" y="305" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
         <mxCell id="lL4FD40Lk23T4WLXlxyA-10" value="&lt;div&gt;private IP&lt;br&gt;&lt;/div&gt;&lt;div&gt;172.16.1.10&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="110" y="300" width="70" height="20" as="geometry" />
         </mxCell>
@@ -63,14 +55,11 @@
         <mxCell id="lL4FD40Lk23T4WLXlxyA-25" value="WireGuard iPhone Client" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fontColor=#000033;fontSize=18;" parent="1" vertex="1">
           <mxGeometry x="362" y="160" width="210" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="R6EIbLXyK4rClFMooKor-1" value="" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image;image=img/lib/active_directory/cell_phone.svg;" vertex="1" parent="1">
+        <mxCell id="R6EIbLXyK4rClFMooKor-1" value="" style="aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;spacingTop=3;image;image=img/lib/active_directory/cell_phone.svg;" parent="1" vertex="1">
           <mxGeometry x="480" y="223" width="28.56" height="68" as="geometry" />
         </mxCell>
-        <mxCell id="R6EIbLXyK4rClFMooKor-10" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/ecommerce-and-business-icon-set/128/qr-code-iphone.png;strokeWidth=1;rotation=90;" vertex="1" parent="1">
+        <mxCell id="R6EIbLXyK4rClFMooKor-10" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/ecommerce-and-business-icon-set/128/qr-code-iphone.png;strokeWidth=1;rotation=90;" parent="1" vertex="1">
           <mxGeometry x="530" y="260" width="90" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="R6EIbLXyK4rClFMooKor-13" value="qrencode" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="405" y="310" width="70" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
