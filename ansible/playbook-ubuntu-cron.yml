@@ -1,0 +1,28 @@
+#
+# Playbook that creates 
+#
+# ansible-playbook playbook-ubuntu-cron.yml -l localhost
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: Places script for cron to run
+      copy:
+        src: "{{playbook_dir}}/from-inside-cron.sh"
+        dest: /tmp/from-inside-cron.sh
+        mode: 0755
+
+    - name: Creates a cron file under /etc/cron.d
+      cron:
+        name: from-inside-cron
+        day: "*"
+        minute: "*"
+        hour: "*"
+        user: root
+        job: "foo=bar test=this /tmp/from-inside-cron.sh"
+        cron_file: from-inside-cron
+        state: present 
