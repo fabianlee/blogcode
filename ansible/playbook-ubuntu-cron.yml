@@ -2,6 +2,9 @@
 # Playbook that creates 
 #
 # ansible-playbook playbook-ubuntu-cron.yml -l localhost
+#
+# blog: https://fabianlee.org/2021/06/17/ansible-creating-a-cron-d-file-for-periodic-system-jobs/
+# 
 ---
 - hosts: all
   become: yes
