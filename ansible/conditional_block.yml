@@ -1,0 +1,11 @@
+# called out from playbook-block-loop.yml, using include_tasks to create looping block
+---
+
+- name: included block with conditional
+  block:
+    - name: included block task1
+      debug: msg="hello"
+    - name: included block task2
+      debug: msg="{{item}}"
+  when: do_block_logic|bool
+

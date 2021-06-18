@@ -1,0 +1,33 @@
+#
+# Playbook that does loop on block (which is not natively supported syntax of Ansible)
+#
+# ansible-playbook playbook-block-loop.yml -l localhost
+#
+# blog: 
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars_prompt:
+    - name: do_block_logic
+      prompt: "do_block_logic (true|false)"
+      private: no
+
+  tasks:
+
+    - name: simple block with conditional
+      block:
+        - name: simple block task1
+          debug: msg="hello"
+        - name: simple block task2
+          debug: msg="world"
+      when: do_block_logic|bool
+
+    - name: calling block with conditional on loop
+      include_tasks: conditional_block.yml
+      loop: ['world','universe']
+
+
