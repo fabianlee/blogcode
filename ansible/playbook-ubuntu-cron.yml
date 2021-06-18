@@ -1,5 +1,5 @@
 #
-# Playbook that creates 
+# Playbook that creates /etc/cron.d entry
 #
 # ansible-playbook playbook-ubuntu-cron.yml -l localhost
 #
