@@ -3,7 +3,7 @@
 #
 # ansible-playbook playbook-block-loop.yml -l localhost
 #
-# blog: 
+# blog: https://fabianlee.org/2021/06/18/ansible-implementing-a-looping-block-using-include_tasks/
 # 
 ---
 - hosts: all
