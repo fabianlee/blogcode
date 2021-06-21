@@ -25,7 +25,7 @@
       dest: "/tmp/{{repo_name}}"
       update: yes
       
-  - name: remove credentials for git repo
+  - name: remove visibility of credentials
     command:
       cmd: git remote set-url origin https://github.com/fabianlee/{{repo_name}}.git
       chdir: "tmp/{{repo_name}}"
