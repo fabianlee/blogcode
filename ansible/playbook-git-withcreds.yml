@@ -24,3 +24,9 @@
       repo: "https://{{git_user|urlencode()}}:{{git_pass|urlencode()}}@github.com/fabianlee/{{repo_name}}.git"
       dest: "/tmp/{{repo_name}}"
       update: yes
+      
+  - name: remove credentials for git repo
+    command:
+      cmd: git remote set-url origin https://github.com/fabianlee/{{repo_name}}.git"
+      chdir: "tmp/{{repo_name}}"
+
