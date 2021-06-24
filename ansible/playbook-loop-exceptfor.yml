@@ -1,0 +1,27 @@
+# Example of processing each home directory but a select list
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+
+  tasks:
+
+    - name: find all user home directories
+      find:
+        paths: /home
+        pattern: "*"
+        depth: 1
+        file_type: directory
+      register: user_dirs
+
+
+     # processing every home directory that is not root or fabian
+    - name: each file
+      debug:
+        msg: "Processing ... {{item.path}}"
+      loop: "{{user_dirs.files}}"
+      when: "not item.path in ['/home/root','/home/fabian']"
+      loop_control:
+        label: "{{item.path}}"
+
