@@ -1,0 +1,23 @@
+#
+# illustrates how multiple fallbacks can be chained together
+#
+---
+
+- hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  vars:
+    # commenting out any of these lines allows fallback values to be used
+    mydict:
+      mystring: foo
+    fallback1: bar
+    fallback2: final
+
+  tasks:
+
+    - debug:
+        msg: "{{mydict.mystring|default(fallback1)|default(fallback2)}}"
+
+
