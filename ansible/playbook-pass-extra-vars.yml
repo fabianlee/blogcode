@@ -2,6 +2,8 @@
 # Boolean MUST be passed as json
 # because key/value pair gets interpreted as string that always evaluates to true
 #
+# blog: https://fabianlee.org/2021/07/28/ansible-overriding-boolean-values-using-extra-vars-at-runtime/
+#
 # will correctly say myflag is true, because that is the default
 #   ansible-playbook playbook-pass-extra-vars.yml
 #
