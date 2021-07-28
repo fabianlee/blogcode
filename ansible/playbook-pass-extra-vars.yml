@@ -1,0 +1,35 @@
+# Example of overriding boolean variable using extra-vars
+# Boolean MUST be passed as json
+# because key/value pair gets interpreted as string that always evaluates to true
+#
+# will correctly say myflag is true, because that is the default
+#   ansible-playbook playbook-pass-extra-vars.yml
+#
+# will incorrectly say myflag is true
+#   ansible-playbook playbook-pass-extra-vars.yml --extra-vars "myflag=false"
+#
+# will correctly say myflag is false
+#   ansible-playbook playbook-pass-extra-vars.yml --extra-vars '{ "myflag": false }'
+---
+- hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  # false by default, override with json
+  vars:
+    myflag: true
+
+  tasks:
+
+    - debug:
+        msg: "myflag is true."
+      when: myflag
+
+    - debug:
+        msg: "myflag is false. You must have used a boolean sent as json"
+      when: not myflag
+
+    - debug:
+        msg: "myflag is false when using explicit boolean conversion"
+      when: not myflag|bool
