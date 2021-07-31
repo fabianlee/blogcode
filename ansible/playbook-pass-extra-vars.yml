@@ -29,7 +29,7 @@
       when: myflag
 
     - debug:
-        msg: "myflag is false. You must have used a boolean sent as json"
+        msg: "myflag is false. You must have used a boolean sent as json or empty value"
       when: not myflag
 
     - debug:
