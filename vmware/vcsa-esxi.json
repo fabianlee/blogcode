@@ -30,7 +30,7 @@
         },
         "os": {
             "password": "ExamplePass@456",
-            "ntp_servers": "time.nist.gov",
+            "ntp_servers": "time.google.com",
             "ssh_enable": true
         },
         "sso": {
