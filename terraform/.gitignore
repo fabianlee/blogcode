@@ -1,3 +1,5 @@
+*.backup
 *tfstate*
+*.retry
 *.hcl
 .terraform

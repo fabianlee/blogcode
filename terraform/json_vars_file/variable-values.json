@@ -1,0 +1,9 @@
+{
+  "a":"123",
+  "strlist": [ "a","b","c" ],
+  "vms": {
+    "host1": { "os":"ubuntu","cpu":2 },
+    "host2": { "os":"rhel","cpu":1 },
+    "host3": { "os":"windows","cpu":4 }
+  }
+}

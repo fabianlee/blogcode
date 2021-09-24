@@ -1,0 +1,8 @@
+{
+  "mylocal": "is local",
+  "mylocal_map" : {  
+    "one" : { "name":"first", "url":"first.com" },
+    "two" : { "name":"second", "url":"second.net" },
+    "three" : { "name":"third", "url":"thirde.org" }
+  }
+}
