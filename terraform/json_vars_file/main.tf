@@ -1,5 +1,5 @@
 #
-# blog: 
+# blog: https://fabianlee.org/2021/09/24/terraform-using-json-files-as-input-variables-and-local-variables/
 #
 
 locals {
