@@ -1,0 +1,25 @@
+---
+
+# get latest ansible role for installing microk8s
+- hosts: localhost
+  become: no
+  tasks:
+
+    # https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters_ipaddr.html
+    # still required for 'ansible.netcommon' collection to work
+    - name: install local packages needed for ipaddr jinja2 filter
+      delegate_to: localhost
+      become: yes
+      apt:
+        pkg:
+        - python-netaddr
+        - python3-netaddr
+        state: present
+
+    # https://galaxy.ansible.com/ansible/netcommon
+    - name: get ansible.netcommon collection from ansible galaxy, be patient can take 5 minutes
+      command:
+        cmd: ansible-galaxy collection install ansible.netcommon:2.2.0
+        # -p .
+        #creates: "{{playbook_dir}}/../collections/ansible_collections/ansible/netcommon"
+        #chdir: "{{playbook_dir}}/../collections"
