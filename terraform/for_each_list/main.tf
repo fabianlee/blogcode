@@ -1,3 +1,7 @@
+#
+# blog: https://fabianlee.org/2021/09/24/terraform-converting-ordered-lists-to-sets-to-avoid-errors-with-for_each/
+#
+
 locals {
   my_set = {
     "a" = { "id":"a", "name":"first", },
