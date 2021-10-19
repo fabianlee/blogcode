@@ -1,0 +1,36 @@
+#
+# Playbook that tests the union of lists
+#
+# ansible-playbook playbook-list-union.yml -l localhost
+#
+# blog: 
+# 
+# https://www.tailored.cloud/devops/how-to-filter-and-map-lists-in-ansible/
+# https://ansiblemaster.wordpress.com/2017/02/24/operating-loop-results-with-dict-or-array/
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    list_mammals:
+      - cow
+      - dog
+    list_mammals_also:
+      - dolphin
+    list_reptiles:
+      - snake
+      - crocodile
+
+  tasks:
+
+    - name: two variable lists, union with plus sign
+      command:
+        cmd: echo {{item}}
+      loop: "{{list_mammals}} + {{list_mammals_also}}"
+
+    - name: one variable list, another hardcoded
+      command:
+        cmd: echo {{item}}
+      loop: "{{list_mammals}} + ['squirrel']"
