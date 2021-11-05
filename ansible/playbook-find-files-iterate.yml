@@ -1,0 +1,26 @@
+#
+# Playbook that uses 'find' to list all files on remote host (fileglob is for local)
+#
+# ansible-playbook playbook-find-files-iterate.yml --connection=local
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  tasks:
+
+    - name: find remote files
+      find:
+        paths: /tmp
+        recurse: no
+      register: tmpfiles
+    #- debug: msg="{{tmpfiles}}"
+
+    - name: show each file
+      debug:
+        msg: "{{item.path}}"
+      loop_control:
+        label: "{{item.path}}"
+      loop: "{{tmpfiles.files}}"
