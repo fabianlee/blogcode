@@ -1,0 +1,45 @@
+#
+# Playbook that takes action for files not found in list
+#
+# ansible-playbook playbook-only-for-missing-files.yml --connection=local
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    filelist: ['a.txt','b.txt','c.txt']
+
+  tasks:
+
+    # remove all target files, then add only first one
+    - file:
+        path: "{{item}}"
+        state: absent
+      loop: "{{filelist}}"
+    - file:
+        path: "{{ filelist | first }}"
+        state: touch
+
+    - name: check for file existence
+      stat:
+        path: "{{item}}"
+      loop: "{{filelist}}"
+      register: filestats
+    #- debug: msg="{{filestats}}"
+
+    - name: take actions on non-existent files (should be b and c)
+      debug:
+        msg: I have determined that {{item.item}} does not exist, do something!
+      loop_control:
+        label: "{{item.item}}"
+      when: not item.stat.exists
+      loop: "{{filestats.results}}"
+
+    # remove all files to prepare for next run
+    - file:
+        path: "{{item}}"
+        state: absent
+      loop: "{{filelist}}"
