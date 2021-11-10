@@ -1,0 +1,27 @@
+#
+# Shows how to do conditional (tertiary) with string split
+#
+# ansible-playbook split-string-with-tertiary.yml --connection=local
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    vmdk: "subfolder/my-asldj.vmdk"
+    #vmdk: "/subfolder/my-asldj.vmdk"
+
+  tasks:
+
+    # can handle optional leading forward slash
+    - set_fact:
+        just_parent: "{{ vmdk.split('/')[1] if vmdk.startswith('/') else vmdk.split('/')[0] }}"
+        just_name: "{{ vmdk.split('/')[2] if vmdk.startswith('/') else vmdk.split('/')[1] }}"
+
+    # shows just the name without starting folder path
+    - debug:
+        msg: "folder path is: {{ just_parent }}"
+    - debug:
+        msg: "file name is: {{ just_name }}"
