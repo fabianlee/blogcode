@@ -12,7 +12,7 @@ files = list(filter(os.path.isfile, glob.glob(pattern)))
 # sort by modified time
 files.sort(key=lambda x: os.path.getmtime(x))
 
-# get last item
+# get last item in list
 lastfile = files[-1]
 
-print("Most recent file: {}".format(lastfile))
+print("Most recent file matching {}: {}".format(pattern,lastfile))

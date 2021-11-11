@@ -1,0 +1,89 @@
+#
+# Shows how to take action if a paired set of files does not exist
+#
+# For example: if you have a complete list of .txt files, where each one should have
+# a corresponding pdf file of the same name, you might need to take action only on
+# those missing pdf files
+#
+# ansible-playbook find-unpaired-files.yml --connection=local
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    filenames:
+      - myfile-a
+      - myfile-b
+      - myfile-c
+
+  tasks:
+
+    # setup
+    - name: create set of txt files
+      file:
+        path: /tmp/{{item}}.txt
+        state: touch
+      loop: "{{filenames}}"
+    - name: create set of pdf files
+      file:
+        path: /tmp/{{item}}.pdf
+        state: touch
+      loop: "{{filenames}}"
+    - name: intentionally remove one of the pdf files
+      file:
+        path: /tmp/myfile-b.pdf
+        state: absent
+
+
+    - name: check existence of txt files
+      stat:
+        path: "{{item}}"
+      with_fileglob: "/tmp/myfile-*.txt"
+      register: txt_stats
+    - name: check existence of pdf files
+      stat:
+        path: "{{item}}"
+      with_fileglob: "/tmp/myfile-*.pdf"
+      register: pdf_stats
+    #- debug: msg="{{txt_stats.results}}"
+    #- debug: msg="{{pdf_stats.results}}"
+
+
+    - name: convert file stat datastructure to list
+      set_fact:
+        txt_exist_list: "{{ (txt_stats.results | map(attribute='item') ) | list }}"
+        pdf_exist_list: "{{ (pdf_stats.results | map(attribute='item') ) | list }}"
+    - name: convert single element list to dictionary
+      set_fact:
+        txt_exist_map: "{{ dict(txt_exist_list | zip(txt_exist_list)) }}"
+        pdf_exist_map: "{{ dict(pdf_exist_list | zip(pdf_exist_list)) }}"
+    #- debug: msg="{{ txt_exist_list }}"
+    #- debug: msg="{{ pdf_exist_list }}"
+    #- debug: msg="{{ txt_exist_map }}"
+    #- debug: msg="{{ pdf_exist_map }}"
+        
+
+    - name: iterate through each txt file and determine if correspding pdf is missing
+      debug:
+        msg: "Missing! Need to regenerate pdf {{ ((item | splitext) | first) + '.pdf' }}"
+      when: pdf_exist_map[ ((item | splitext) | first) + '.pdf' ] is not defined
+      loop: "{{txt_exist_list}}"
+      loop_control:
+        label: "{{item}}"
+
+
+    # cleanup
+    - name: remove txt files
+      file:
+        path: /tmp/{{item}}.txt
+        state: absent
+      loop: "{{filenames}}"
+    - name: remove pdf files
+      file:
+        path: /tmp/{{item}}.pdf
+        state: absent
+      loop: "{{filenames}}"
+
