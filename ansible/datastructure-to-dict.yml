@@ -1,11 +1,10 @@
 #
-# Shows how to take action if a paired set of files does not exist
+# Shows how to extract arrays and map from complex data structure
 #
-# For example: if you have a complete list of .txt files, where each one should have
-# a corresponding pdf file of the same name, you might need to take action only on
-# those missing pdf files
+# blog: https://fabianlee.org/2021/11/12/ansible-extracting-a-list-or-dictionary-from-a-complex-data-structure/
 #
-# ansible-playbook find-unpaired-files.yml --connection=local
+#
+# ansible-playbook datastructure-to-dict.yml
 # 
 # json_query filter requires 'community.general' galaxy module and jmespath pip module
 #   pip3 install jmespath
