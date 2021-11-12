@@ -5,8 +5,10 @@
 # example:
 #   ansible-playbook playbook-nested-check.yml
 #
-# https://stackoverflow.com/questions/35105615/ansible-use-default-if-a-variable-is-not-defined
-# https://github.com/ansible/ansible/issues/35992
+# json_query filter requires 'community.general' galaxy module and jmespath pip module
+#   pip3 install jmespath
+#   ansible-galaxy collection install community.general
+#
 ---
 - hosts: all
   become: no
