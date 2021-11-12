@@ -1,0 +1,59 @@
+#
+# Shows how to take action if a paired set of files does not exist
+#
+# For example: if you have a complete list of .txt files, where each one should have
+# a corresponding pdf file of the same name, you might need to take action only on
+# those missing pdf files
+#
+# ansible-playbook find-unpaired-files.yml --connection=local
+# 
+# json_query filter requires 'community.general' galaxy module and jmespath pip module
+#   pip3 install jmespath
+#   ansible-galaxy collection install community.general
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    # emulates structure of 'stat' module output (checks for file existence)
+    # as test for pulling values out of deeply nested json structure
+    my_json_structure:
+      results:
+        - item: /tmp/a.txt
+          stat:
+            exists: true
+        - item: /tmp/b.txt
+          stat:
+            exists: false
+        - item: /tmp/c.txt
+          stat:
+            exists: true
+
+  tasks:
+
+    # 'my_json_structure' emulates what 'stat' and 'with_fileglob' return
+    #- stat:
+    #    path: "{{item}}"
+    #  register: complex_results
+    #  with_fileglob: "/tmp/*"
+    #- debug: msg="{{complex_results}}"
+
+    # pulling single value out of each item, create list
+    - set_fact:
+        exist_list: "{{ ( my_json_structure.results | map(attribute='item') )  }}"
+    - debug: msg="{{ exist_list }}"
+
+    # pulling single value out of each item, create map
+    - set_fact:
+        exist_map_simple: "{{ dict( exist_list | zip(exist_list) ) }}"
+    - debug: msg="{{ exist_map_simple }}"
+
+    # pulling two values out of each item, create map with key/value
+    - set_fact:
+        exist_map: "{{ exist_map|default({}) | combine( {item.item : item.stat.exists} ) }}"
+      with_items: "{{ my_json_structure | json_query('results[*]') }}"
+    - debug: msg="{{ exist_map }}"
+   
