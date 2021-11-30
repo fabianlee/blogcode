@@ -19,7 +19,7 @@ echo "project/projectId=$project/$projectId"
 gcloud config set project $projectId
 
 # check if service account already exists
-alreadyExists=$(gcloud iam service-accounts list --filter=$newServiceAccount 2>/dev/null | wc -l)
+alreadyExists=$(gcloud iam service-accounts list --filter="name ~ ${newServiceAccount}@" 2>/dev/null | wc -l)
 [ $alreadyExists -eq 0 ] || { echo "ABORTING the service account $newServiceAccount already exists!"; exit 0; }
 
 # create service account
