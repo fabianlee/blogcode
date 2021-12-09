@@ -1,55 +1,29 @@
 #!/usr/bin/env python3
 # encoding=utf8
 #
-# Flattens out AdventureWorks relational database orders
+# Flattens out AdventureWorks relational database Sales orders
+#
+# https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/adventure-works/oltp-install-script
 #
 # Requirement:
 #   pip3 install pandas --user
 #
 import sys
 import argparse
-import io
-import csv
 import datetime
 import pandas as pd
 
-
-# look for application name given id
-def resolve_app_id(app_id):
-    return app_data[app_data['id'] == app_id].iloc[0]['name']
-
-# look for tenant name given id
-def resolve_tenant_id(tenant_id):
-    return tenant_data[tenant_data['id'] == tenant_id].iloc[0]['company_name']
-
-# look for swift container id in either 'tenant_id' or 'name' column of subscriptions
-# multiple rows can be returned because swift container id matches back to tenant (which can have multiple subs)
-#
-def resolve_swift_container_id(swift_id):
-    tenant_res = sub_data[sub_data['tenant_id'] == swift_id]
-    if not tenant_res.empty:
-        return "TENANTID",tenant_res
-
-    sub_res = sub_data[sub_data['name'] == swift_id]
-    if not sub_res.empty:
-        return "TENANTNAME",sub_res
-
-    # did not find resolution
-    return None,None
 
 
 ######### MAIN ##########################
 
 ap = argparse.ArgumentParser()
-ap.add_argument('-d', '--datacenter', default="li3_prod", help="datacenter env name")
+ap.add_argument('-r', '--rows', type=int, default="20", help="number of sales rows to process")
 args = ap.parse_args()
-datacenter = args.datacenter
-
-MAX_SALES = 100
-
+rows = args.rows
 
 # read CSV files into DataFrames
-sales_data = pd.read_csv("SalesOrderHeader.csv",encoding="unicode_escape",sep="\t",nrows=MAX_SALES)
+sales_data = pd.read_csv("SalesOrderHeader.csv",encoding="unicode_escape",sep="\t",nrows=rows)
 creditcard_data = pd.read_csv("CreditCard.csv",encoding="unicode_escape",sep="\t")
 address_data = pd.read_csv("Address.csv",encoding="unicode_escape",sep="\t")
 state_data = pd.read_csv("StateProvince8.csv",encoding="unicode_escape",sep="\t",on_bad_lines="warn",header=0)
@@ -93,4 +67,3 @@ for _,sales_row in sales_data.iterrows():
           card_row["cardtype"]))
 
 
-sys.exit(0)
