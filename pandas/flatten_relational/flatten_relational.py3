@@ -4,6 +4,8 @@
 # Flattens out AdventureWorks relational database Sales orders
 # using pandas merge
 #
+# blog: https://fabianlee.org/2021/12/09/python-flattening-relational-data-with-pandas/
+#
 # Adventure Works CSV dumps:
 # https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/adventure-works/oltp-install-script
 #
@@ -34,7 +36,7 @@ address_data = pd.read_csv("Address.csv",encoding="unicode_escape",sep="\t")
 state_data = pd.read_csv("StateProvince8.csv",encoding="unicode_escape",sep="\t",on_bad_lines="warn",header=0)
 
 # define columns since these files do not have headers
-# prefixed names (e.g "cc." "add.") makes it easier to identify join source later
+# prefixed names (e.g "add." "state.") makes it easier to identify join source later
 creditcard_data.columns = ["cc.id","cc.cardtype","cc.cardnumber","cc.expmonth","cc.expyear","cc.modifieddate"]
 address_data.columns = ["add.id","add.line1","add.line2","add.city","add.state","add.postalcode","add.spatialloc","add.guid","add.modifieddate"]
 state_data.columns = ["state.id","state.code","state.regioncode","state.isstateprovince","state.name","state.territoryid","state.guid","state.modifieddata"]

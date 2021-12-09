@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# blog: https://fabianlee.org/2021/12/09/python-flattening-relational-data-with-pandas/
+#
 
 echo "Fetching relevant csv datafiles from Microsoft AdventureWorks relational database..."
 
