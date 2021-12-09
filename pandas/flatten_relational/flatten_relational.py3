@@ -2,6 +2,7 @@
 # encoding=utf8
 #
 # Flattens out AdventureWorks relational database Sales orders
+# using pandas merge
 #
 # Adventure Works CSV dumps:
 # https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/adventure-works/oltp-install-script
@@ -24,7 +25,7 @@ ap.add_argument('-d', '--debug', action="store_true", help="whether to show debu
 args = ap.parse_args()
 rows = args.rows
 debug = args.debug
-print("Showing {} max sales rows, debug={}".format(rows,debug))
+print("Processing {} max sales rows, debug={}".format(rows,debug))
 
 # read relational CSV files into DataFrames
 sales_data = pd.read_csv("SalesOrderHeader.csv",encoding="unicode_escape",sep="\t",nrows=rows)
