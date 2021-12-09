@@ -1,3 +1,4 @@
 .vagrant
 __pycache__
 ansible-roles-community/
+*.swp
