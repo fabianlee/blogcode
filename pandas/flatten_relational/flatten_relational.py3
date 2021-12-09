@@ -3,6 +3,7 @@
 #
 # Flattens out AdventureWorks relational database Sales orders
 #
+# Adventure Works CSV dumps:
 # https://github.com/microsoft/sql-server-samples/tree/master/samples/databases/adventure-works/oltp-install-script
 #
 # Requirement:
@@ -79,13 +80,14 @@ for _,sales_row in sales_data.iterrows():
             address_row['city'],
             state_row['name'],
             sales_row["totaldue"],
-            card_row["cardtype"],sales_row['taxamt']/sales_row['totaldue'])
+            card_row["cardtype"],
+            sales_row['taxamt']/sales_row['totaldue'])
             )
 
 # write DataFrame to csv, leave off internal id
 flattened_results.to_csv("flattened_sales_data.csv", index=False)
 
-# sample of flattened results
+# show sample of flattened results
 print("")
 print(flattened_results)
 
@@ -95,7 +97,7 @@ print(flattened_results)
 flattened_and_grouped = flattened_results.groupby(['address.state']).sum()
 
 # create synthesized tax rate column based on tax/total
-flattened_and_grouped = flattened_and_grouped.assign(synthtaxrate = lambda x: x['sales.tax']/x['sales.total'] )
+flattened_and_grouped = flattened_and_grouped.assign(meantaxrate = lambda x: x['sales.tax']/x['sales.total'] )
 
 # write grouped DataFrame to csv
 flattened_and_grouped.to_csv("flattened_sales_by_state.csv")
@@ -104,7 +106,7 @@ flattened_and_grouped.to_csv("flattened_sales_by_state.csv")
 for col in ['sales.tax','sales.total']:
   flattened_and_grouped[col] = flattened_and_grouped[col].apply(lambda x: "${:.1f}k".format((x/1000)))
 # format tax rate float to 3 significant decimal points
-flattened_and_grouped['synthtaxrate'] = flattened_and_grouped['synthtaxrate'].apply(lambda x: "{0:.3f}".format(x) )
+flattened_and_grouped['meantaxrate'] = flattened_and_grouped['meantaxrate'].apply(lambda x: "{0:.3f}".format(x) )
 
 print("\n\n=== TOTAL TAX AND SALES BY STATE =======================")
 with pd.option_context('display.max_rows',10):
