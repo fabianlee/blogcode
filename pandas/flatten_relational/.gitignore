@@ -1,2 +1,3 @@
 *.csv
 instawdb.sql
+flattened_sales.*.csv
