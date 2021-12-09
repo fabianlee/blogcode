@@ -66,4 +66,4 @@ for _,sales_row in sales_data.iterrows():
           sales_row["totaldue"],
           card_row["cardtype"]))
 
-
+# TODO take DataFrame created above and group by state then write to CSV
