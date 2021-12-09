@@ -33,77 +33,41 @@ address_data = pd.read_csv("Address.csv",encoding="unicode_escape",sep="\t")
 state_data = pd.read_csv("StateProvince8.csv",encoding="unicode_escape",sep="\t",on_bad_lines="warn",header=0)
 
 # define columns since these files do not have headers
-creditcard_data.columns = ["id","cardtype","cardnumber","expmonth","expyear","modifieddate"]
-address_data.columns = ["id","line1","line2","city","state","postalcode","spatialloc","guid","modifieddate"]
-state_data.columns = ["id","code","regioncode","isstateprovince","name","territoryid","guid","modifieddata"]
+# prefixed names (e.g "cc." "add.") makes it easier to identify join source later
+creditcard_data.columns = ["cc.id","cc.cardtype","cc.cardnumber","cc.expmonth","cc.expyear","cc.modifieddate"]
+address_data.columns = ["add.id","add.line1","add.line2","add.city","add.state","add.postalcode","add.spatialloc","add.guid","add.modifieddate"]
+state_data.columns = ["state.id","state.code","state.regioncode","state.isstateprovince","state.name","state.territoryid","state.guid","state.modifieddata"]
 sales_data.columns = ["id","revision","orderdate","duedate","shipdate","status","onlineflag","salesnum","ponum","acctnum","custid","salespersonid","territoryid","billtoaddressid","shiptoaddressid","shipmethodid","ccid","ccapproval","currencyrateid","subtotal","taxamt","freight","totaldue","comment","guid","modifieddate"]
 
+# inner join on Address add.state-> state.stateid
+address_data = pd.merge(address_data,state_data,how="left",left_on="add.state",right_on="state.id",suffixes=(None,"_s") )
+if debug:
+  address_data.to_csv("address_with_state.csv",index=False)
 
+# inner join on Sales billtoaddressid -> add.id
+sales_data = pd.merge(sales_data,address_data,how="left",left_on="billtoaddressid",right_on="add.id",suffixes=(None,"_a") )
 
-# build final flattened DataFrame
-flattened_results = pd.DataFrame( columns = [ "order.id","order.date","address.city","address.state","sales.tax","sales.total","credit.type" ] )
+# inner join on Sales ccid -> cc.id
+sales_data = pd.merge(sales_data,creditcard_data,how="left",left_on="ccid",right_on="cc.id",suffixes=(None,"_c") )
 
-# go through each row of Sales (SalesOrderHeader.csv), resolve relational foreign keys
-for _,sales_row in sales_data.iterrows():
+# write out fully expanded Sales data
+if debug:
+  sales_data.to_csv("sales_with_full_adddress_and_cc.csv",index=False)
 
-    # lookup address by id (Address.csv)
-    address_row = address_data[address_data['id'] == sales_row["billtoaddressid"]].iloc[0]
-    # lookup state by id (StateProvince8.csv)
-    state_res = state_data[state_data['id'] == address_row['state']]
-    # lookup credit card by id (CreditCard.csv)
-    card_res = creditcard_data[creditcard_data['id'] == sales_row["ccid"]]
+# derive new DataFrame, with just a few columns we want to analyze
+sales_data_select_columns = sales_data[ ["state.name", "taxamt", "totaldue"]  ]
+# sum up the total taxes and purchased, by State
+flattened_and_grouped = sales_data_select_columns.groupby(['state.name']).sum()
 
-    # show Sale, but only if state and card resolved
-    if not state_res.empty and not card_res.empty:
-      # get first row of state results
-      state_row = state_res.iloc[0]
-      # get first row of card results
-      card_row = card_res.iloc[0]
-      # convert str to datetime
-      order_date = pd.to_datetime( sales_row["orderdate"] )
+# create synthesized mean tax rate column based on tax/total
+flattened_and_grouped = flattened_and_grouped.assign(meantaxrate = lambda x: x['taxamt']/x['totaldue'] )
 
-      # add result row to final DataFrame
-      flattened_results.loc[len(flattened_results.index)] = [
-          sales_row['id'],
-          order_date,
-          address_row['city'],
-          state_row['name'],
-          sales_row['taxamt'],
-          sales_row['totaldue'],
-          card_row['cardtype'],
-          ]
-
-      if debug:
-        print("ORDER {} on {} from {},{} for ${} charged to {} calc taxrate {}".format(
-            sales_row['id'],
-            order_date.strftime('%a %Y-%m-%d'),
-            address_row['city'],
-            state_row['name'],
-            sales_row["totaldue"],
-            card_row["cardtype"],
-            sales_row['taxamt']/sales_row['totaldue'])
-            )
-
-# write DataFrame to csv, leave off internal id
-flattened_results.to_csv("flattened_sales_data.csv", index=False)
-
-# show sample of flattened results
-print("")
-print(flattened_results)
-
-
-
-# derive new DataFrame, grouped by state
-flattened_and_grouped = flattened_results.groupby(['address.state']).sum()
-
-# create synthesized tax rate column based on tax/total
-flattened_and_grouped = flattened_and_grouped.assign(meantaxrate = lambda x: x['sales.tax']/x['sales.total'] )
-
-# write grouped DataFrame to csv
-flattened_and_grouped.to_csv("flattened_sales_by_state.csv")
+# write raw grouped DataFrame to csv
+if debug:
+  flattened_and_grouped.to_csv("sales_grouped_by_state.csv")
 
 # format tax and total columns into currency for viewing
-for col in ['sales.tax','sales.total']:
+for col in ['taxamt','totaldue']:
   flattened_and_grouped[col] = flattened_and_grouped[col].apply(lambda x: "${:.1f}k".format((x/1000)))
 # format tax rate float to 3 significant decimal points
 flattened_and_grouped['meantaxrate'] = flattened_and_grouped['meantaxrate'].apply(lambda x: "{0:.3f}".format(x) )
