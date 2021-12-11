@@ -4,6 +4,8 @@
 # Flattens out Employee sample database from live MariaDB databse
 # illustrates how DataFrame can be created from calls to relational database
 #
+# blog: https://fabianlee.org/2021/12/11/python-constructing-dataframe-from-a-relational-database-with-pandas/
+#
 # Module requirement:
 #   pip3 install pandas mysql-client mysql-connector --user
 #
@@ -33,9 +35,9 @@ db_conn = mysql.connector.connect(
       passwd=args.password,
       database="employees"
     )
-# simplest test DB connection
+# simplest test of DB connection
 all_tables = pd.read_sql("show tables",db_conn)
-print(all_tables)
+#print(all_tables)
 
 department_name = "Finance"
 
@@ -56,7 +58,7 @@ department_name = "Finance"
 # APPROACH #1:
 # pull DataFrame in single SQL complex query
 #
-print("\n\n")
+print("")
 print("=================================================")
 print("  DataFrame using single SQL with complex join")
 print("=================================================")
