@@ -4,7 +4,7 @@
 # Flattens out Employee sample database from live MariaDB databse
 # illustrates how DataFrame can be created from calls to relational database
 #
-# blog: https://fabianlee.org/2021/12/11/python-constructing-dataframe-from-a-relational-database-with-pandas/
+# blog: https://fabianlee.org/2021/12/11/python-constructing-a-dataframe-from-a-relational-database-with-pandas/
 #
 # Module requirement:
 #   pip3 install pandas mysql-client mysql-connector --user
