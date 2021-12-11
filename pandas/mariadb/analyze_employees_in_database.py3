@@ -60,7 +60,7 @@ department_name = "Finance"
 #
 print("")
 print("=================================================")
-print("  DataFrame using single SQL with complex join")
+print("1. DataFrame using single SQL with complex join")
 print("=================================================")
 
 employee_data = pd.read_sql("""
@@ -81,11 +81,10 @@ print(employee_data)
 #
 print("\n\n")
 print("=================================================")
-print("  Multiple DataFrame merged by pandas")
+print("2. Multiple DataFrame merged by pandas")
 print("=================================================")
 
 print("Select department info for each employee in {}...".format(department_name))
-# can filter by dept_name because it is available
 dept_info = pd.read_sql("""
         SELECT d.dept_no,d.dept_name,de.emp_no
         FROM departments d, dept_emp de
@@ -94,7 +93,6 @@ dept_info = pd.read_sql("""
         db_conn)
 
 print("Select titles just for {} group..".format(department_name))
-# need to filter by dept_no because name is not available
 titles = pd.read_sql("""
         SELECT t.emp_no,t.title
         FROM titles t
@@ -114,6 +112,7 @@ employees_from_dept = pd.read_sql("""
 
 # merge department and employee data
 employees_merged = pd.merge(dept_info,employees_from_dept,how="left",left_on="emp_no",right_on="emp_no",suffixes=(None,"_e") )
+
 # additional merge of titles
 employees_merged = pd.merge(employees_merged,titles,how="left",left_on="emp_no",right_on="emp_no",suffixes=(None,"_e") )
 

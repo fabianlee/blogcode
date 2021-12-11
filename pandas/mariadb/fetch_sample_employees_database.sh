@@ -5,7 +5,7 @@
 
 echo "Fetching example Employees database to ~/Downloads/test_db"
 
-pushd . > /dev/null 2>&1
+pushd . > /dev/null
 cd ~/Downloads
 
 # download and unzip
@@ -23,4 +23,5 @@ fi
 cd test_db
 ls -l *.sql
 
-popd
+
+popd > /dev/null
