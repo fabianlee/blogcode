@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # encoding=utf8
 #
-# Flattens out Employee sample database from mysql
+# Flattens out Employee sample database from live MariaDB databse
 # illustrates how DataFrame can be created from calls to relational database
 #
 # Module requirement:
@@ -19,16 +19,12 @@ import mysql.connector
 ######### MAIN ##########################
 
 ap = argparse.ArgumentParser()
-ap.add_argument('-r', '--rows', type=int, default="500", help="number of sales rows to process")
 ap.add_argument('-H', '--host', default="172.17.0.2", help="IP address of MariaDB server")
 ap.add_argument('-u', '--user', default="root", help="user for MariaDB server")
 ap.add_argument('-p', '--password', default="thepassword", help="password for MariaDB server")
 ap.add_argument('-d', '--debug', action="store_true", help="whether to show debug print")
 args = ap.parse_args()
-rows = args.rows
 debug = args.debug
-dbhost = args.host
-print("Processing {} max rows, debug={}".format(rows,debug))
 
 # connect to MariaDB server
 db_conn = mysql.connector.connect(
@@ -41,8 +37,9 @@ db_conn = mysql.connector.connect(
 all_tables = pd.read_sql("show tables",db_conn)
 print(all_tables)
 
-# lookup finance department ID from database
 department_name = "Finance"
+
+# lookup finance department ID from database
 #try:
 #  cursor = db_conn.cursor()
 #  statement = "SELECT dept_no from departments where dept_name=%s"
