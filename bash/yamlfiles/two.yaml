@@ -1,0 +1,3 @@
+root:
+  two: 2
+  which_animal: $animal

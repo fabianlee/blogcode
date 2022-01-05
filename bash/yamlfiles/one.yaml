@@ -1,0 +1,3 @@
+root:
+  first: 1
+  testsub_first: $first
