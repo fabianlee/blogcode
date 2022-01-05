@@ -57,6 +57,6 @@ echo "##########"
 export first
 export animal
 # only substitute listed variables
-#echo "$mytemplate" | envsubst '$first $animal'
+echo "$mytemplate" | envsubst '$first $animal'
 # substitute all env variables
-echo "$mytemplate" | envsubst
+#echo "$mytemplate" | envsubst
