@@ -36,7 +36,7 @@ grep -Po "(?<=https://)([^ /?\"])*" $testfile
 
 echo ""
 echo "#############################"
-echo "PCR Perl regex with brute forced variable length LookBehind, use /K instead"
+echo "PCR Perl regex with brute forced variable length LookBehind, use \K instead"
 grep -Po "(?:(?<=http://)|(?<=https://))([^ /?\"])*" $testfile
 
 echo ""
