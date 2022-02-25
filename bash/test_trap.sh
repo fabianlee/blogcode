@@ -29,23 +29,36 @@ function sigint_capture() {
 #  sleep 1
 #done
 
+timeout 5 sleep 1 && true
+echo "exited short sleep ending in true with $? (expected 0)"
+
+timeout 5 sleep 1 && false
+echo "exited short sleep ending in false with $? (expected 1)"
+
+timeout 2 sleep 10 && $(exit 3)
+echo "exited long sleep ending in false with $? (expected 124 for timeout)"
+timeout 2 sleep 10 && true
+echo "exited long sleep ending in true with $? (expected 124 for timeout)"
+
 # kill ping after 3 seconds and continue
 echo ""
 echo "ping will die after 3 seconds, then continue processing..."
 timeout 3 ping 127.0.0.1
+echo "exited ping with $? (expected 124 for timeout)"
 
 # disable trap
 #trap "" SIGKILL
 
 # trap 'EXIT' signal (kill) for custom message
-trap pingtimeout_kill SIGEXIT
+#trap pingtimeout_kill SIGINT
 
 # kill after 3 seconds
 echo ""
 echo "ping will die after 3 seconds with custom message..."
-timeout --signal=SIGEXIT 3 ping 127.0.0.1
+timeout 3 ping 127.0.0.1
+echo "exited with $?"
 
-echo ""
-for i in $(seq 1 3); do
-  echo "last $i"
-done
+#echo ""
+#for i in $(seq 1 3); do
+#  echo "last $i"
+#done
