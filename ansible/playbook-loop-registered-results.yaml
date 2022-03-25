@@ -1,0 +1,82 @@
+#
+# Playbook that illustrates how to iterate over registered results from loop
+#
+# example invocation:
+# KUBECONFIG=/tmp/k3s-kubeconfig ansible-playbook playbook-loop-registered-results.yaml -l localhost
+#
+# prerequisites for using community.kubernetes ansible galaxy module:
+# pip module
+#   pip3 install kubernetes
+# download galaxy module
+#   ansible-galaxy collection install community.kubernetes:2.0.1
+#
+---
+- hosts: localhost
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    list_mammals:
+      - cow
+      - dog
+    list_reptiles:
+      - snake
+      - crocodile
+
+  tasks:
+
+    - name: two variable lists, union with plus sign
+      command:
+        cmd: echo {{item}}
+      loop: "{{list_mammals}} + {{list_reptiles}}"
+      register: myloop_results
+
+    - name: the return type is 'list'
+      debug:
+        msg: "{{ myloop_results.results | type_debug }}"
+
+    - name: show each results entry
+      debug:
+        msg: "{{entry.item}}"
+      loop: "{{myloop_results.results}}"
+      loop_control:
+        loop_var: entry
+        label: "{{entry.item}}"
+
+    - name: show each results entry without using loop_var
+      debug:
+        msg: "{{item.item}}"
+      loop: "{{myloop_results.results}}"
+      loop_control:
+        label: "{{item.item}}"
+
+    - name: apply namespace changes through definition
+      kubernetes.core.k8s:
+        kubeconfig: "{{ lookup('env','KUBECONFIG') }}"
+        api_version: v1
+        kind: Namespace
+        state: present
+        name: "{{item}}"
+      loop:
+        - default
+        - test
+      register: k8sapply_res
+
+    - name: k8s apply result is 'list'
+      debug:
+        msg: "{{k8sapply_res.results | type_debug }}"
+    - name: show k8s results from definition apply
+      debug:
+        msg: "{{item.result.kind}} {{item.item}} changed? {{item.changed}}"
+      loop: "{{k8sapply_res.results}}"
+      loop_control:
+        label: "{{item.item}}"
+
+    - name: remove test ns
+      kubernetes.core.k8s:
+        kubeconfig: "{{ lookup('env','KUBECONFIG') }}"
+        api_version: v1
+        kind: Namespace
+        state: absent
+        name: test
