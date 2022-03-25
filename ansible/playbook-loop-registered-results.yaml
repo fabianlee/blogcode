@@ -10,6 +10,7 @@
 # download galaxy module
 #   ansible-galaxy collection install community.kubernetes:2.0.1
 #
+# did not find need to use from_yaml|list workaround (https://istio.io/latest/blog/2021/revision-tags/#introducing-revision-tags)
 ---
 - hosts: localhost
   become: no
