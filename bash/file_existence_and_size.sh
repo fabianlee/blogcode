@@ -2,7 +2,7 @@
 #
 # Test to make sure file exists and has size greater than 0 bytes
 #
-# blog: https://fabianlee.org/2022/03/27/bash-test-for-both-file-existence-and-size-to-avoid-signalling-success/
+# blog: https://fabianlee.org/2022/03/27/bash-test-both-file-existence-and-size-to-avoid-signalling-success/
 #
 
 # test for existence and content
