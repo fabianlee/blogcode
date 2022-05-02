@@ -3,8 +3,11 @@
 # makes sure data disk at /dev/sdb is formatted and mounted
 # https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting
 #
+# blog: https://fabianlee.org/2022/05/01/gcp-moving-a-vm-instance-to-a-different-region-using-snapshots/
+#
 # meant to be run inside GCP VM instance using startup metadata
 # gcloud compute instances create .... --metadata-from-file=startup-script=gcp-add-data-disk.sh
+#
 
 set -x
 
