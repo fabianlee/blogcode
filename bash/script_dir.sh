@@ -1,12 +1,15 @@
 #!/bin/bash
 # 
 # Evaluates script directory
+# blog: https://fabianlee.org/2022/05/07/bash-current-directory-versus-directory-of-script/
 #
 SCRIPT_DIR_REL=$(dirname ${BASH_SOURCE[0]})
 SCRIPT_DIR_ABS=$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+CURRENT_DIR=$(pwd)
 
-echo "Relative script is located at: $SCRIPT_DIR_REL"
-echo "Absolute script is located at: $SCRIPT_DIR_ABS"
+echo "Current directory: $CURRENT_DIR"
+echo "Relative script dir: $SCRIPT_DIR_REL"
+echo "Absolute script dir: $SCRIPT_DIR_ABS"
 
 
 echo ""
