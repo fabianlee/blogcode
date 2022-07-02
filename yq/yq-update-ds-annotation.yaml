@@ -3,7 +3,7 @@
 # reads multi-document yaml, adds row to array of only targeted ones
 # https://mikefarah.gitbook.io/yq/usage/tips-and-tricks
 #
-# blog: 
+# blog: https://fabianlee.org/2022/07/02/kubernetes-targeting-the-addition-of-array-items-to-a-multi-document-yaml-manifest
 
 
 # adds array row indiscrimanately to all documents (not what we want)
