@@ -1,0 +1,23 @@
+# multi-doc.yaml
+---
+kind: namespace
+metadata:
+  name: mynamespace
+---
+kind: DaemonSet
+metadata:
+  name: mydaemonset
+spec:
+  template:
+    metadata:
+      annotations:
+        my/annotation: "is-daemonset"
+---
+kind: Deployment
+metadata:
+  name: mydeployment
+spec:
+  template:
+    metadata:
+      annotations:
+        my/annotation: "is-deployment"
