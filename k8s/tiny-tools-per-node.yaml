@@ -43,7 +43,7 @@ spec:
         args:
         - /bin/sh
         - -c
-        - touch /tmp/healthy; date; cho "initializing..."; sleep 30d
+        - touch /tmp/healthy; date; echo "initializing..."; sleep 30d
         livenessProbe:
           exec: 
             command:
