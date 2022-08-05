@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  labels:
+  name: limited-ns-role
+  namespace: default
+rules:
+- apiGroups:
+  - ""
+  resources: ["secrets"]
+  verbs:
+  - get
+  - list
+  - watch

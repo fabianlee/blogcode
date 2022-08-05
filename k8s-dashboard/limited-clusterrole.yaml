@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  labels:
+  name: limited-clusterrole
+  namespace: default
+rules:
+- apiGroups:
+  - ""
+  resources: ["pods", "configmaps", "services", "pods/log"] # ["*"]
+  verbs:
+  - get
+  - list
+  - watch
