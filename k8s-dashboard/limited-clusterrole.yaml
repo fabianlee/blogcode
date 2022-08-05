@@ -9,7 +9,7 @@ metadata:
 rules:
 - apiGroups:
   - ""
-  resources: ["namespaces","pods", "configmaps", "services", "pods/log"] # ["*"]
+  resources: ["namespaces","pods", "configmaps", "services", "pods/log"]
   verbs:
   - get
   - list
