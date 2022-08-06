@@ -13,6 +13,7 @@ Import-Module ADDSDeployment
 $domainbios = 'FABIAN'
 $domain = 'FABIAN.LEE'
 $dmode = '7' # win2019
+$safepass = 'ThisIsMyP4ss!' # same as example unattend.xml
 
 read-host 'About to create the Windows Domain controller for $domain...press <ENTER> to begin'
 Install-ADDSForest `
@@ -26,5 +27,6 @@ Install-ADDSForest `
 -LogPath 'C:\Windows\NTDS' `
 -NoRebootOnCompletion:$false `
 -SysvolPath 'C:\Windows\SYSVOL' `
+-SafeModeAdministatorPassword $safepass `
 -Force:$true
 
