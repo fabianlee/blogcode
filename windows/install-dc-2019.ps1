@@ -1,15 +1,27 @@
 #
 # Windows PowerShell script for AD DS Deployment
 #
+# https://social.technet.microsoft.com/wiki/contents/articles/52765.windows-server-2019-step-by-step-setup-active-directory-environment-using-powershell.aspx
+# https://petri.com/how-to-install-active-directory-in-windows-server-2019-using-powershell/
+
+read-host "About to add the AD-Domain-Services feature...press <ENTER> to begin"
+Install-WindowsFeature –Name AD-Domain-Services –IncludeManagementTools
+start-sleep -seconds 3
 
 Import-Module ADDSDeployment
+
+$domainbios = "FABIAN"
+$domain = "FABIAN.LEE"
+$dmode = "7" # win2019
+
+read-host "About to create the Windows Domain controller for $domain...press <ENTER> to begin"
 Install-ADDSForest `
 -CreateDnsDelegation:$false `
 -DatabasePath "C:\Windows\NTDS" `
--DomainMode "Win2012R2" `
--DomainName "FABIAN.LEE" `
--DomainNetbiosName "FABIAN" `
--ForestMode "Win2012R2" `
+-DomainMode $dmode `
+-DomainName $domain `
+-DomainNetbiosName $domainbios `
+-ForestMode $dmode `
 -InstallDns:$true `
 -LogPath "C:\Windows\NTDS" `
 -NoRebootOnCompletion:$false `
