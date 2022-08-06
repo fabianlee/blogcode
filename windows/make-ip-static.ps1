@@ -17,10 +17,20 @@ write-host "The interface index $interfaceIndex/$interfaceIndexAlternate has IP 
 $gateway=(Get-NetIPConfiguration | select-object -first 1).IPv4DefaultGateway.NextHop
 write-host "default gateway is $gateway"
 
-# make IP address static
-# must remove first, then add new
-Remove-NetIPAddress -InterfaceIndex $interfaceIndex -Confirm:$false
-New-NetIPAddress –IPAddress $ipAddress -DefaultGateway $gateway -PrefixLength $prefixLen -InterfaceIndex $interfaceIndex
 
-write-host "===NEW INFO======================================"
-Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias Ethernet
+$prefixOrigin=(Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias Ethernet).PrefixOrigin
+if ($prefixOrigin -eq "dhcp") {
+
+  # make IP address static
+  # must remove first, then add new
+  Remove-NetIPAddress -InterfaceIndex $interfaceIndex -Confirm:$false
+  New-NetIPAddress –IPAddress $ipAddress -DefaultGateway $gateway -PrefixLength $prefixLen -InterfaceIndex $interfaceIndex
+  
+  write-host "===NEW INFO======================================"
+  Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias Ethernet
+
+}else {
+  write-host "SKIP prefix origin was not dhcp, it was $prefixOrigin so not going to make any changes"
+}
+
+
