@@ -76,8 +76,8 @@
            <PrivateProfile_DisableNotifications>true</PrivateProfile_DisableNotifications>
    </component>
 
-        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-OutOfBoxExperience" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-            <DoNotOpenInitialConfigurationTasksAtLogon>true</DoNotOpenInitialConfigurationTasksAtLogon>
+    <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-OutOfBoxExperience" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+           <DoNotOpenInitialConfigurationTasksAtLogon>true</DoNotOpenInitialConfigurationTasksAtLogon>
     </component>
 
 </settings>
@@ -116,10 +116,10 @@
                     <CommandLine>cmd.exe /c %SystemRoot%\System32\reg.exe ADD "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoAdminLogon /t REG_SZ /d 0 /f</CommandLine>
                     <Order>4</Order>
                     <Description>Disable AutoLogon for future reboots</Description>
-	        </SynchronousCommand>
+                </SynchronousCommand>
 		<SynchronousCommand wcm:action="add">
-                  <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v HideFileExt /t REG_DWORD /d 0 /f</CommandLine>
-                  <Order>4</Order>
+			<CommandLine>cmd.exe /c %SystemRoot%\System32\reg.exe ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\" /v HideFileExt /t REG_DWORD /d 0 /f</CommandLine>
+                  <Order>5</Order>
                   <Description>Show file extensions in Explorer</Description>
 	        </SynchronousCommand>
 	    </FirstLogonCommands>
