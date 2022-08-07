@@ -9,6 +9,10 @@ read-host 'About to add the AD-Domain-Services feature...press <ENTER> to begin'
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 start-sleep -seconds 3
 
+read-host 'About to add the in-Services feature...press <ENTER> to begin'
+Install-WindowsFeature -Name DNS -IncludeManagementTools
+start-sleep -seconds 3
+
 Import-Module ADDSDeployment
 
 $domainbios = 'FABIAN'
