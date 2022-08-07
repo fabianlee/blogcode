@@ -24,7 +24,7 @@ if ($prefixOrigin -eq "dhcp") {
   # make IP address static
   # must remove first, then add new
   Remove-NetIPAddress -InterfaceIndex $interfaceIndex -Confirm:$false
-  New-NetIPAddress –IPAddress $ipAddress -DefaultGateway $gateway -PrefixLength $prefixLen -InterfaceIndex $interfaceIndex
+  New-NetIPAddress -IPAddress $ipAddress -DefaultGateway $gateway -PrefixLength $prefixLen -InterfaceIndex $interfaceIndex
   
   write-host "===NEW INFO======================================"
   Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias Ethernet
