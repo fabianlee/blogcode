@@ -114,15 +114,10 @@
                     <Order>4</Order>
                     <Description>Disable AutoLogon for future reboots</Description>
 	        </SynchronousCommand>
-                <SynchronousCommand wcm:action="add">
-                    <CommandLine>cmd.exe /c %SystemRoot%\System32\reg.exe ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v InactivityTimeoutSecs /t REG_SZ /d 3600 /f</CommandLine>
-                    <Order>5</Order>
-                    <Description>Extend lock screen timeout</Description>
-	        </SynchronousCommand>
 		<SynchronousCommand wcm:action="add">
                   <CommandLine>cmd.exe /c netsh.exe advfirewall firewall set rule group="remote desktop" new enable=Yes</CommandLine>
                   <Description>RDP port open</Description>
-                  <Order>6</Order>
+                  <Order>5</Order>
                   <RequiresUserInput>false</RequiresUserInput>
                </SynchronousCommand>
 	    </FirstLogonCommands>
