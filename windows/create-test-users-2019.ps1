@@ -48,6 +48,10 @@ Add-ADGroupMember -Identity "Administrators" -Members $name
 $name="adfs1"
 create-ad-user $name $edomain "$password"
 
+# ldap1 - service account for ldap
+$name="ldap1"
+create-ad-user $name $edomain "$password"
+
 # engineer1 - test engineer
 $name="engineer1"
 create-ad-user $name $edomain "$password"
