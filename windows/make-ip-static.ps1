@@ -17,7 +17,7 @@ write-host "The interface index $interfaceIndex/$interfaceIndexAlternate has IP 
 $gateway=(Get-NetIPConfiguration | select-object -first 1).IPv4DefaultGateway.NextHop
 write-host "default gateway is $gateway"
 
-$dnsServer=(Get-DnsClientServerAddress -InterfaceIndex $interfaceIndex).ServerAdddresses
+$dnsServer=(Get-DnsClientServerAddress -InterfaceIndex $interfaceIndex).ServerAddresses
 write-host "DNS server is $dnsServer"
 
 
