@@ -35,7 +35,7 @@ $edomain="test.local"
 # jdoe - test account that can login directly at console, but not over RDP
 # has additional attributes that can be seen in ADSI
 $name="jdoe"
-New-ADUser -Type User -Name $name -GivenName John -Surname Doe -SamAccountName $name -EmailAddress "$name@$edomain" -UserPrincipalName "$name@$edomain" -AccountPassword (make-secure-pass $password) -Enabled $true -ChangePasswordAtLogon $false -OtherAttributes @{'title'="mytitle";'mail'="$name@$edomain"}
+New-ADUser -Type User -Name $name -GivenName John -Surname Doe -SamAccountName $name -EmailAddress "$name@$edomain" -UserPrincipalName "$name@$edomain" -AccountPassword (make-secure-pass $password) -Enabled $true -ChangePasswordAtLogon $false -OtherAttributes @{'title'="mytitle";'telephoneNumber'="(555)123-4567"}
 Add-ADGroupMember -Identity "Remote Desktop Users" -Members $name
 Add-ADGroupMember -Identity "Backup Operators" -Members $name
 
