@@ -32,9 +32,11 @@ $baseDir = 'c:\certs'
 # ignore error if already exists
 New-Item -Path $baseDir -ItemType Directory -Force | out-null
 
+# CA certificate into trusted roots (computer level)
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 
+# leaf certificate into personal (computer level)
 $primaryDnsName = $certCN.Split(',')[0]
 $safeName=([char[]]$primaryDnsName | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
-Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
+Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
