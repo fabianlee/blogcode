@@ -1,43 +1,63 @@
-param([String]$thepass="ThisIsMyP4ss!")
-
+#
+# Creates suites of AD test users
+# Run on the AD Domain Controller
+#
 # https://technig.com/create-user-account-using-powershell/
 # https://www.faqforge.com/powershell/create-ad-user-in-specific-ou/
 # https://devblogs.microsoft.com/scripting/powertip-create-an-active-directory-group-with-powershell/
 # https://www.wintips.org/fix-the-sign-in-method-you-are-trying-to-use-is-not-allowed/
 
+
 Import-Module activedirectory
+
+# takes user account name, suffixes with 123! and makes into secure password
+function make-secure-pass {
+  param([String]$name)
+  $securePass = ConvertTo-SecureString -string "${name}123!" -asplaintext -force
+  write-output $securePass
+}
+
+# create AD user
+function create-ad-user {
+  param([String]$name,[String]$edomain)
+  New-ADUser -Type User -Name $name -SamAccountName $name -SamAccountName $name -EmailAddress "$name@$edomain" -UserPrincipalName "$name@$edomain" -AccountPassword (make-secure-pass $name) -Enabled $true -ChangePasswordAtLogon $false
+}
+
 
 # create groups: engineers, managers
 New-ADGroup -Name engineers -GroupScope global
 New-ADGroup -Name managers -GroupScope global
 
-
-# create users
-$securePass = ConvertTo-SecureString -string $thepass -asplaintext -force
-
-# myadmin - extra admin account
-New-ADUser -Type User -Name "myadmin" -SamAccountName myadmin -UserPrincipalName myadmin@test.local -AccountPassword $securePass -Enabled $true -ChangePasswordAtLogon $false
-Add-ADGroupMember -Identity "Administrators" -Members myadmin
+# email domain
+$edomain="test.local"
 
 # jdoe - test account that can login directly at console, but not over RDP
-New-ADUser -Type User -Name "jdoe" -GivenName John -Surname Doe -SamAccountName jdoe -UserPrincipalName jdoe@test.local -AccountPassword $securePass -Enabled $true -ChangePasswordAtLogon $false -OtherAttributes @{'title'="engineer";'mail'="jdoe@test.com"}
-Add-ADGroupMember -Identity "Remote Desktop Users" -Members jdoe
-Add-ADGroupMember -Identity "Backup Operators" -Members jdoe
+# has additional attributes that can be seen in ADSI
+$name="jdoe"
+New-ADUser -Type User -Name $name -GivenName John -Surname Doe -SamAccountName $name -EmailAddress "$name@$edomain" -UserPrincipalName "$name@$edomain" -AccountPassword (make-secure-pass $name) -Enabled $true -ChangePasswordAtLogon $false -OtherAttributes @{'title'="mytitle";'foo'="bar"}
+Add-ADGroupMember -Identity "Remote Desktop Users" -Members $name
+Add-ADGroupMember -Identity "Backup Operators" -Members $name
+
+# myadmin - extra admin account
+$name="myadmin"
+create-ad-user $name $edomain
+Add-ADGroupMember -Identity "Administrators" -Members $name
 
 # adfs1 - service account for ADFS
-New-ADUser -Type User -Name "adfs1" -SamAccountName adfs1 -UserPrincipalName adfs1@test.local -AccountPassword $securePass -Enabled $true -ChangePasswordAtLogon $false
+$name="adfs1"
+create-ad-user $name $edomain
 
 # engineer1 - test engineer
 $name="engineer1"
-New-ADUser -Type User -Name $name -SamAccountName $name -UserPrincipalName "$name@test.local" -AccountPassword $securePass -Enabled $true -ChangePasswordAtLogon $false
+create-ad-user $name $edomain
 Add-ADGroupMember -Identity "engineers" -Members $name
-# engineer2
+# engineer2 - another test engineer
 $name="engineer2"
-New-ADUser -Type User -Name $name -SamAccountName $name -UserPrincipalName "$name@test.local" -AccountPassword $securePass -Enabled $true -ChangePasswordAtLogon $false
+create-ad-user $name $edomain
 Add-ADGroupMember -Identity "engineers" -Members $name
 
 # manager1 - test manager
 $name="manager1"
-New-ADUser -Type User -Name $name -SamAccountName $name -UserPrincipalName "$name@test.local" -AccountPassword $securePass -Enabled $true -ChangePasswordAtLogon $false
+create-ad-user $name $edomain
 Add-ADGroupMember -Identity "managers" -Members $name
 
