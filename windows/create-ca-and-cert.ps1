@@ -25,7 +25,7 @@ param(
 
 if ( ! ( $rootCN -or $certCN ) ) {
   write-host "ERROR need to supply root and cert CN for certificate"
-  write-host "Example: myCA flee-dc1.fabian.lee 'flee-dc1.fabian.lee,flee-dc1.FABIAN.LEE,flee-adfs1.fabian.lee'"
+  write-host "Example: myCA 'flee-dc1.fabian.lee,flee-dc1.FABIAN.LEE,flee-adfs1.fabian.lee'"
   exit(1)
 }
 
