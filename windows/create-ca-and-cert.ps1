@@ -42,10 +42,10 @@ $params = @{
   HashAlgorithm = 'SHA256'
   KeyExportPolicy = 'Exportable'
   NotAfter = (Get-Date).AddYears(5)
-  CertStoreLocation = 'Cert:\LocalMachine\My'
+  CertStoreLocation = 'Cert:\LocalMachine\Root'
   KeyUsage = 'CertSign','CRLSign' #fixes invalid cert error
 }
-$rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$rootCN"} | Select -First 1
+$rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\Root' | Where-Object { $_.Subject -eq "CN=$rootCN"} | Select -First 1
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 
 if ($rootCA) {
