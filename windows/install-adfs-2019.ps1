@@ -31,4 +31,4 @@ Install-AdfsFarm `
 -FederationServiceName "win2k19-adfs1.$userDNSDomain" `
 -ServiceAccountCredential $serviceAccountCredential `
 -OverwriteConfiguration `
--Confirm $false
+-Confirm:$false
