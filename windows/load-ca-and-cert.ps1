@@ -40,8 +40,8 @@ $cred = New-Object System.Management.Automation.PSCredential("foo",$password)
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
 
-# this would import the cert, but we need the key from pfx
-#Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
+# CA root needs to be in 'My' but does not need pfx version, just the cert
+Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
 
 # if not provided any value, then stop
 if ( ! $certCN ) {

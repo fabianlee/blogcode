@@ -55,11 +55,14 @@ if ($rootCA) {
 }else {
   $rootCA = New-SelfSignedCertificate @params
 
-  # Extra step needed since self-signed cannot be directly shipped to trusted root CA store
-  # if you want to silence the cert warnings on other systems you'll need to import the rootCA.crt on them too
   Export-Certificate    -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
   Export-PfxCertificate -Cert $rootCA -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
-  Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
+
+  # cannot create cert in Root, so have to move it post-creation
+  Move-Item (Join-Path Cert:\LocalMachine\My $rootCA.Thumbprint) -Destination Cert:\LocalMachine\Root
+
+  # in order to create self-signed leaf certs, need CA cert in 'My'
+  Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
 }
 
 # ServerAuth key extension not necessary in Win2016, but it is with 2012
