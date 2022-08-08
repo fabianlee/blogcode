@@ -37,6 +37,12 @@ $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notco
 Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 
 # leaf certificate into personal (computer level)
+# using PFX with key and passphrase
 $primaryDnsName = $certCN.Split(',')[0]
+$password = ConvertTo-SecureString -string "$pfxPassword" -AsPlainText -force
+$cred = New-Object System.Management.Automation.PSCredential("foo",$password)
 $safeName=([char[]]$primaryDnsName | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
-Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
+Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
+
+# this would have imported the cert without key, BUT we need the key from the pfx
+#Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
