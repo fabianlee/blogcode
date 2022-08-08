@@ -36,16 +36,17 @@ New-Item -Path $baseDir -ItemType Directory -Force | out-null
 $password = ConvertTo-SecureString -string "$pfxPassword" -AsPlainText -force
 $cred = New-Object System.Management.Automation.PSCredential("foo",$password)
 
-# CA key+cert into trusted roots (computer level)
+# CA key+cert into trusted root (computer level)
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
 
-# CA root needs to be in 'My' but does not need pfx version, just the cert
-Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
+# CA key+cert into 'My' (computer level), only cert is not sufficient
+Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
 
 # if not provided any value, then stop
 if ( ! $certCN ) {
   write-host "SKIP any leaf cert processing"
+  exit(0)
 }
 
 # leaf certificate into personal (computer level)
