@@ -36,7 +36,7 @@ New-Item -Path $baseDir -ItemType Directory -Force | out-null
 $password = ConvertTo-SecureString -string "$pfxPassword" -AsPlainText -force
 $cred = New-Object System.Management.Automation.PSCredential("foo",$password)
 
-# CA certificate into trusted roots (computer level)
+# CA key+cert into trusted roots (computer level)
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
 

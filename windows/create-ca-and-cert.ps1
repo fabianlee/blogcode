@@ -42,8 +42,8 @@ $params = @{
   HashAlgorithm = 'SHA256'
   KeyExportPolicy = 'Exportable'
   NotAfter = (Get-Date).AddYears(5)
-  CertStoreLocation = 'Cert:\LocalMachine\My'
-  KeyUsage = 'CertSign','CRLSign' #fixes invalid cert error
+  CertStoreLocation = 'Cert:\LocalMachine\My' # cannot create certs in Root
+  KeyUsage = 'CertSign','CRLSign' # fixes invalid cert error
 }
 $rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\Root' | Where-Object { $_.Subject -eq "CN=$rootCN"} | Select -First 1
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
@@ -58,11 +58,10 @@ if ($rootCA) {
   Export-Certificate    -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
   Export-PfxCertificate -Cert $rootCA -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
 
-  # cannot create cert in Root, so have to move it post-creation
-  Move-Item (Join-Path Cert:\LocalMachine\My $rootCA.Thumbprint) -Destination Cert:\LocalMachine\Root
-
-  # in order to create self-signed leaf certs, need CA cert in 'My'
-  Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.crt"
+  # in order to create self-signed leaf certs, need CA cert+key in 'Root'
+  $password = ConvertTo-SecureString -string "$pfxPassword" -AsPlainText -force
+  $cred = New-Object System.Management.Automation.PSCredential("foo",$password)
+  Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable  
 }
 
 # ServerAuth key extension not necessary in Win2016, but it is with 2012
