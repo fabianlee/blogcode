@@ -13,7 +13,7 @@ $userDNSDomain="$env:USERDNSDOMAIN"
 # instead, construct PSCredential
 $password = ConvertTo-SecureString -string "ThisIsMyP4ss!" -AsPlainText -force
 $installationCredential = New-Object System.Management.Automation.PSCredential("$theDomain\Administrator",$password)
-$serviceAccountCredential = New-Object System.Management.Automation.PSCredential("$theDomain\adfs1",$password)
+$serviceAccountCredential = New-Object System.Management.Automation.PSCredential("$theDomain\Administrator",$password) # try 'adfs1' later
 
 $leafThumbprint=(get-ChildItem -Path 'Cert:\LocalMachine\My' | where-object { $_.Subject -like 'CN=win2k19-adfs1*' }).Thumbprint
 write-host "leafThumbprint is $leafThumbprint"
