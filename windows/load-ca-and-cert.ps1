@@ -36,6 +36,11 @@ New-Item -Path $baseDir -ItemType Directory -Force | out-null
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 
+# if not provided any value, then stop
+if ( ! $certCN ) {
+  write-host "SKIP any leaf cert processing"
+}
+
 # leaf certificate into personal (computer level)
 # using PFX with key and passphrase
 $primaryDnsName = $certCN.Split(',')[0]

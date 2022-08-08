@@ -50,13 +50,15 @@ $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notco
 
 if ($rootCA) {
   write-host "root CA already created 'CN=$rootCN' thumbprint $($rootCA.Thumbprint)"
-  Export-Certificate -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
+  Export-Certificate    -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
+  Export-PfxCertificate -Cert $rootCA -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
 }else {
   $rootCA = New-SelfSignedCertificate @params
 
   # Extra step needed since self-signed cannot be directly shipped to trusted root CA store
   # if you want to silence the cert warnings on other systems you'll need to import the rootCA.crt on them too
-  Export-Certificate -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
+  Export-Certificate    -Cert $rootCA -FilePath "$baseDir\$safeName.crt"
+  Export-PfxCertificate -Cert $rootCA -FilePath "$baseDir\$safeName.pfx" -Password (ConvertTo-SecureString -AsPlainText "$pfxPassword" -Force)
   Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 }
 
@@ -75,7 +77,7 @@ $params = @{
 }
 $theCert = Get-ChildItem -Path 'Cert:\LocalMachine\My' | Where-Object { $_.Subject -eq "CN=$primaryDnsName" } | Select -First 1
 if ($theCert) {
-  write-host "certificate $primryDnsName already created thumbprint $($theCert.Thumbprint)"
+  write-host "certificate $primaryDnsName already created thumbprint $($theCert.Thumbprint)"
 }else {
   $theCert = New-SelfSignedCertificate @params
 }
@@ -96,4 +98,4 @@ Export-PfxCertificate -Cert $theCert -FilePath "$baseDir\$safeName.pfx" -Passwor
 # export server private key to pem format
 #openssl pkcs12 -in <cert>.pfx -nocerts -nodes -out <cert>.pem
 # convert server certificate to pem format
-#openssl x509 -inform DER -in <cert>.crt -out <cert>.pem
+#openssl x509 -inform DER -in <cert>.crt-out <cert>.pem
