@@ -32,9 +32,16 @@ $baseDir = 'c:\certs'
 # ignore error if already exists
 New-Item -Path $baseDir -ItemType Directory -Force | out-null
 
+# setup pfx private key password
+$password = ConvertTo-SecureString -string "$pfxPassword" -AsPlainText -force
+$cred = New-Object System.Management.Automation.PSCredential("foo",$password)
+
 # CA certificate into trusted roots (computer level)
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
-Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
+Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
+
+# this would import the cert, but we need the key from pfx
+#Import-Certificate -CertStoreLocation 'Cert:\LocalMachine\Root' -FilePath "$baseDir\$safeName.crt"
 
 # if not provided any value, then stop
 if ( ! $certCN ) {
@@ -44,8 +51,6 @@ if ( ! $certCN ) {
 # leaf certificate into personal (computer level)
 # using PFX with key and passphrase
 $primaryDnsName = $certCN.Split(',')[0]
-$password = ConvertTo-SecureString -string "$pfxPassword" -AsPlainText -force
-$cred = New-Object System.Management.Automation.PSCredential("foo",$password)
 $safeName=([char[]]$primaryDnsName | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
 Import-PfxCertificate -CertStoreLocation 'Cert:\LocalMachine\My' -FilePath "$baseDir\$safeName.pfx" -Password $cred.Password -Exportable
 
