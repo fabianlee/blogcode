@@ -4,7 +4,7 @@ Install-windowsfeature adfs-federation -IncludeManagementTools
 Import-Module ADFS
 
 $theDomain="$env:USERDOMAIN"
-$userDNSDomain="$env:USERDNSDOMAIN"
+$userDNSDomain="$env:USERDNSDOMAIN".ToLower()
 
 # do NOT prompt manually
 #$installationCredential = Get-Credential -Message "Enter credentials of user to perform config"
