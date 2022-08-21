@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-21T13:03:48.099Z" agent="5.0 (X11)" etag="k-jKEyCeMPxqz9qec2yt" version="17.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-08-21T15:04:47.629Z" agent="5.0 (X11)" etag="eel7eQLRMcL2RgokFpP2" version="17.4.0" type="github">
   <diagram id="ELBJaecDyFUATaK4MYXZ" name="Page-1">
     <mxGraphModel dx="935" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -43,17 +43,17 @@
         <mxCell id="dYzwd8fi6cYSQRCEDAko-17" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="240" y="441" width="90" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-18" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Resource Owner&lt;/font&gt;&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="134" y="40" width="130" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-18" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Resource Owner&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;(user)&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="146" y="30" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-19" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Client Application&lt;/font&gt;&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="320" y="40" width="130" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-19" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Client Application&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;(web app)&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="317" y="30" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-20" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Authetication Server&lt;/font&gt;&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="500" y="40" width="150" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-20" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Authentication Server&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;(ADFS)&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="488" y="30" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-21" value="&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Resource Server&lt;/font&gt;&lt;/b&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="675" y="40" width="130" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-21" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Resource Server&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;(microservice)&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="681" y="30" width="130" height="40" as="geometry" />
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-22" value="" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#E6E6E6;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="207" y="134" width="20" height="400" as="geometry" />
@@ -78,6 +78,24 @@
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-27" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="230" y="172" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-32" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="391" y="211" as="sourcePoint" />
+            <mxPoint x="481" y="211" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-33" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="481" y="220" as="sourcePoint" />
+            <mxPoint x="391" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-34" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="391" y="192" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-35" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="391" y="224" width="90" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
