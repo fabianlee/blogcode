@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-08-21T15:04:47.629Z" agent="5.0 (X11)" etag="eel7eQLRMcL2RgokFpP2" version="17.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-08-21T15:42:23.733Z" agent="5.0 (X11)" etag="ZcuayY-EbbcQ-FwyZsvw" version="17.4.0" type="github">
   <diagram id="ELBJaecDyFUATaK4MYXZ" name="Page-1">
     <mxGraphModel dx="935" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -28,21 +28,6 @@
         <mxCell id="dYzwd8fi6cYSQRCEDAko-12" value="" style="sketch=0;aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#505050;shape=mxgraph.mscae.enterprise.application_server2" vertex="1" parent="1">
           <mxGeometry x="730" y="70" width="51.6" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-15" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="240" y="460" as="sourcePoint" />
-            <mxPoint x="330" y="460" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-16" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="330" y="469" as="sourcePoint" />
-            <mxPoint x="240" y="469" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-17" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="240" y="441" width="90" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-18" value="&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;Resource Owner&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font style=&quot;font-size: 14px&quot;&gt;(user)&lt;br&gt;&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="146" y="30" width="130" height="40" as="geometry" />
         </mxCell>
@@ -58,44 +43,107 @@
         <mxCell id="dYzwd8fi6cYSQRCEDAko-22" value="" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#E6E6E6;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="207" y="134" width="20" height="400" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-23" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="240" y="473" width="90" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-24" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="230" y="159" as="sourcePoint" />
-            <mxPoint x="320" y="159" as="targetPoint" />
+            <mxPoint x="228" y="183" as="sourcePoint" />
+            <mxPoint x="370" y="183" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-25" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="320" y="168" as="sourcePoint" />
-            <mxPoint x="230" y="168" as="targetPoint" />
+            <mxPoint x="367" y="194" as="sourcePoint" />
+            <mxPoint x="227" y="194" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-26" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="230" y="140" width="90" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-26" value="Unauthenticated request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="221" y="162" width="150" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-27" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="230" y="172" width="90" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-27" value="Login link or redirection" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="225" y="198" width="140" height="20" as="geometry" />
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-32" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="391" y="211" as="sourcePoint" />
-            <mxPoint x="481" y="211" as="targetPoint" />
+            <mxPoint x="225" y="262" as="sourcePoint" />
+            <mxPoint x="557" y="262" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-33" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="481" y="220" as="sourcePoint" />
-            <mxPoint x="391" y="220" as="targetPoint" />
+            <mxPoint x="560" y="306" as="sourcePoint" />
+            <mxPoint x="230" y="306" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-34" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="391" y="192" width="90" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-34" value="&lt;div align=&quot;left&quot;&gt;Begin ADFS OAuth2 login&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;GET /adfs/oauth2/authorize (client_id, redirect_uri, scope)&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="236" y="232" width="320" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-35" value="Authz request" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="391" y="224" width="90" height="20" as="geometry" />
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-35" value="&lt;div align=&quot;left&quot;&gt;ADFS user login&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;POST /login/oauth2/code/adfs&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="238" y="276" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-39" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="229" y="317" as="sourcePoint" />
+            <mxPoint x="371" y="317" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-40" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="561" y="356" as="sourcePoint" />
+            <mxPoint x="231" y="356" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-41" value="GET /login/oauth2/code/adfs (code)" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="228" y="333" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-42" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="230" y="367" as="sourcePoint" />
+            <mxPoint x="372" y="367" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-43" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="398" y="411" as="sourcePoint" />
+            <mxPoint x="560" y="411" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-44" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="554" y="422" as="sourcePoint" />
+            <mxPoint x="391" y="422" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-45" value="&lt;div&gt;POST /adfs/oauth2/token&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="402.5" y="391" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-46" value="Login link or redirection" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="402.5" y="429" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-47" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="398" y="477" as="sourcePoint" />
+            <mxPoint x="560" y="477" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-48" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="554" y="488" as="sourcePoint" />
+            <mxPoint x="391" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-49" value="&lt;div&gt;GET /adfs/discovery/keys&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="402.5" y="457" width="150" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-50" value="Login link or redirection" style="text;html=1;resizable=0;autosize=1;align=center;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="402.5" y="495" width="140" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-51" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="227" y="549" as="sourcePoint" />
+            <mxPoint x="740" y="549" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-52" value="&lt;div align=&quot;left&quot;&gt;Use access token&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&quot;Authentication: Bearer &amp;lt;jwtToken&amp;gt;&quot;&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontStyle=0" vertex="1" parent="1">
+          <mxGeometry x="238" y="519" width="210" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
