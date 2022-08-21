@@ -35,8 +35,8 @@ if (Get-AdfsWebApiApplication -ApplicationGroupIdentifier $ClientRoleIdentifier)
   Add-AdfsWebApiApplication -ApplicationGroupIdentifier $ClientRoleIdentifier  -Name "App Web API" -Identifier $identifier -AccessControlPolicyName "Permit everyone"
 }  
 
-# allow scope to be used in claims output
-Set-AdfsClaimDescription -ShortName scp -TargetShortName scp -IsAccepted $false -IsOffered $true
+# allow scope to be used in claims output (not necessary for our claim rules)
+#Set-AdfsClaimDescription -ShortName scp -TargetShortName scp -IsAccepted $false -IsOffered $true
 
 # application specific scopes
 if (!(Get-AdfsScopeDescription -name api_delete)) {
