@@ -1,0 +1,18 @@
+# patch for quickstart keycloak deployment so we have extra files mounted
+spec:
+  template:
+    spec:
+      volumes:
+      - name: keycloak-hookvolume
+        configMap:
+          name: keycloak-configmap
+          defaultMode: 0755
+      containers:
+      - name: keycloak
+        volumeMounts:
+          - mountPath: /opt/keycloak/bin/poststart.sh
+            subPath: poststart.sh
+            name: keycloak-hookvolume
+          - mountPath: /tmp/myclient.exported.json
+            subPath: myclient.exported.json
+            name: keycloak-hookvolume

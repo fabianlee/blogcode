@@ -32,6 +32,14 @@ spec:
       labels:
         app: keycloak
     spec:
+
+      # inserted
+#      volumes:
+#      - name: keycloak-hookvolume
+#        configMap:
+#          name: keycloak-configmap
+#          defaultMode: 0755
+
       containers:
       - name: keycloak
         image: quay.io/keycloak/keycloak:19.0.1
@@ -50,3 +58,11 @@ spec:
           httpGet:
             path: /realms/master
             port: 8080
+        # inserted
+#        volumeMounts:
+#          - mountPath: /opt/keycloak/bin/poststart.sh
+#            subPath: poststart.sh
+#            name: keycloak-hookvolume
+#          - mountPath: /tmp/myclient.exported.json
+#            subPath: myclient.exported.json
+#            name: keycloak-hookvolume

@@ -1,0 +1,26 @@
+# keycloak-subdomain-ingress.yaml
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: keycloak
+  name: keycloak
+spec:
+  rules:
+  - host: keycloak.kubeadm.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: keycloak
+            port:
+              number: 8080
+  tls:
+  - hosts:
+    - keycloak.kubeadm.local
+    secretName: tls-credential
