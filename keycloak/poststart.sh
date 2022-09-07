@@ -1,8 +1,19 @@
 #!/bin/bash
 
-# default 
-sleepSeconds="${1:-90}"
-echo "going to sleep for $sleepSeconds"
+# first wait for port 8080 to be ready
+port_ready=0
+while [[ $port_ready -eq 0 ]]; do
+  curl --retry 0 http://localhost:8080/realms/master
+  if [ $? -eq 0 ]; then
+    echo "port 8080 is now ready"
+    port_ready=1
+  fi
+  echo "waiting another 5 seconds for port 8080 to be ready..."
+  sleep 5
+done
+
+sleepSeconds="${1:-30}"
+echo "going to wait for initialization/stabilization of server, sleeping for $sleepSeconds"
 sleep $sleepSeconds
 
 cd /opt/keycloak/bin
