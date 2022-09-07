@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# default 
+sleepSeconds="${1:-90}"
+echo "going to sleep for $sleepSeconds"
+sleep $sleepSeconds
+
 cd /opt/keycloak/bin
 
 # login

@@ -9,6 +9,11 @@ spec:
           defaultMode: 0755
       containers:
       - name: keycloak
+        lifecycle:
+          postStart:
+            exec:
+              # lifecycle hook called right after container created, bash script has built-in delay
+              command: ["/bin/bash","-c","cd /opt/keycloak/bin; ./poststart.sh > /tmp/poststart.log"]
         volumeMounts:
           - mountPath: /opt/keycloak/bin/poststart.sh
             subPath: poststart.sh
