@@ -27,6 +27,11 @@ cd /opt/keycloak/bin
 # create group
 ./kcadm.sh create groups -r myrealm -s name=mygroup
 
+# disable 'rsa-enc-generated' key for realm to avoid JWKS 'RSA-OAEP' key types which jwt module cannot parse
+component_id=$(./kcadm.sh get components -r myrealm -q name=rsa-enc-generated --fields id --format csv --noquotes)
+./kcadm.sh update components/$component_id -r myrealm -s 'config.active=["false"]'
+./kcadm.sh update components/$component_id -r myrealm -s 'config.enabled=["false"]'
+
 # creates user and set credentials
 ./kcadm.sh create users -r myrealm -s username=myuser -s enabled=true -s emailVerified=true -s email="first.last@kubeadm.local" -s firstName=first -s lastName=last
 ./kcadm.sh set-password -r myrealm --username myuser --new-password Password1! --temporary=false
@@ -50,5 +55,5 @@ outfile=/tmp/keycloak.properties
 touch $outfile
 chmod 666 $outfile
 echo "realm=myrealm" >> $outfile
-echo "clientid=$clientid" >> $outfile
+echo "clientid=myclient" >> $outfile
 echo "clientsecret=$clientsecret" >> $outfile
