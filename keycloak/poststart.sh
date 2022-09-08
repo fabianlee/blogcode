@@ -23,7 +23,11 @@ function create_user() {
   
   # fetch user and group id
   userid=$(./kcadm.sh get users -r myrealm -q username=$username --fields id --format csv --noquotes)
-  groupid=$(./kcadm.sh get groups -r myrealm -q name=$group --fields id --format csv --noquotes)
+
+  # known issue where group query does not work
+  # https://github.com/keycloak/keycloak-documentation/issues/1359
+  #groupid=$(./kcadm.sh get groups -r myrealm -q name=$group --fields id --format csv --noquotes)
+  groupid=$(./kcadm.sh get groups -r myrealm --noquotes --format csv | grep ",$group" | cut -d, -f1)
   
   # no group membership yet, but add
   ./kcadm.sh update users/$userid/groups/$groupid -r myrealm -s realm=myrealm -s userId=$userid -s groupId=$groupid -n
@@ -72,7 +76,7 @@ create_user engineer1 engineers engineer1@kubeadm.local
 create_user engineer2 engineers engineer2@kubeadm.local
 create_user manager1 managers manager1@kubeadm.local
 
-# create client from json placed unto container (secret generated)
+# create client from json placed unto container (secret will be generated upon import)
 ./kcadm.sh create clients -r myrealm -f /tmp/myclient.exported.json
 
 # get secret for 'myclient' that was just generated upon import
