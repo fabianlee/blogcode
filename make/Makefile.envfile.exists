@@ -1,0 +1,42 @@
+# Example make file showing how env var and file existence
+# can be tested using make constructs
+#
+# This can be used to set values conditionally, 
+# or preference for env var versus defaults
+#
+# run with neither env var or file existing:
+#   make -f Makefile.envfile.exists
+#
+# run with env var existing, but not file it points to:
+#   MY_FILE=fakefile.txt make -f Makefile.envfile.exists
+#
+# run with env var existing, and also file it points to
+#   echo "test me" >> /tmp/tempfile
+#   MY_FILE=/tmp/tempfile make -f Makefile.envfile.exists
+
+ENV_VARS := -e FOO=bar -e name=me
+
+# test for env var existence
+ifeq ($(origin MY_FILE),undefined)
+  ENV_VAR_EXISTS = 0
+else
+  ENV_VAR_EXISTS = 1
+endif
+
+# test for file existence
+ifneq ("$(wildcard $(MY_FILE))","")
+  FILE_EXISTS = 1
+else
+  FILE_EXISTS = 0
+endif
+
+# if file content exists, append to current var
+ifeq ($(FILE_EXISTS),1)
+  ENV_VARS += -e FILE_CONTENTS="$(shell cat $$MY_FILE | sed 's/\n/ /' )"
+endif
+
+
+init:
+	@echo "MY_FILE env var exists? $(ENV_VAR_EXISTS)"
+	@echo "MY_FILE file content exists? $(FILE_EXISTS)"
+	true $(ENV_VARS)
