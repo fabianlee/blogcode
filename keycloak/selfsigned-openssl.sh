@@ -3,7 +3,8 @@
 FQDN="$1"
 [ -n "$FQDN" ] || { echo "ERROR provide FQDN for self-signed cert"; exit 3; }
 
-sudo apt-get install libssl1.0.0 -y
+# older was libssl1.0.0
+sudo apt install libssl1.1 -y
 
 echo -------------------
 echo FQDN is $FQDN
