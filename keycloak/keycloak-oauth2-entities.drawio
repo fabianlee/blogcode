@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-09-10T19:05:59.368Z" agent="5.0 (X11)" etag="7dyUWw93bNOJ8klkZHI8" version="20.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-09-11T02:21:24.076Z" agent="5.0 (X11)" etag="Xy9UqSr15YAVJDNmgwmd" version="20.3.0" type="github">
   <diagram id="ELBJaecDyFUATaK4MYXZ" name="Page-1">
     <mxGraphModel dx="935" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -63,26 +63,26 @@
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-32" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="225" y="270" as="sourcePoint" />
-            <mxPoint x="557" y="270" as="targetPoint" />
+            <mxPoint x="225" y="264" as="sourcePoint" />
+            <mxPoint x="557" y="264" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-33" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="560" y="314" as="sourcePoint" />
-            <mxPoint x="230" y="314" as="targetPoint" />
+            <mxPoint x="560" y="320" as="sourcePoint" />
+            <mxPoint x="230" y="320" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-34" value="&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Begin OIDC login&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;GET /realms/&amp;lt;realm&amp;gt;/protocol/openid-connect/auth (client_id, redirect_uri, scope)&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontStyle=0" parent="1" vertex="1">
-          <mxGeometry x="231" y="227" width="460" height="40" as="geometry" />
+          <mxGeometry x="231" y="228" width="460" height="40" as="geometry" />
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-35" value="&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Auth Server provides code&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;GET /oidc_callback&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="232" y="279" width="180" height="40" as="geometry" />
+          <mxGeometry x="232" y="285" width="180" height="40" as="geometry" />
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-39" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="229" y="325" as="sourcePoint" />
-            <mxPoint x="371" y="325" as="targetPoint" />
+            <mxPoint x="229" y="331" as="sourcePoint" />
+            <mxPoint x="371" y="331" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-43" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
@@ -97,7 +97,7 @@
             <mxPoint x="391" y="393" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="dYzwd8fi6cYSQRCEDAko-45" value="&lt;div&gt;&lt;b&gt;Exchange code for ID/Access Token&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;POST /realms/&amp;lt;realm&amp;gt;/protocol/openid-connect/token (code)&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
+        <mxCell id="dYzwd8fi6cYSQRCEDAko-45" value="&lt;div&gt;&lt;b&gt;Opaquely exchange code for ID/Access Token&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;POST /realms/&amp;lt;realm&amp;gt;/protocol/openid-connect/token (code)&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="397.5" y="348" width="350" height="40" as="geometry" />
         </mxCell>
         <mxCell id="dYzwd8fi6cYSQRCEDAko-46" value="ID/Access Token JWT" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
@@ -112,10 +112,10 @@
         <mxCell id="dYzwd8fi6cYSQRCEDAko-52" value="&lt;div align=&quot;left&quot;&gt;&lt;b&gt;Make calls to protected services&lt;/b&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Header &quot;Authentication: Bearer &amp;lt;AccessToken&amp;gt;&quot;&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;fontStyle=0" parent="1" vertex="1">
           <mxGeometry x="233" y="428" width="280" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="LTC7T7H0LT_NFuuIO1uc-2" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn3.iconfinder.com/data/icons/arrows-set-12/512/reset-128.png;fontColor=#808080;" vertex="1" parent="1">
+        <mxCell id="LTC7T7H0LT_NFuuIO1uc-2" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn3.iconfinder.com/data/icons/arrows-set-12/512/reset-128.png;fontColor=#808080;" parent="1" vertex="1">
           <mxGeometry x="574" y="276" width="27" height="27" as="geometry" />
         </mxCell>
-        <mxCell id="LTC7T7H0LT_NFuuIO1uc-3" value="&lt;div&gt;Keycloak&lt;/div&gt;&lt;div&gt;login process&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" vertex="1" parent="1">
+        <mxCell id="LTC7T7H0LT_NFuuIO1uc-3" value="&lt;div&gt;Keycloak&lt;/div&gt;&lt;div&gt;login process&lt;br&gt;&lt;/div&gt;" style="text;html=1;resizable=0;autosize=1;align=left;verticalAlign=middle;points=[];fillColor=none;strokeColor=none;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="600" y="272" width="90" height="40" as="geometry" />
         </mxCell>
       </root>
