@@ -1,0 +1,25 @@
+#
+# Playbook that shows how a timestamp can be generated (for logs, archives, etc)
+#
+# ansible-playbook playbook-timestamp.yml -l localhost
+#
+# blog: 
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: yes # if 'no', then ansible_date_time would not be populated
+  connection: local
+
+  tasks:
+
+    - set_fact:
+        facts_timestamp: "{{ ansible_date_time.iso8601_basic_short }}" # requires gather_facts
+        pipe_timestamp: "{{ lookup('pipe', 'date +%Y%m%dT%H%M%S') }}"
+
+    - debug:
+        msg: "from facts: {{ facts_timestamp }}"
+    - debug:
+        msg: "from pipe: {{pipe_timestamp}}"
+
+
