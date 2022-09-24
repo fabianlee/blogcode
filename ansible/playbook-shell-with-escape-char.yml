@@ -1,0 +1,84 @@
+#
+# Playbook that shows how to use a single quote inside a shell command
+#
+# ansible-playbook playbook-shell-with-escape-char.yml -l localhost
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  vars:
+    outfile: /tmp/ansibleshell.log
+    ansible_backslash_char: '\'
+
+  tasks:
+
+    # create empty file for this run
+    - shell:
+        cmd: truncate -s 0 {{outfile}}
+
+    - shell:
+        cmd: echo "Showing this {{ ansible_backslash_char }} evaluation by the shell" | tee -a {{outfile}}
+      register: out
+
+    - shell:
+        cmd: backslash=$(awk 'BEGIN{printf "%c", 92}'); echo "BEWARE debug output will make it appear the backslash is double-escaped, when in reality the $backslash is evaluated properly by the shell module" | tee -a {{outfile}}
+      register: out
+    - debug:
+        var: out
+
+    - shell:
+        cmd: cat {{outfile}}
+      register: out
+    - debug:
+        var: out.stdout_lines
+
+
+    #
+    # demonstrating how the backslash character does indeed work as intended
+    # kubectl needs a backslash in the jsonpath='{.data.tls\.crt'} expression
+    #
+
+    - name: Create secret simulating tls structure with dotted key name that needs backslash to pull using jsonpath
+      command: kubectl create secret generic my-secret -n default --from-literal=tls.crt=mycertHere --from-literal=tls.key=myprivateKeyHere
+      register: createsecret
+      failed_when: createsecret.rc!=0 and not ("already exists" in createsecret.stderr)
+
+
+    - name: backslash works without any outside quotes and double quotes inside
+      shell:
+        cmd: kubectl get secret my-secret -n default -o=jsonpath="{.data.tls\.crt}" | base64 -d
+      register: out
+    - debug:
+        var: out.stdout_lines
+
+    - name: backslash works without any outside quotes and single quotes inside
+      shell:
+        cmd: kubectl get secret my-secret -n default -o=jsonpath='{.data.tls\.crt}' | base64 -d
+      register: out
+    - debug:
+        var: out.stdout_lines
+
+    - name: backslash works with outside double quotes and escaped backslash
+      shell:
+        cmd: "kubectl get secret my-secret -n default -o=jsonpath='{.data.tls\\.crt}' | base64 -d"
+      register: out
+    - debug:
+        var: out.stdout_lines
+
+    - name: backslash works with outside single quotes 
+      shell:
+        cmd: 'kubectl get secret my-secret -n default -o=jsonpath=''{.data.tls\.crt}'' | base64 -d'
+      register: out
+    - debug:
+        var: out.stdout_lines
+
+    - name: backslash character as runtime evaluation
+      shell:
+        cmd: backslash=$(awk 'BEGIN{printf "%c", 92}'); kubectl get secret my-secret -n default -o=jsonpath="{.data.tls${backslash}.crt}" | base64 -d
+      register: out
+    - debug:
+        var: out.stdout_lines
+
