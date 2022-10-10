@@ -1,0 +1,17 @@
+# illustrates in-memory cache of playbook to pass variables from one host to another
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html#caching-facts
+#
+# ansible-playbook playbook-cached-facts.yaml
+
+# save IP address of ansible orchestrator
+- hosts: localhost
+  connection: local
+  gather_facts: yes
+  tasks:
+    - set_fact:
+        hostvm_ip: "{{ ansible_default_ipv4.address }}"
+    - debug: msg="The localhost default IP is {{hostvm_ip}}"
+
+- hosts: all
+  tasks:
+    - debug: msg="The ansible orchestrator default IP was cached in memory as {{hostvars['localhost']['hostvm_ip']}}"
