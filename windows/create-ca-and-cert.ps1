@@ -44,6 +44,7 @@ $params = @{
   NotAfter = (Get-Date).AddYears(5)
   CertStoreLocation = 'Cert:\LocalMachine\My' # cannot create certs in Root
   KeyUsage = 'CertSign','CRLSign' # fixes invalid cert error
+  TextExtension = @("2.5.29.19={text}CA=true&pathLength=2")
 }
 $rootCA = Get-ChildItem -Path 'Cert:\LocalMachine\Root' | Where-Object { $_.Subject -eq "CN=$rootCN"} | Select -First 1
 $safeName=([char[]]$rootCN | where { [IO.Path]::GetinvalidFileNameChars() -notcontains $_ }) -join ''
