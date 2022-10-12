@@ -43,7 +43,7 @@ if (!(Get-AdfsScopeDescription -name api_delete)) {
   Add-AdfsScopeDescription -name api_delete -description "make DELETE calls from API"
 }  
 
-#Grant the ADFS Applciation the allatclaims and openid permissions
+#Grant the ADFS Application the allatclaims and openid permissions
 if ( (Get-AdfsApplicationPermission -ClientRoleIdentifier $identifier) -and (Get-AdfsApplicationPermission -ClientRoleIdentifier $identifier) ) {
   write-host "SKIP found Get-AdfsApplicationPermission for both client/server identifier '$identifier'"
   Set-AdfsApplicationPermission -TargetClientRoleIdentifier $identifier -TargetServerRoleIdentifier $identifier -ScopeNames @('allatclaims', 'openid', 'api_delete')
