@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # validates if key and cert are matched
+# can also check against custom CA
 #
 
 [[ -n "$1" && -n "$2" ]] || { echo "Usage: keyFile certFile [CACertFile]"; exit 1; }
