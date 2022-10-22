@@ -19,6 +19,7 @@ if [[ $keyperms -gt 600 ]]; then
   exit 3
 fi
 
+# intentionally not using '-e' which echoes .pub file when it exists!
 keyfingerprint=$(ssh-keygen -y -f $sshkeyfile | ssh-keygen -lf -)
 echo "key: $keyfingerprint"
 
