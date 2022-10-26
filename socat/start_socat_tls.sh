@@ -25,3 +25,7 @@ chmod 644 $FQDN.crt
 
 # shows HTTP protocol
 socat -v -ls OPENSSL-LISTEN:${PORT},reuseaddr,cert=${FQDN}.pem,verify=0,crlf,fork SYSTEM:"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; echo \"hello from $(hostname) at \$(date)\""
+
+
+# if we had wanted plain, insecure HTTP
+#socat -v -ls TCP-LISTEN:${PORT},reuseaddr,crlf,fork SYSTEM:"echo HTTP/1.0 200; echo Content-Type\: text/plain; echo; echo \"hello from $(hostname) at \$(date)\""
