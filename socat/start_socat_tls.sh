@@ -2,6 +2,8 @@
 #
 # uses socat to create HTTPS web server running on local port
 #
+# blog: https://fabianlee.org/2022/10/26/linux-socat-used-as-secure-https-web-server/
+#
 
 FQDN="${1:-mysocat.local}"
 PORT="${2:-9443}"

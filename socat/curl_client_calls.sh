@@ -2,6 +2,8 @@
 #
 # uses curl to test socat HTTPS web server
 #
+# blog: https://fabianlee.org/2022/10/26/linux-socat-used-as-secure-https-web-server/
+#
 
 [[ -x $(which curl) ]] || sudo apt install curl -y
 
