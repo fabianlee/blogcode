@@ -1,0 +1,32 @@
+[Unit]
+Description=Sleep service
+ConditionPathExists=/home/ubuntu/work/src/sleepservice/sleepservice
+After=network.target
+ 
+[Service]
+Type=simple
+User=sleepservice
+Group=sleepservice
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+WorkingDirectory=/home/ubuntu/work/src/sleepservice
+ExecStart=/home/ubuntu/work/src/sleepservice/sleepservice --name=foo
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/sleepservice
+ExecStartPre=/bin/chown syslog:adm /var/log/sleepservice
+ExecStartPre=/bin/chmod 755 /var/log/sleepservice
+# syslog feature deprecated
+# https://bugs.launchpad.net/cloud-init/+bug/1536964
+# https://www.freedesktop.org/wiki/Software/systemd/syslog/
+#StandardOutput=syslog
+#StandardError=syslog
+#SyslogIdentifier=sleepservice
+ 
+[Install]
+WantedBy=multi-user.target
