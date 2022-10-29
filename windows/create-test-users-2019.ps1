@@ -30,7 +30,7 @@ New-ADGroup -Name engineers -GroupScope global
 New-ADGroup -Name managers -GroupScope global
 
 # email domain
-$edomain="test.local"
+$edomain="fabian.lee"
 
 # jdoe - test account that can login directly at console, but not over RDP
 # has additional attributes that can be seen in ADSI
