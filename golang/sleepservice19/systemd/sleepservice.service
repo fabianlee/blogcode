@@ -21,12 +21,12 @@ PermissionsStartOnly=true
 ExecStartPre=/bin/mkdir -p /var/log/sleepservice
 ExecStartPre=/bin/chown syslog:adm /var/log/sleepservice
 ExecStartPre=/bin/chmod 755 /var/log/sleepservice
-# syslog feature deprecated
+# syslog forwarding feature deprecated
 # https://bugs.launchpad.net/cloud-init/+bug/1536964
 # https://www.freedesktop.org/wiki/Software/systemd/syslog/
 #StandardOutput=syslog
 #StandardError=syslog
-#SyslogIdentifier=sleepservice
+SyslogIdentifier=sleepservice
  
 [Install]
 WantedBy=multi-user.target
