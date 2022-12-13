@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Install 'glab' the GitLab official CLI
+#
 
 project="gitlab-org/cli"
 
