@@ -5,7 +5,7 @@ company:
       region: us-east
       tags:
       - linux
-      machineB:
+    machineB:
       region: us-central
       tags:
-      - linux
+      - windows
