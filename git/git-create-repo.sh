@@ -299,14 +299,27 @@ if [ -d "$fork_name" ]; then
 fi
 
 if [ "$git_provider" == "github" ]; then
-  gh repo fork $repository_name --fork-name $fork_name --clone
+
+  # fork wants 'owner/repo' syntax
+  if echo $repository_name | grep -q "/"; then
+    gh repo fork $repository_name --fork-name $fork_name --clone
+    if [ $? -ne 0 ]; then
+      echoRed "ERROR creating fork. If you got 'cannot be forked' note that github does not allow you to fork repo that you own."
+    fi
+  else
+    echoRed "SKIP github does not support the concept of forking a repo you own"
+  fi
+
 elif [ "$git_provider" == "gitlab" ]; then
+
+  # fork wants 'owner/repo' syntax
   if echo $repository_name | grep -q "/"; then
     glab repo fork $repository_name --name $fork_name --path $fork_name --clone --remote
   else
-    echo "no repo owner supplied, so using self: $username/repository_name"
+    echo "no repo owner supplied, so using self: $username/$repository_name"
     glab repo fork $username/$repository_name --name $fork_name --path $fork_name --clone --remote
   fi
+
 fi
 ;;
 
