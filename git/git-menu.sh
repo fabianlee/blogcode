@@ -449,21 +449,24 @@ function merge_pull_request_github() {
   [ -n "$origin_owner_repo" ] || { echoRed "ERROR need origin owner defined when merging PR"; return; }
 
   gh pr list --repo $origin_owner_repo
-  return
+  if [ $? -ne 0 ]; then
+    echoRed "ERROR trying to get pr list"
+    return
+  fi
 
-  if gh pr list | grep -q "no open"; then
+  if gh pr list --repo $origin_owner_repo | grep -q "no open"; then
     echoYellow "There were no github pull requests to show"
     return
   fi
   
   read -p "Squash and merge which pull request number? " to_merge
   if [ -n "$to_merge" ]; then
-    mr_status=$(gh pr view $to_merge --json closed -t "{{.closed}}")
+    mr_status=$(gh pr view $to_merge --repo $origin_owner_repo --json closed -t "{{.closed}}")
     if [ "$mr_status" == "false" ]; then
 
-      merge_branch=$(gh pr view $to_merge --json author,headRefName -t "{{.headRefName}}")
+      merge_branch=$(gh pr view $to_merge --repo $origin_owner_repo --json author,headRefName -t "{{.headRefName}}")
       echo "Going to merge $to_merge into branch $merge_branch"
-      gh pr merge -s $to_merge
+      gh pr merge --repo $origin_owner_repo -s $to_merge
 
       # after merge request, need to sync up local again
       saved_branch=$branch
