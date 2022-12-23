@@ -438,6 +438,7 @@ function create_pull_request_github() {
   msg="$1"
   datestr=$(date)
 
+  # not specifying --repo will cause 'No default remote repository has been set for this directory.'
   upstream_owner_repo=$(get_repo_remote "upstream")
   [ -n "$upstream_owner_repo" ] || { echoRed "ERROR need upstream owner defined when submitting PR"; return; }
 
@@ -445,6 +446,7 @@ function create_pull_request_github() {
 }
 
 function merge_pull_request_github() {
+  # not specifying --repo will cause 'No default remote repository has been set for this directory.'
   origin_owner_repo=$(get_repo_remote "origin")
   [ -n "$origin_owner_repo" ] || { echoRed "ERROR need origin owner defined when merging PR"; return; }
 
