@@ -257,10 +257,16 @@ function pull_from_upstream() {
   saved_branch=$branch
   git pull --all
 
+  # fetch all upstream (replaces need to fetch each branch)
+  git fetch upstream
+
   any_ahead=0
   for localbranch in "${branch_array[@]}"; do
     git checkout $localbranch && branch=$localbranch
-    git fetch upstream $localbranch
+
+    # not necessary, since all upstream was fetched earlier
+    #git fetch upstream $localbranch
+
     git merge upstream/$localbranch --no-edit
     if [ $? -eq 0 ]; then
       if git status | grep -q ahead; then
@@ -289,16 +295,23 @@ function pull_from_upstream() {
 function sync_from_origin() {
   saved_branch=$branch
 
+  # fetches all origin (replaces need to fetch each branch)
+  git fetch origin
+
   for localbranch in "${branch_array[@]}"; do
     git checkout $localbranch 2>/dev/null && branch=$localbranch
     if [ $? -eq 0 ]; then
-      git fetch origin $localbranch
+
+      #  not necessary to fetch branch since we started by fetching all
+      # git fetch origin $localbranch
+
       # we are just a fork, so favor the origin changes (avoids most sync conflicts)
       git merge -s recursive -Xtheirs origin/$localbranch --no-edit
       if [ $? -ne 0 ]; then
         echoRed "ERROR while trying to merge from origin/$localbranch"
         return
       fi
+
     fi
   done
 
