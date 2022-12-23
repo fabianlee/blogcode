@@ -303,11 +303,13 @@ if [ "$git_provider" == "github" ]; then
   # fork wants 'owner/repo' syntax
   if echo $repository_name | grep -q "/"; then
     gh repo fork $repository_name --fork-name $fork_name --clone
-    if [ $? -ne 0 ]; then
-      echoRed "ERROR creating fork. If you got 'cannot be forked' note that github does not allow you to fork repo that you own."
-    fi
   else
-    echoRed "SKIP github does not support the concept of forking a repo you own"
+    gh repo fork $username/$repository_name --fork-name $fork_name --clone
+  fi
+  if [ $? -ne 0 ]; then
+    echoRed "ERROR creating fork."
+    echo "If you got 'cannot be forked' note that github does not allow you to fork repo that you own."
+    echo "If you got a 404, then the source repo could not be found"
   fi
 
 elif [ "$git_provider" == "gitlab" ]; then
