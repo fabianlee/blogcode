@@ -437,11 +437,20 @@ function get_repo_remote() {
 function create_pull_request_github() {
   msg="$1"
   datestr=$(date)
-  gh pr create --title "$msg at $datestr" --base $branch --body ""
+
+  upstream_owner_repo=$(get_repo_remote "upstream")
+  [ -n "$upstream_owner_repo" ] || { echoRed "ERROR need upstream owner defined when submitting PR"; return; }
+
+  gh pr create --title "$msg at $datestr" --base $branch --repo $upstream_owner_repo --body ""
 }
 
 function merge_pull_request_github() {
-  gh pr list
+  origin_owner_repo=$(get_repo_remote "origin")
+  [ -n "$origin_owner_repo" ] || { echoRed "ERROR need origin owner defined when merging PR"; return; }
+
+  gh pr list --repo $origin_owner_repo
+  return
+
   if gh pr list | grep -q "no open"; then
     echoYellow "There were no github pull requests to show"
     return
