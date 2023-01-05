@@ -2,6 +2,8 @@
 #
 # Uses awk to pull content after Nth match
 #
+# blog: https://fabianlee.org/2023/01/05/bash-awk-to-extract-nth-match-from-file-based-on-line-separator/
+#
 
 # create multiline string
 read -r -d '' herecontent <<EOF
