@@ -671,7 +671,7 @@ mixed_ownership="self"
 if [ -n "$upstream_owner_repo" ]; then
   echo "upstream=$upstream_owner_repo"
   if [[ "$(dirname $upstream_owner_repo)" == "$(dirname $origin_owner_repo)" ]]; then
-    mixed_ownership="self/$(basename $upstream_owner_repo)"
+    mixed_ownership="self/$(basename $origin_owner_repo)"
   else
     mixed_ownership="$origin_owner_repo"
   fi 
