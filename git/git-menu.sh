@@ -255,7 +255,8 @@ function switch_branch() {
 
 function pull_from_upstream() {
   saved_branch=$branch
-  git pull --all
+  # no need to pull, we will fetch all then merge each branch
+  #git pull --all
 
   # fetch all upstream (replaces need to fetch each branch)
   git fetch upstream
