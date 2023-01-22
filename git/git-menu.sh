@@ -40,7 +40,7 @@ echo ""
 
 if [[ ($independent_branches -eq 1) && ("$primary_branch" != "$branch") ]]; then
   echo "pin       tag primary branch with 'pin-$branch'"
-  echo "promote   merge into branch '$branch' < 'pin-$branch'"
+  echo "promote   merge into branch '$branch' < 'pin-${parent_branch[$branch]}'"
 fi
 
 if [[ ($independent_branches -eq 0) && ("$primary_branch" != "$branch") ]]; then
