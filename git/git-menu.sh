@@ -267,6 +267,9 @@ function pull_from_upstream() {
     # not necessary, since all upstream was fetched earlier
     #git fetch upstream $localbranch
 
+    # we are just a fork, so favor the upstream changes (avoids most sync conflicts)
+    #git merge -s recursive -Xtheirs upstream/$localbranch --no-edit
+
     git merge upstream/$localbranch --no-edit
     if [ $? -eq 0 ]; then
       if git status | grep -q ahead; then
@@ -306,9 +309,7 @@ function sync_from_origin() {
       #  not necessary to fetch branch since we started by fetching all
       # git fetch origin $localbranch
 
-      # we are just a fork, so favor the origin changes (avoids most sync conflicts)
-      #git merge -s recursive -Xtheirs origin/$localbranch --no-edit
-
+      # instead of creating a merge node, do a rebase to get latest applied to central repo
       git pull -r --no-edit
       if [ $? -ne 0 ]; then
         echoRed "ERROR while trying to pull with rebase from $localbranch"
