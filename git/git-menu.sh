@@ -309,7 +309,7 @@ function sync_from_origin() {
       # we are just a fork, so favor the origin changes (avoids most sync conflicts)
       #git merge -s recursive -Xtheirs origin/$localbranch --no-edit
 
-      git pull -r origin/$localbranch --no-edit
+      git pull -r $localbranch --no-edit
       if [ $? -ne 0 ]; then
         echoRed "ERROR while trying to rebase from origin/$localbranch"
         return
