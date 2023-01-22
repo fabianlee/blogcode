@@ -503,6 +503,7 @@ function merge_pull_request_github() {
 
 function create_merge_request_gitlab() {
   msg="$1"
+  # with glab you do push first, then you create merge request
   # glab does not require unpushed commit to exist
 
   # get fully qualified 'owner/repo' name of remotes
