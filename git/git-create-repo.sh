@@ -1,6 +1,10 @@
 #!/bin/bash
 #
-# Create either github OR gitlb repo and create branch structure
+# Create either github OR gitlab repo and create branch structure
+#
+# Branches are treated either as:
+# 1. independent branches - each with their own environment files
+# 2. promotional branches - cascading changes from (main->dev->preprod->prod)
 #
 # Branch structure:
 # [main]    main.txt
@@ -8,9 +12,6 @@
 # [preprod] overlays/preprod/preprod.txt
 # [prod]    overlays/prod/prod.txt
 #
-# Branches are treated either as:
-# 1. independent branches - each with their own environment files
-# 2. promotional branches - cascading changes from (main->dev->preprod->prod)
 #
 
 GREEN='\033[0;32m'
@@ -70,10 +71,10 @@ fi
 function ensure_main_branch_exists() {
   if [ "$git_provider" == "github" ]; then
     # if 'main' does not exist, then create
-    git checkout main || git branch -M main
+    git checkout main 2>/dev/null || git branch -M main
   elif [ "$git_provider" == "gitlab" ]; then
     # if 'main' does not exist, then create
-    git checkout main || git branch -M main
+    git checkout main 2>/dev/null || git branch -M main
   fi
 }
 
