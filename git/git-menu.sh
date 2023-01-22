@@ -299,16 +299,19 @@ function sync_from_origin() {
   git fetch origin
 
   for localbranch in "${branch_array[@]}"; do
-    git checkout $localbranch 2>/dev/null && branch=$localbranch
+    git checkout $localbranch 2>/dev/null
     if [ $? -eq 0 ]; then
+      branch=$localbranch
 
       #  not necessary to fetch branch since we started by fetching all
       # git fetch origin $localbranch
 
       # we are just a fork, so favor the origin changes (avoids most sync conflicts)
-      git merge -s recursive -Xtheirs origin/$localbranch --no-edit
+      #git merge -s recursive -Xtheirs origin/$localbranch --no-edit
+
+      git pull -r origin/$localbranch --no-edit
       if [ $? -ne 0 ]; then
-        echoRed "ERROR while trying to merge from origin/$localbranch"
+        echoRed "ERROR while trying to rebase from origin/$localbranch"
         return
       fi
 
