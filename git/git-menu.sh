@@ -40,7 +40,7 @@ echo ""
 
 if [[ ($independent_branches -eq 1) && ("$primary_branch" != "$branch") ]]; then
   echo "pin       tag primary branch with 'pin-$branch'"
-  echo "promote   merge into branch '$branch' < 'pin-${parent_branch[$branch]}'"
+  echo "promote   merge into branch '$branch' < from tag 'pin-$branch'"
 fi
 
 if [[ ($independent_branches -eq 0) && ("$primary_branch" != "$branch") ]]; then
@@ -255,8 +255,6 @@ function switch_branch() {
 
 function pull_from_upstream() {
   saved_branch=$branch
-  # no need to pull, we will fetch all then merge each branch
-  #git pull --all
 
   # fetch all upstream (replaces need to fetch each branch)
   git fetch upstream
@@ -264,9 +262,6 @@ function pull_from_upstream() {
   any_ahead=0
   for localbranch in "${branch_array[@]}"; do
     git checkout $localbranch && branch=$localbranch
-
-    # not necessary, since all upstream was fetched earlier
-    #git fetch upstream $localbranch
 
     # we are just a fork, so favor the upstream changes (avoids most sync conflicts)
     #git merge -s recursive -Xtheirs upstream/$localbranch --no-edit
