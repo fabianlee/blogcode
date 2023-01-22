@@ -76,8 +76,6 @@ function ensure_main_branch_exists() {
     # if 'main' does not exist, then create
     git checkout main 2>/dev/null || git branch -M main
   fi
-  git branch -v
-  echo "===="
 }
 
 function populate_independent_branches() {
@@ -85,7 +83,7 @@ function populate_independent_branches() {
   ensure_main_branch_exists
  
   # main branch
-  git checkout main
+  git checkout main 2>/dev/null
   if [ ! -f "main.txt" ]; then
      echo "main value" > main.txt
      git add main.txt
@@ -128,7 +126,7 @@ function populate_promotional_branches() {
   ensure_main_branch_exists
  
   # main branch
-  git checkout main
+  git checkout main 2>/dev/null
   if [ ! -f ".gitbranches" ]; then
     cat <<EOF >.gitbranches
 main<
