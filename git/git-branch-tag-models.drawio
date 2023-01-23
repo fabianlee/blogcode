@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-01-23T15:01:37.634Z" agent="5.0 (X11; Ubuntu)" etag="P8fbRLhBETQN561TCR35" version="20.8.10" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-23T15:03:53.870Z" agent="5.0 (X11; Ubuntu)" etag="M2lrIthgcHOBYRzMavtw" version="20.8.10" type="github">
   <diagram name="Page-1" id="BfglhBFAaLgnUbkgtS8U">
     <mxGraphModel dx="1004" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -358,7 +358,7 @@
         <mxCell id="7XaKORpLVI9cMn0TTe21-20" value="NOTE: use tag on each release branch for explicit published state" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="149.5" y="80" width="250" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="7XaKORpLVI9cMn0TTe21-22" value="NOTE: promotional branches do not require cascading ownership" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="7XaKORpLVI9cMn0TTe21-22" value="NOTE: tag to mark state of common files being promoted across release branches" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="588.75" y="834" width="250" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7XaKORpLVI9cMn0TTe21-23" value="" style="endArrow=none;html=1;strokeWidth=2;rounded=0;fontColor=#000000;startSize=6;strokeColor=#E6E6E6;" edge="1" parent="1">
