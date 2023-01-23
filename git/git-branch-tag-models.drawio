@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-01-23T14:34:47.118Z" agent="5.0 (X11; Ubuntu)" etag="hsC1_0Uz1yONW3yqQKTO" version="20.8.10" type="github">
+<mxfile host="app.diagrams.net" modified="2023-01-23T14:45:11.701Z" agent="5.0 (X11; Ubuntu)" etag="iP8Z2-U4YzC9wVBYoim2" version="20.8.10" type="github">
   <diagram name="Page-1" id="BfglhBFAaLgnUbkgtS8U">
     <mxGraphModel dx="1004" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -101,10 +101,10 @@
           <mxGeometry x="115" y="374" width="12" height="12" as="geometry" />
         </mxCell>
         <mxCell id="_kzCFRDFW5OItWKDNAEy-65" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Independent Branches model&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;align=left;fontSize=13;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
-          <mxGeometry x="40" y="27" width="332" height="30" as="geometry" />
+          <mxGeometry x="75" y="24" width="332" height="30" as="geometry" />
         </mxCell>
         <mxCell id="_kzCFRDFW5OItWKDNAEy-66" value="&lt;div style=&quot;font-size: 13px;&quot;&gt;&amp;nbsp;Promotional Branches model&lt;br style=&quot;font-size: 13px;&quot;&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#000000;align=left;fontSize=13;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
-          <mxGeometry x="480" y="27" width="332" height="30" as="geometry" />
+          <mxGeometry x="515" y="24" width="332" height="30" as="geometry" />
         </mxCell>
         <mxCell id="_kzCFRDFW5OItWKDNAEy-191" value="" style="endArrow=classic;html=1;rounded=0;startArrow=none;" parent="1" source="_kzCFRDFW5OItWKDNAEy-203" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -347,7 +347,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="7XaKORpLVI9cMn0TTe21-15" value="PROB: would have different versions of common files being released" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" vertex="1" parent="1">
-          <mxGeometry x="156" y="1261" width="250" height="30" as="geometry" />
+          <mxGeometry x="151" y="1620" width="250" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7XaKORpLVI9cMn0TTe21-18" value="NOTE: tag to guarantee common files are uniform across release branches" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="156" y="834" width="250" height="30" as="geometry" />
@@ -416,7 +416,7 @@
           <mxGeometry x="769.5" y="1261" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7XaKORpLVI9cMn0TTe21-42" value="&lt;div&gt;NOTE: not necessary for branches&lt;/div&gt;&lt;div&gt;to have cascading lineage&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;align=left;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#FF0000;" vertex="1" parent="1">
-          <mxGeometry x="646.5" y="1545" width="194.25" height="30" as="geometry" />
+          <mxGeometry x="611.25" y="1550" width="194.25" height="30" as="geometry" />
         </mxCell>
         <mxCell id="7XaKORpLVI9cMn0TTe21-43" value="" style="endArrow=none;html=1;rounded=0;fillColor=#f5f5f5;strokeColor=#000000;strokeWidth=1;endFill=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
