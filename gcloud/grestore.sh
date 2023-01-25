@@ -3,6 +3,9 @@
 # Processes output of 'gsave.sh'
 # Inserts credentials into gcloud configs
 #
+# inspired by:
+# https://www.jhanley.com/blog/google-cloud-where-are-my-credentials-stored/
+#
 
 function decrypt_with_openssl() {
   text="$1"

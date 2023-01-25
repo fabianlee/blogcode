@@ -3,6 +3,9 @@
 # Dumps credentials of current gcloud user from configs
 # The output can be used to run 'grestore.sh' from another host and use the same credentials
 #
+# inspired by:
+# https://www.jhanley.com/blog/google-cloud-where-are-my-credentials-stored/
+#
 
 function encrypt_with_openssl_tobase64() {
   text="$1"
