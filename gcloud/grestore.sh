@@ -9,7 +9,8 @@ function decrypt_with_openssl() {
   # base64 encoding was applied twice:
   # 1. once to get rid of special chars/unicode and create single line of text to encode
   # 2. another time to turn encrypted binary into ascii-friendly text for copy-paste
-  echo "$text" | base64 -d | openssl enc -d -aes-256-cbc -pbkdf2 -iter 1234567 -salt -pass pass:abc123 | base64 -d
+  echo "$text" | base64 -d | openssl enc -d -aes-256-cbc -pbkdf2 -iter 1234567 -salt | base64 -d
+  # -pass pass:fakepass123
 } 
 
 function ensure_binary() {
@@ -53,7 +54,7 @@ for line in $decrypted_lines; do
     else
       sqlite3 ~/.config/gcloud/access_tokens.db "delete from access_tokens where account_id='$current_user'"
       echo $line | sqlite3 ~/.config/gcloud/access_tokens.db ".import \"|cat -\" access_tokens"
-      echo "INSERT ~/.config/gcloud/access_tokens.db: $?"
+      echo "INSERT ~/.config/gcloud/access_tokens.db, exit code $?"
     fi
     ;;
   2)
@@ -62,7 +63,7 @@ for line in $decrypted_lines; do
     else
       sqlite3 ~/.config/gcloud/credentials.db "delete from credentials where account_id='$current_user'"
       echo $line | sqlite3 ~/.config/gcloud/credentials.db
-      echo "INSERT ~/.config/gcloud/credentials.db: $?"
+      echo "INSERT ~/.config/gcloud/credentials.db, exit code $?"
     fi
 
     ;;

@@ -8,7 +8,8 @@ function encrypt_with_openssl_tobase64() {
   text="$1"
   # using OS level base64 which can output full width of screen
   # avoid 3des weak cipher
-  echo "$text" | openssl enc -aes-256-cbc -pbkdf2 -iter 1234567 -salt -pass pass:abc123 | base64 -w0
+  echo "$text" | openssl enc -aes-256-cbc -pbkdf2 -iter 1234567 -salt | base64 -w0
+  # -pass pass:fakepass123
 } 
 
 function ensure_binary() {
