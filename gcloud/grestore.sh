@@ -28,6 +28,10 @@ ensure_binary base64 "use 'apt install openssl -y' to install openssl"
 
 # input comes as one line of encrypted text, base64 encoded
 read -r stdin_line
+# throw away any extra lines of stdin, so that password entry is not stuffed
+if test -t 0; then
+  while read -r -t 1 foo; do true; done
+fi
 decrypted_lines=$(decrypt_with_openssl $stdin_line)
 #echo "decrypted=$decrypted_lines"
 
