@@ -25,9 +25,9 @@ function ensure_binary() {
 
 }
 ensure_binary gcloud "install gcloud, https://cloud.google.com/sdk/docs/install"
-ensure_binary sqlite3 "use 'apt install sqlite3 -y' to install sqlite"
-ensure_binary base64 "use 'apt install coreutils -y' to install base64"
-ensure_binary base64 "use 'apt install openssl -y' to install openssl"
+ensure_binary sqlite3 "use 'sudo apt install sqlite3 -y' to install sqlite"
+ensure_binary base64 "use 'sudo apt install coreutils -y' to install base64"
+ensure_binary base64 "use 'sudo apt install openssl -y' to install openssl"
 
 # input comes as one line of encrypted text, base64 encoded
 read -r stdin_line

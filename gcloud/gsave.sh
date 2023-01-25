@@ -24,9 +24,9 @@ function ensure_binary() {
 
 }
 ensure_binary gcloud "install gcloud, https://cloud.google.com/sdk/docs/install"
-ensure_binary sqlite3 "use 'apt install sqlite3 -y' to install sqlite"
-ensure_binary base64 "use 'apt install coreutils -y' to install base64"
-ensure_binary base64 "use 'apt install openssl -y' to install openssl"
+ensure_binary sqlite3 "use 'sudo apt install sqlite3 -y' to install sqlite"
+ensure_binary base64 "use 'sudo apt install coreutils -y' to install base64"
+ensure_binary base64 "use 'sudo apt install openssl -y' to install openssl"
 
 current_user=$(gcloud auth list 2>/dev/null | grep "^*" | cut -d'*' -f2 | tr -d ' ')
 [[ -n "$current_user" ]] || { echo "ERROR could not retrieve gcloud current user"; exit 3; }
