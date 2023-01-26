@@ -29,7 +29,7 @@ ensure_binary sqlite3 "use 'sudo apt install sqlite3 -y' to install sqlite"
 ensure_binary base64 "use 'sudo apt install coreutils -y' to install base64"
 ensure_binary base64 "use 'sudo apt install openssl -y' to install openssl"
 
-echo "======PASTE IN YOUR CONTENT FROM gsave.sh====="
+echo "======PASTE IN YOUR CONTENT FROM gsave.sh=====" >&2
 # input comes as one line of encrypted text, base64 encoded
 read -r stdin_line
 # throw away any extra lines of stdin, so that password entry is not stuffed
