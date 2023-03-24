@@ -24,14 +24,14 @@ echo "$herecontent"
 echo ""
 echo ""
 echo "==2nd occurence of '---' till EOF=="
-echo "$herecontent" | awk '/---/&&++k==2,/EOF/'
+echo "$herecontent" | awk '/---/&&++k==2,/FOOBAR/'
 
 echo ""
 echo ""
 echo "==2nd occurence of '---' till another '---' found" 
-echo "$herecontent" | awk '/---/&&++k==2,/EOF/' | tail -n+2 | awk '//&&++k==1,/---/'
+echo "$herecontent" | awk '/---/&&++k==2,/FOOBAR/' | tail -n+2 | awk '//&&++k==1,/---/'
 
 echo ""
 echo ""
 echo "==3rd occurence of '---' till another '---' found" 
-echo "$herecontent" | awk '/---/&&++k==3,/EOF/' | tail -n+2 | awk '//&&++k==1,/---/'
+echo "$herecontent" | awk '/---/&&++k==3,/FOOBAR/' | tail -n+2 | awk '//&&++k==1,/---/'
