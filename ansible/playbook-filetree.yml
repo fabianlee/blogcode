@@ -1,0 +1,15 @@
+# Example of using 'with_filetree' from role
+#
+# Supporting blog entry:
+# 
+#
+# example:
+#   ansible-playbook playbook-filetree.yml --connection=local
+#
+---
+- hosts: all
+  become: no
+  gather_facts: no
+
+  roles:
+    - roles/filetreetest
