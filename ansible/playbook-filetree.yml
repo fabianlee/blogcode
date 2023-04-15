@@ -1,7 +1,7 @@
 # Example of using 'with_filetree' from role
 #
 # Supporting blog entry:
-# 
+# https://fabianlee.org/2023/04/15/ansible-generating-templates-while-maintaining-deep-directory-structure-using-with_filetree/
 #
 # example:
 #   ansible-playbook playbook-filetree.yml --connection=local
