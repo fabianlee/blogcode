@@ -1,0 +1,23 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeployment
+  namespace: default
+  labels:
+    app: mydeployment
+spec:
+  foo: bar
+  selector:
+    matchLabels:
+      app: mydeployment
+  template:
+    metadata:
+      labels:
+        app: mydeployment
+    spec:
+      containers:
+      - name: mydeployment
+        image: gcr.io/google-samples/hello-app:1.0
+        ports:
+        - containerPort: 8080

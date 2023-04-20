@@ -1,0 +1,7 @@
+---
+$patch: delete
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+  namespace: default

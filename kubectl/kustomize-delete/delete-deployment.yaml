@@ -1,0 +1,7 @@
+---
+$patch: delete
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydeployment
+  namespace: default

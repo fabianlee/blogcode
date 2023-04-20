@@ -1,0 +1,46 @@
+# example showing how delete patches can remove resources
+# using delete patch from either file or inline
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - myns.yaml 
+  - mydeployment.yaml
+
+configMapGenerator:
+- name: myconfigmap
+  namespace: default
+  literals:
+  - foo=bar
+generatorOptions:
+  disableNameSuffixHash: true
+
+patches:
+
+# OPTION #1 delete with patch from file
+#  - delete-ns.yaml
+#  - delete-configmap.yaml
+#  - delete-deployment.yaml
+
+# OPTION #2 delete with inline patch
+#  - |-
+#    $patch: delete
+#    apiVersion: v1
+#    kind: Namespace
+#    metadata:
+#      name: myns
+#  - |-
+#    $patch: delete
+#    apiVersion: v1
+#    kind: ConfigMap
+#    metadata:
+#      name: myconfigmap
+#      namespace: default
+#  - |-
+#    $patch: delete
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    metadata:
+#      name: mydeployment
+#      namespace: default
