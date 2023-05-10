@@ -2,7 +2,7 @@
 #
 # Test of file existence, size, and age
 #
-# blog: 
+# blog: https://fabianlee.org/2023/05/10/bash-testing-if-a-file-exists-has-content-and-is-recently-modified/
 #
 
 # test for existence and content
