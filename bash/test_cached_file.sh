@@ -6,17 +6,15 @@
 #
 
 # test for existence and content
-tempfile=/tmp/cached_file.html
-[ -s $tempfile ] || echo "File $tempfile does not exist or is 0 bytes"
+cachefile=/tmp/cached_file.html
+[ -s $cachefile ] || echo "File $cachefile does not exist or is 0 bytes"
 
-find $tempfile -mtime -1 -size +0b 2>/dev/null | grep .
+find $cachefile -mtime -1 -size +0b 2>/dev/null | grep .
 if [ $? -ne 0 ]; then
-  echo "$tempfile does not yet exist, going to download..."
-  set -ex
-  wget -q https://fabianlee.org/ -O $tempfile
-  set +ex
-  echo "DONE downloaded $tempfile"
+  echo "$cachefile does not yet exist, going to download..."
+  wget -q https://fabianlee.org/ -O $cachefile
+  echo "DONE downloaded $cachefile"
 else
-  echo "$tempfile already exists, has content size, and was last modified in the last day"
+  echo "$cachefile already exists, has content size, and was last modified in the last day"
 fi
 
