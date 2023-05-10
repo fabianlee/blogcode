@@ -11,7 +11,7 @@ cachefile=/tmp/cached_file.html
 
 find $cachefile -mtime -1 -size +0b 2>/dev/null | grep .
 if [ $? -ne 0 ]; then
-  echo "$cachefile does not yet exist, going to download..."
+  echo "$cachefile needs to be downloaded"
   wget -q https://fabianlee.org/ -O $cachefile
   echo "DONE downloaded $cachefile"
 else
