@@ -20,6 +20,16 @@ echo testing > $tempfile
 filesize=$(stat -c%s $tempfile)
 if [[ -f $tempfile && $filesize -gt 0 ]]; then
   echo "longer form of validating file existence and size of $tempfile at $filesize bytes"
+else
+  echo "file failed validation of existence+sie using stat"
+fi
+
+# use find to implement file existence and content size
+find $tempfile -size +0b 2>/dev/null | grep .
+if [[ $? -eq 0 ]]; then
+  echo "'find' validated both file existence and size of $tempfile"
+else
+  echo "file failed validation of existence+sie using find"
 fi
 
 rm -f $tempfile
