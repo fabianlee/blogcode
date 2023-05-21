@@ -1,5 +1,7 @@
 #!/bin/bash
 # Construct URL for Merge Request from fork to upstream
+#
+# blog: https://fabianlee.org/2023/05/21/gitlab-generating-url-that-can-be-used-for-merge-request-from-fork-to-upstream/
 # 
 # Even if the repo and project level squash settings are set properly,
 # I think there is an issue with the web UI page honoring squash/squash_on_merge settings
