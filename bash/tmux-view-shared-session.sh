@@ -21,5 +21,5 @@ echo "==SESSIONS=="
 tmux -S $sharedSocket list-sessions
 
 echo ""
-read -p "press <ENTER> to start viewing session, to detatch press CTRL-b d" $dummy
+read -p "press <ENTER> to start viewing session, to detatch press CTRL-b d" dummy
 tmux -S $sharedSocket attach-session -t ${myid}_tmux_shared -r
