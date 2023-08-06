@@ -1,0 +1,23 @@
+# shows how tls secret can be embedded as base64 OR provided as file
+#
+# generating secret+key
+#   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout my-tls.key -out my-tls.crt -subj "/CN=my-tls.com"
+#
+# testing kustomize:
+#   kustomize build --enable-helm
+# applying to cluster:
+#   kubectl apply -k .
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# overide if you want non-default
+#namespace: default
+
+resources:
+  # load secret from embedded content
+  - my-tls-secret-embedded.yaml 
+
+generators:
+  # load secret from file
+  - my-tls-secret-extfile.yaml
