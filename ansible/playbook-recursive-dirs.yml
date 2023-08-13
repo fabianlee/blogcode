@@ -1,0 +1,40 @@
+#
+# Playbook that retrieves the recursive list of directories from a base path
+# 'with_filetree' would be a cleaner solution, but requires the community Galaxy module
+#
+# ansible-playbook playbook-recursive-dirs.yml -l localhost
+#
+# blog: 
+# 
+---
+- hosts: all
+  become: no
+  gather_facts: no
+  connection: local
+
+  tasks:
+    
+    - set_fact:
+        base_path: /tmp
+
+    # undefine if you want the full path returned
+    - set_fact:
+        base_path_to_remove: "{{ base_path }}/"
+
+    # retrieve directory entries recursively
+    - find:
+        paths: "{{ base_path }}"
+        file_type: directory
+        recurse: yes
+      register: dir_item_list
+    #- debug: var=dir_item_list
+
+    # transform from item list to string path list
+    - set_fact:
+        dir_path_list: "{{ dir_item_list.files|map(attribute='path') | sort }}"
+    # remove prefixed base path
+    - set_fact:
+        dir_path_list: "{{ dir_path_list | regex_replace(base_path_to_remove,'') }}"
+      when: base_path_to_remove is defined
+    # show final results
+    - debug: var=dir_path_list
