@@ -1,10 +1,6 @@
 #!/bin/bash
 #
 # Check full health of: deployments, daemonset, pods
-# Will warn if:
-#   * deployment does not have all replica healthy
-#   * daemonset does not have desired number scheduled all health
-#   * pod is not in healthy
 #
 # prerequisite: requires 'jq' utility for parsing kubectl json
 #
