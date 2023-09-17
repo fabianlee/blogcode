@@ -25,7 +25,7 @@ for line in $(helm list -A 2>/dev/null | tail -n+2); do
   # skip 'stable' because it is central hub for too many charts
   [[ $name == "stable" ]] && continue
 
-  # chart name is '<name>-<version', split it
+  # chart name is '<name>-<version>', split it
   chart_with_suffix=$(echo $line | awk -F' ' '{print $9}' | xargs)
   chart_name=${chart_with_suffix%-*}
   chart_version=${chart_with_suffix##*-}
