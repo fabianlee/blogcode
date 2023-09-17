@@ -15,19 +15,27 @@ repo_list_local=$(helm repo list | tail -n+2 | grep -v "^stable " | awk '{print 
 >&2 echo ""
 >&2 echo ""
 >&2 echo "RELEASE,CHART,VERSION,REPO"
-# brute-force test to find if chart is contained in local repo
+
+# for each installed Release
 IFS=$'\n'
 for line in $(helm list -A 2>/dev/null | tail -n+2); do 
+  # release name
   name=$(echo $line | awk '{print $1}' | xargs)
+
+  # skip 'stable' because it is central hub for too many charts
   [[ $name == "stable" ]] && continue
+
+  # chart name is '<name>-<version', split it
   chart_with_suffix=$(echo $line | awk -F' ' '{print $9}' | xargs)
   chart_name=${chart_with_suffix%-*}
   chart_version=${chart_with_suffix##*-}
+
+  # brute-force check of each local repo
   while read -r repo; do 
     helm show chart $repo/$chart_name >/dev/null 2>&1
     if [ $? -eq 0 ]; then
-      #echo "repo: $repo, Release: $name, chart: $chart_name, chart version: $chart_version"
       echo "$name,$chart_name,$chart_version,$repo"
     fi
   done < <(echo "$repo_list_local")
+
 done
