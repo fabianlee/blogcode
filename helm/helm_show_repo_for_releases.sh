@@ -5,7 +5,7 @@
 # For each release installed into Kubernetes cluster,
 # does brute force check into each local helm repo to see if there is a chart match
 #
-# This is no guarantee of provenance (that release actually came from this exact repo),
+# This is no guarantee of provenance (that release came from this exact repo),
 # but at least it at provides a repo that could be used to maintain/upgrade release going forward
 #
 
