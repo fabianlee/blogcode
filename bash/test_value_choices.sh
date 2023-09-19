@@ -10,12 +10,14 @@ myval="$1"
 echo "myval = $myval"
 
 # one liner
-#[[ "$myval" == @("on"|"off") ]] || { echo "ERROR does not match"; exit 4; }
+[[ "$myval" == @("on"|"off") ]] || { echo "ERROR does not match"; exit 4; }
 
 # if statement
-#if [[ ! "$myval" == @("on"|"off") ]]; then
-#  echo "ERROR value must either be 'on' or 'off'"; exit 3;
-#fi
+if [[ ! "$myval" == @(on|off) ]]; then
+  echo "ERROR value must either be 'on' or 'off'"; exit 3;
+else
+  echo "OK value matched"
+fi
 
 # use case statement
 #case $myval in
