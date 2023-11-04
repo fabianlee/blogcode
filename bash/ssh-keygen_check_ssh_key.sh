@@ -2,6 +2,10 @@
 #
 # validates if ssh key and its pub key are matched 
 #
+# this script works for both 'rsa' and 'ecdsa' types, examples:
+#   ssh-keygen -t rsa -b 4096 -f $sshkeyfile -C test -N "" -q
+#   ssh-keygen -t ecdsa -b 521 -f $sshkeyfile -C test -N "" -q
+#
 
 [[ -n "$1" ]] || { echo "Usage: sshKeyFile [sshPubFile]"; exit 1; }
 
@@ -19,19 +23,15 @@ if [[ $keyperms -gt 600 ]]; then
   exit 3
 fi
 
-# intentionally not using '-e' which echoes .pub file when it exists!
-keyfingerprint=$(ssh-keygen -y -f $sshkeyfile | ssh-keygen -lf -)
+keyfingerprint=$(ssh-keygen -l -f $sshkeyfile)
 echo "key: $keyfingerprint"
 
 if [[ ! -f $sshpubfile ]]; then
   echo ""
-  echo "WARNING: did not find pub file ${sshpubfile}, but here is what the public cert and fingerprint should be (based on the private key):"
-  ssh-keygen -y -f $sshkeyfile
-  echo ""
-  ssh-keygen -y -f $sshkeyfile | ssh-keygen -l -f $sshkeyfile
+  echo "WARNING: did not find pub file '${sshpubfile}', but here is what the public cert should be (extracted from private key):"
+  ssh-keygen -y -f $sshkeyfile -N ""
   exit 0
 fi
-
 
 pubperms=$(stat -c '%a' $sshpubfile)
 echo $pubperms
@@ -45,8 +45,8 @@ pubfingerprint=$(ssh-keygen -l -f $sshpubfile)
 echo "pub: $pubfingerprint"
 
 # do comparison without comment field
-justsha_key=$(echo $keyfingerprint | cut -d' ' -f2)
-justsha_pub=$(echo $pubfingerprint | cut -d' ' -f2)
+justsha_key=$(echo $keyfingerprint)
+justsha_pub=$(echo $pubfingerprint)
 #echo $justsha_key
 #echo $justsha_pub
 if [[ "$justsha_key" == "$justsha_pub" ]]; then
