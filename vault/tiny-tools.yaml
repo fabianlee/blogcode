@@ -1,0 +1,76 @@
+#
+# Used as template for sidecar injection with HashiCorp Vault for secret access
+#
+#export role=myrole
+#export app=mytest
+#export namespace_k8s=vault
+#export service_account_k8s=vault-auth
+#export auth_path_vault=auth/kubernetes
+#export path_secrets_vault=secret/webapp/config
+#
+# generate:
+# cat tiny-tools.yaml | DOLLAR_SIGN='$' envsubst | kubectl apply -f -
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiny-tools-$app-vault
+  namespace: $namespace_k8s
+  labels:
+    app: tiny-tools-$app-vault
+spec:
+  selector:
+    matchLabels:
+      app: tiny-tools-$app-vault
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tiny-tools-$app-vault
+      annotations:
+        sidecar.istio.io/inject: "false"
+
+        vault.hashicorp.com/agent-cache-enable: 'true'
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/auth-type: 'kubernetes'
+        vault.hashicorp.com/auth-config-path: '/var/run/secrets/kubernetes.io/serviceaccount/token'
+        vault.hashicorp.com/remove-jwt-after-reading : 'false'
+        vault.hashicorp.com/auth-path: $auth_path_vault
+        #vault.hashicorp.com/namespace: $namespace_vault # only available to Vault Enterprise
+        vault.hashicorp.com/role: $role
+
+        # https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar#inject-secrets-into-the-pod
+        vault.hashicorp.com/agent-inject-secret-mysecret.txt: $path_secrets_vault
+        vault.hashicorp.com/agent-inject-template-mysecret.txt: |
+          {{- with secret "$path_secrets_vault" -}}
+          {{- range ${DOLLAR_SIGN}k, ${DOLLAR_SIGN}v := .Data.data -}}
+          {{ ${DOLLAR_SIGN}k }} = {{ ${DOLLAR_SIGN}v }}
+          {{ end }}
+          {{- end -}}
+
+    spec:
+      serviceAccountName: $service_account_k8s
+
+      containers:
+      - name: tiny-tools
+        image: giantswarm/tiny-tools:3.12
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; date; echo "starting..."; sleep 30d
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
