@@ -28,16 +28,17 @@ spec:
       labels:
         app: tiny-tools-$app-vault
       annotations:
-        sidecar.istio.io/inject: "false"
+        #sidecar.istio.io/inject: "true"
 
-        vault.hashicorp.com/agent-cache-enable: 'true'
         vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/agent-init-first: 'false'
+        vault.hashicorp.com/agent-cache-enable: 'true'
         vault.hashicorp.com/auth-type: 'kubernetes'
         vault.hashicorp.com/auth-config-path: '/var/run/secrets/kubernetes.io/serviceaccount/token'
         vault.hashicorp.com/remove-jwt-after-reading : 'false'
         vault.hashicorp.com/auth-path: $auth_path_vault
-        #vault.hashicorp.com/namespace: $namespace_vault # only available to Vault Enterprise
         vault.hashicorp.com/role: $role
+        #vault.hashicorp.com/namespace: $namespace_vault # only available to Vault Enterprise
 
         # https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar#inject-secrets-into-the-pod
         vault.hashicorp.com/agent-inject-secret-mysecret.txt: $path_secrets_vault
