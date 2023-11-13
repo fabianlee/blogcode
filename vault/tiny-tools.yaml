@@ -1,12 +1,11 @@
 #
 # Used as template for sidecar injection with HashiCorp Vault for secret access
 #
-#export role=myrole
-#export app=mytest
+#export app=tiny-tools-mytest-vault
 #export namespace_k8s=vault
 #export service_account_k8s=vault-auth
-#export auth_path_vault=auth/kubernetes
-#export path_secrets_vault=secret/webapp/config
+#export vault_role=myrole
+#export vault_secret_path=secret/webapp/config
 #
 # generate:
 # cat tiny-tools.yaml | DOLLAR_SIGN='$' envsubst | kubectl apply -f -
@@ -14,19 +13,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tiny-tools-$app-vault
+  name: $app
   namespace: $namespace_k8s
   labels:
-    app: tiny-tools-$app-vault
+    app: $app
 spec:
   selector:
     matchLabels:
-      app: tiny-tools-$app-vault
+      app: $app
   replicas: 1
   template:
     metadata:
       labels:
-        app: tiny-tools-$app-vault
+        app: $app
       annotations:
         #sidecar.istio.io/inject: "true"
 
@@ -36,18 +35,33 @@ spec:
         vault.hashicorp.com/auth-type: 'kubernetes'
         vault.hashicorp.com/auth-config-path: '/var/run/secrets/kubernetes.io/serviceaccount/token'
         vault.hashicorp.com/remove-jwt-after-reading : 'false'
-        vault.hashicorp.com/auth-path: $auth_path_vault
-        vault.hashicorp.com/role: $role
+        vault.hashicorp.com/auth-path: auth/kubernetes
+        vault.hashicorp.com/role: $vault_role
         #vault.hashicorp.com/namespace: $namespace_vault # only available to Vault Enterprise
 
         # https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar#inject-secrets-into-the-pod
-        vault.hashicorp.com/agent-inject-secret-mysecret.txt: $path_secrets_vault
+
+        # write secret to file
+        vault.hashicorp.com/agent-inject-secret-mysecretdump: $vault_secret_path
+        vault.hashicorp.com/agent-inject-file-mysecretdump: mysecret.dump
+
+        # embed into filesystem of container
+        vault.hashicorp.com/agent-inject-secret-mysecret.txt: $vault_secret_path
         vault.hashicorp.com/agent-inject-template-mysecret.txt: |
-          {{- with secret "$path_secrets_vault" -}}
+          {{- with secret "$vault_secret_path" -}}
           {{- range ${DOLLAR_SIGN}k, ${DOLLAR_SIGN}v := .Data.data -}}
           {{ ${DOLLAR_SIGN}k }} = {{ ${DOLLAR_SIGN}v }}
           {{ end }}
           {{- end -}}
+
+        # embed as system environment variables of container
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{- with secret "$vault_secret_path" -}}
+          {{- range ${DOLLAR_SIGN}k, ${DOLLAR_SIGN}v := .Data.data -}}
+          {{ export MYENV_${DOLLAR_SIGN}k }}="{{ ${DOLLAR_SIGN}v" }}
+          {{ end }}
+          {{- end -}}
+
 
     spec:
       serviceAccountName: $service_account_k8s
