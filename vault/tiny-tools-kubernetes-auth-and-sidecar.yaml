@@ -8,7 +8,7 @@
 #export vault_secret_path=secret/webapp/config
 #
 # generate:
-# cat tiny-tools.yaml | DOLLAR_SIGN='$' envsubst | kubectl apply -f -
+# cat tiny-tools-kubernetes-auth-and-sidecar.yaml | DOLLAR_SIGN='$' envsubst | kubectl apply -f -
 ---
 apiVersion: apps/v1
 kind: Deployment
