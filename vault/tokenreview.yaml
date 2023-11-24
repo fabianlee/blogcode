@@ -1,0 +1,10 @@
+# https://support.hashicorp.com/hc/en-us/articles/18712750429843-How-to-check-validity-of-JWT-token-in-kubernetes
+# export JWT=...
+# cat tokenreview.yaml | envsubst | kubectl apply -o json -f - | jq .status
+---
+kind: TokenReview
+apiVersion: authentication.k8s.io/v1
+metadata:
+   name: test
+spec:
+   token: $JWT
