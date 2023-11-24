@@ -1,17 +1,17 @@
 #
 # Used as template for sidecar injection with HashiCorp Vault for secret access
 #
-#export app=tiny-tools-mytest-vault
+#export app=tiny-tools-jwttest-vault
 #export namespace_k8s=vault
 #export service_account_k8s=vault-auth
-#export vault_role=myrole
-#export vault_secret_path=secret/webapp/config
+#export vault_role=demo
+#export vault_secret_path=secret/demo/app
 #
 # generate:
-# cat tiny-tools-kubernetes-auth-and-sidecar.yaml | DOLLAR_SIGN='$' envsubst | kubectl apply -f -
+# cat tiny-tools-jwt-auth-and-sidecar.yaml | DOLLAR_SIGN='$' envsubst | kubectl apply -f -
 #
 # test from inside container:
-# kubectl exec -it deployment/$app -n $vault_ns -c tiny-tools -- curl -X GET http://localhost:8200/v1/$secret_path
+# kubectl exec -it deployment/$app -n $vault_ns -c tiny-tools -- curl -X GET http://localhost:8200/v1/secret/data/demo/app
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,10 +35,10 @@ spec:
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/agent-init-first: 'false'
         vault.hashicorp.com/agent-cache-enable: 'true'
-        vault.hashicorp.com/auth-type: 'kubernetes'
+        vault.hashicorp.com/auth-type: 'jwt'
         vault.hashicorp.com/auth-config-path: '/var/run/secrets/kubernetes.io/serviceaccount/token'
         vault.hashicorp.com/remove-jwt-after-reading : 'false'
-        vault.hashicorp.com/auth-path: auth/kubernetes
+        vault.hashicorp.com/auth-path: auth/jwt
         vault.hashicorp.com/role: $vault_role
         #vault.hashicorp.com/namespace: $namespace_vault # only available to Vault Enterprise
 
