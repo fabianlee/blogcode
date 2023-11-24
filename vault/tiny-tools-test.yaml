@@ -1,0 +1,49 @@
+#
+# Used as example deployment to test cluster
+#
+# generate:
+# kubectl apply -f tiny-tools-test.yaml
+#
+# test from inside container:
+# kubectl exec -it deployment/tiny-tools-test -c tiny-tools -- <command>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiny-tools-test
+  labels:
+    app: tiny-tools-test
+spec:
+  selector:
+    matchLabels:
+      app: tiny-tools-test
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tiny-tools-test
+    spec:
+      #serviceAccountName: default
+      containers:
+      - name: tiny-tools
+        image: giantswarm/tiny-tools:3.12
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; date; echo "starting..."; sleep 30d
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
