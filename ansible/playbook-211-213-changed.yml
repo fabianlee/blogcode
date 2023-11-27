@@ -30,7 +30,9 @@
   tasks:
 
     - set_fact:
+        # if you using this type of syntax to add to an array, it will fail at Ansible 2.13
         group_list_211: "['{{myatomicvalue}}'] + {{myarray}}"
+        # this syntax works for both 2.11 and 2.13
         group_list_213: "{{ [myatomicvalue] + myarray|default([]) }}"
     - debug:
         msg: |
