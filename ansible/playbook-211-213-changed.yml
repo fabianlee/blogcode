@@ -1,0 +1,60 @@
+#
+# Shows change in Ansible 2.13 in evaluation of loop expression
+#
+# Show it working in Ansible 2.11 (2.12 works also)
+#mkdir ansible-test && cd $_
+#python3 -m venv .
+#. bin/activate
+#pip install ansible-core==2.11.0
+#ansible --version | head -n1
+#ansible-playbook playbook-211-213-changed.yml
+#
+# Move to Ansible 2.13 and it breaks
+#pip install ansible-core==2.13.9
+#ansible --version | head -n1
+#ansible-playbook playbook-211-213-changed.yml
+#
+---
+
+- hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+  vars:
+    myarray:
+      - one
+      - two
+    myatomicvalue: three
+
+  tasks:
+
+    - set_fact:
+        group_list_211: "['{{myatomicvalue}}'] + {{myarray}}"
+        group_list_213: "{{ [myatomicvalue] + myarray|default([]) }}"
+    - debug:
+        msg: |
+          group_list_211 = {{group_list_211}}
+          group_list_213 = {{group_list_213}}
+    - pause:
+
+    - name: loop works with ansible 2.11-2.13 using fact and loop
+      debug:
+        msg: "{{item}}"
+      loop: "{{group_list_213}}"
+
+    - name: loop works with ansible 2.11-2.13 using list evaluated in loop
+      debug:
+        msg: "{{item}}"
+      loop: "{{ [myatomicvalue] + myarray|default([]) }}"
+
+
+    - name: loop works only with ansible 2.11 using fact and loop
+      debug:
+        msg: "{{item}}"
+      loop: "{{group_list_211}}"
+
+    - name: loop works only with ansible 2.11 using list evaulated in loop
+      debug:
+        msg: "{{item}}"
+      loop: "['{{myatomicvalue}}'] + {{myarray}}"
