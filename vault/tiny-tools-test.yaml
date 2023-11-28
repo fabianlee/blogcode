@@ -26,7 +26,7 @@ spec:
       #serviceAccountName: default
       containers:
       - name: tiny-tools
-        image: giantswarm/tiny-tools:3.12
+        image: ghcr.io/fabianlee/tiny-tools-multi-arch:2.0.3
         args:
         - /bin/sh
         - -c

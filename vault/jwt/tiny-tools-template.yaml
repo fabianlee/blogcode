@@ -1,0 +1,75 @@
+#
+# Used 
+#
+# generate:
+# cat tiny-tools-template.yaml | ns=myns name=svc-acct envsubst | kubectl apply -f -
+#
+# test from inside container:
+# kubectl exec -it deployment/tiny-tools-$name -c tiny-tools -- sh
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiny-tools-$name
+  namespace: $ns
+  labels:
+    app: tiny-tools-$name
+spec:
+  selector:
+    matchLabels:
+      app: tiny-tools-$name
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tiny-tools-$name
+    spec:
+      serviceAccountName: $name
+      containers:
+      - name: tiny-tools
+        image: ghcr.io/fabianlee/tiny-tools-multi-arch:2.0.3
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; date; echo "starting..."; sleep 30d
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        #- mountPath: /service-account
+          name: jwt-token
+          readOnly: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: jwt-token
+        projected:
+          defaultMode: 420
+          sources:
+          - serviceAccountToken:
+              audience: $ns-$name
+              expirationSeconds: 600 # minimum=600 seconds
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
