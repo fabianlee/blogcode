@@ -29,6 +29,7 @@ spec:
       annotations:
         #sidecar.istio.io/inject: "true"
         #traffic.sidecar.istio.io/excludeOutboundPorts: "8200"
+        #vault.hashicorp.com/agent-run-as-user: "1337"
 
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/agent-init-first: 'false'
