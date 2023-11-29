@@ -3,6 +3,7 @@
 #
 # generate:
 # cat tiny-tools-template-sidecar.yaml | DOLLAR_SIGN='$' auth_path=/auth/minikube vault_secret_path=/secret/webapp/sales vault_role=sales ns=sales name=sales-auth envsubst | kubectl apply -f -
+# cat tiny-tools-template-sidecar.yaml | DOLLAR_SIGN='$' auth_path=/auth/minikube vault_secret_path=/secret/webapp/eng vault_role=eng ns=engineering name=eng-auth envsubst | kubectl apply -f -
 #
 #
 # test from inside container:
