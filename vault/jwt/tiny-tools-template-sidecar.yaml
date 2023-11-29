@@ -1,0 +1,101 @@
+#
+# Used 
+#
+# generate:
+# cat tiny-tools-template-sidecar.yaml | DOLLAR_SIGN='$' auth_path=/auth/minikube vault_secret_path=/secret/webapp/sales vault_role=sales ns=sales name=sales-auth envsubst | kubectl apply -f -
+#
+#
+# test from inside container:
+# kubectl exec -it deployment/tiny-tools-sidecar-$name -c tiny-tools -- sh
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiny-tools-sidecar-$name
+  namespace: $ns
+  labels:
+    app: tiny-tools-side-car-$name
+spec:
+  selector:
+    matchLabels:
+      app: tiny-tools-sidecar-$name
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: tiny-tools-sidecar-$name
+
+      annotations:
+        #sidecar.istio.io/inject: "true"
+        #traffic.sidecar.istio.io/excludeOutboundPorts: "8200"
+
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/agent-init-first: 'false'
+        vault.hashicorp.com/agent-cache-enable: 'true'
+        vault.hashicorp.com/auth-type: 'jwt'
+        vault.hashicorp.com/auth-config-path: '/var/run/secrets/kubernetes.io/serviceaccount/token'
+        vault.hashicorp.com/remove-jwt-after-reading : 'false'
+        vault.hashicorp.com/auth-path: $auth_path
+        vault.hashicorp.com/role: $vault_role
+        #vault.hashicorp.com/namespace: $namespace_vault # only available to Vault Enterprise
+
+        # https://developer.hashicorp.com/vault/tutorials/kubernetes/kubernetes-sidecar#inject-secrets-into-the-pod
+        # write into filesystem of container, formatted as we choose
+        vault.hashicorp.com/agent-inject-secret-mysecret.txt: $vault_secret_path
+        vault.hashicorp.com/agent-inject-template-mysecret.txt: |
+          {{- with secret "$vault_secret_path" -}}
+          {{- range ${DOLLAR_SIGN}k, ${DOLLAR_SIGN}v := .Data.data -}}
+          {{ ${DOLLAR_SIGN}k }} = {{ ${DOLLAR_SIGN}v }}
+          {{ end }}
+          {{- end -}}
+
+    spec:
+      serviceAccountName: $name
+      containers:
+      - name: tiny-tools
+        image: ghcr.io/fabianlee/tiny-tools-multi-arch:2.0.3
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; date; echo "starting..."; sleep 30d
+        livenessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        #- mountPath: /service-account
+          name: jwt-token
+          readOnly: true
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: jwt-token
+        projected:
+          defaultMode: 420
+          sources:
+          - serviceAccountToken:
+              audience: $ns-$name
+              expirationSeconds: 600 # minimum=600 seconds
+              path: token
+          - configMap:
+              items:
+              - key: ca.crt
+                path: ca.crt
+              name: kube-root-ca.crt
+          - downwardAPI:
+              items:
+              - fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+                path: namespace
