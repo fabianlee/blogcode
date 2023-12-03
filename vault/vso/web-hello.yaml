@@ -1,0 +1,32 @@
+# kubectl create secret generic hello-secret --from-literal="greeting=My Secret"
+# kubectl apply -f web-hello.yaml
+# kubectl exec -it deployment/web-hello -n default -- wget -q http://localhost:8080 -O-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web-hello
+  name: web-hello
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-hello
+  template:
+    metadata:
+      labels:
+        app: web-hello
+    spec:
+      containers:
+      - image: ghcr.io/fabianlee/docker-golang-hello-world-web:1.0.2
+        imagePullPolicy: IfNotPresent
+        name: hello-app
+        env:
+        # create environment variable from secret
+        - name: GREETING
+          valueFrom:
+            secretKeyRef:
+              name: hello-secret
+              key: greeting

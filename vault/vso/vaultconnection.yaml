@@ -1,0 +1,14 @@
+# https://developer.hashicorp.com/vault/docs/platform/k8s/vso/api-reference#vaultconnectionspec
+# cat vaultconnection.yaml | vso_ns=vault-secrets-operator vault_url=http://192.168.2.239:8200 envsubst | kubectl apply -f -
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultConnection
+metadata:
+  namespace: $vso_ns
+  name: vault-external
+spec:
+  #address: http://vault.vault.svc.cluster.local:8200
+  address: $vault_url
+  skipTLSVerify: true
+  #tlsServerName: ""
+  #caCertSecretRef: ""
+

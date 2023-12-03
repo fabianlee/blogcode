@@ -1,0 +1,18 @@
+# https://github.com/hashicorp/vault-secrets-operator/blob/main/chart/crds/secrets.hashicorp.com_vaultauths.yaml
+# https://developer.hashicorp.com/vault/docs/platform/k8s/vso/api-reference#vaultauthspec
+# https://developer.hashicorp.com/vault/docs/platform/k8s/vso/api-reference#vaultauthconfigjwt
+# cat vaultauth-jwt.yaml | vso_ns=vault-secrets-operator envsubst | kubectl apply -f - 
+apiVersion: secrets.hashicorp.com/v1beta1
+kind: VaultAuth
+metadata:
+  name: vso-jwt-auth
+spec:
+  vaultConnectionRef: $vso_ns/vault-external
+  method: jwt
+  mount: vsojwt
+  allowedNamespaces: ['*']
+  jwt:
+    role: vso
+    serviceAccount: vso-auth
+    audiences: ['audience-vso-auth']
+    tokenExpirationSeconds: 600
