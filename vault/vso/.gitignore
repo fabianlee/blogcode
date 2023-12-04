@@ -1,5 +1,7 @@
 *.jwk
 *.pem
 *.jwt
+*.crt
+*.key
 jwker
 step
