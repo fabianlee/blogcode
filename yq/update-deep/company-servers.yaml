@@ -1,0 +1,11 @@
+company:
+  regions: [ 'us-east', 'us-central', 'us-west']
+  inventory:
+    machineA:
+      region: us-east
+      tags:
+      - linux
+    machineB:
+      region: us-central
+      tags:
+      - windows
