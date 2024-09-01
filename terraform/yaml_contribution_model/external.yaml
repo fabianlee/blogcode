@@ -1,0 +1,7 @@
+files:
+  - name: foo1.txt
+    content: |
+      this is foo1
+  - name: foo2.txt
+    content: |
+      this is foo2
