@@ -1,0 +1,7 @@
+datacenters:
+  neam1:
+    name: Germany
+    resources: 50
+  neam2:
+    name: France
+    resources: 49

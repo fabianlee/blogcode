@@ -1,7 +1,7 @@
 files:
-  - name: foo1.txt
+  - name: foo3
     content: |
-      this is foo1
-  - name: foo2.txt
+      this is foo3
+  - name: foo4
     content: |
-      this is foo2
+      this is foo4

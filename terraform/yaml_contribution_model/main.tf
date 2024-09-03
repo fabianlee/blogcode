@@ -4,8 +4,8 @@
 
 locals {
   file_data_static = [
-    { name="foo3", content="this is foo3" },
-    { name="foo4", content="this is foo4" }
+    { name="foo1", content="this is foo1" },
+    { name="foo2", content="this is foo2" }
   ]
 
   #file_data_ext_yaml = yamldecode(file("${path.module}/external.yaml"))
