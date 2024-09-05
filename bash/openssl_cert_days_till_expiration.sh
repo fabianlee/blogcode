@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # shows number of days before expiration of certificate using openssl
+# https://fabianlee.org/2024/09/05/bash-calculating-number-of-days-till-certificate-expiration-using-openssl/
 #
 # https://stackoverflow.com/questions/10175812/how-to-generate-a-self-signed-ssl-certificate-using-openssl
 # test using self-signed cert:
