@@ -5,9 +5,10 @@ RUN apk update &&\
  mkdir /usr/src
 WORKDIR /usr/src
 
-RUN wget http://archive.apache.org/dist/httpd/httpd-2.4.37.tar.gz &&\
+ARG AB_VERSION=2.4.59
+RUN wget http://archive.apache.org/dist/httpd/httpd-${AB_VERSION}.tar.gz &&\
  tar xvfz httpd-*.tar.gz
-WORKDIR /usr/src/httpd-2.4.37
+WORKDIR /usr/src/httpd-${AB_VERSION}
 
 RUN cp support/ab.c support/ab.c.old &&\
  wget https://raw.githubusercontent.com/fabianlee/blogcode/master/haproxy/ab.c -O support/ab.c &&\

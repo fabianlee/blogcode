@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: default
+  namespace: default
+  annotations:
+    foo: bar
+    iam.gke.io/gcp-service-account: dummy-sa@dummyproject.iam.gserviceaccount.com
