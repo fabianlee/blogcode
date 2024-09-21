@@ -11,8 +11,8 @@ kind: ScaledObject
 metadata:
   name: pubsub-scaledobject
 spec:
-  pollingInterval: 5 # For this tutorial, we want to see fast scaling from Keda
-  cooldownPeriod:  10 # For this tutorial, we want to see fast scaling from Keda
+  pollingInterval: 10 # seconds, too fast for real deployments
+  cooldownPeriod:  10 # seconds, too fast for real deployments
   maxReplicaCount: 5
   minReplicaCount: 0
   scaleTargetRef:
