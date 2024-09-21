@@ -1,0 +1,32 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: keda-workload-identity-auth
+spec:
+  podIdentity:
+    provider: gcp
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: pubsub-scaledobject
+spec:
+  pollingInterval: 5 # For this tutorial, we want to see fast scaling from Keda
+  cooldownPeriod:  10 # For this tutorial, we want to see fast scaling from Keda
+  maxReplicaCount: 5
+  minReplicaCount: 0
+  scaleTargetRef:
+    name: golang-hello-world-web-scaled-pubsub
+  triggers:
+    - type: gcp-pubsub
+      authenticationRef:
+        name: keda-workload-identity-auth
+      metadata:
+        subscriptionName: my-sub # "projects/<projectId>/subscriptions/<subId>"
+        #topicName: my-topic
+        mode: "SubscriptionSize" # Optional - Default is SubscriptionSize - SubscriptionSize or OldestUnackedMessageAge
+        aggregation: "sum" # Optional - Only meaningful for distribution-valued metrics
+        value: "5.5" # Optional - Default is 10
+        valueIfNull: '1.0' # Optional - Default is ""
+        activationValue: "10.5" # Optional - Default is 0
+        timeHorizon: "1m" # Optional - Default is 2m and with aggregation 5m

@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-hello-world-web-scaled-pubsub
+  # allow for override: kubectl -n <ns> apply ...
+  #namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: golang-hello-world-web-scaled-pubsub
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: golang-hello-world-web-scaled-pubsub
+      annotations:
+        sidecar.istio.io/inject: "false"
+
+    spec:
+
+      containers:
+      - name: golang-hello-world-web-scaled-pubsub
+        image: registry.gitlab.com/gitlab-pipeline7091038/google-hello-app-logging-multiarch:latest
+
+        # resource limits
+        resources:
+          requests:
+            memory: "8Mi"
+            cpu: "100m" # 100/1000 of vcpu
+          limits:
+            memory: "16Mi"
+            cpu: "200m" # 200/1000 of vcpu
+
+        env:
+
+        # override default log type: json|line
+        - name: logType
+          value: json
+
+        # override default message
+        - name: whoAmI
+          #value: "mypod"
+          # instead of hardcoding, use Downward API to get exact k8s pod name
+          # https://fabianlee.org/2021/05/01/kubernetes-using-the-downward-api-to-access-pod-container-metadata/
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 20
+
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 20
+
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golang-hello-world-web-scaled-pubsub-service
+  #namespace: default
+  labels:
+    app: golang-hello-world-web-scaled-pubsub
+spec:
+  ports:
+  # port=available to other containers
+  - port: 8080
+    name: http
+    # targetPort=exposed from inside container
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    app: golang-hello-world-web-scaled-pubsub
