@@ -1,0 +1,63 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tiny-tools
+  # not going to specify namespace, so that 'default' is implied
+  # it can be overridden at command line if necessary
+  # kubectl apply -f tiny-tools-per-node.yaml -n kube-system
+  #namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: tiny-tools
+
+  # can scale across all nodes later
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: tiny-tools
+      annotations:
+        # to avoid istio sidecar auto-injection (if applicable)
+        sidecar.istio.io/inject: "false"
+    spec:
+
+      # place on node with this label
+      nodeSelector:
+        purpose: batch
+
+      # allow on node with this taint
+      tolerations:
+        - key: processingtype
+          #operator: Exists
+          operator: Equal
+          value: batch
+          effect: NoSchedule
+
+      containers:
+      - name: tiny-tools
+        # https://github.com/giantswarm/tiny-tools
+        # https://hub.docker.com/r/giantswarm/tiny-tools/
+        image: giantswarm/tiny-tools:3.12
+        args:
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; date; echo "initializing..."; sleep 30d
+        livenessProbe:
+          exec: 
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          exec: 
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      # this is the only supported value for 'Deployment'
+      restartPolicy: Always
