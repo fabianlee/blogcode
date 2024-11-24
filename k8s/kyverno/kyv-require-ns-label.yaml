@@ -1,0 +1,34 @@
+# originally from: https://medium.com/@glen.yu/why-i-prefer-kyverno-over-gatekeeper-for-native-kubernetes-policy-management-35a05bb94964
+# https://gist.githubusercontent.com/Neutrollized/7e261ddea3d26cf774344edbfd20e0de/raw/c76c56b56f897a4c7ac8bf240b0fe2a7805a0344/kyv-require-ns-label.yaml
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-ns-label
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: require-ns-owner-label
+    match:
+      any:
+      - resources:
+          kinds:
+          - Namespace
+    validate:
+      message: "You must have label `owner` with a value of set on all new namespaces."
+      pattern:
+        metadata:
+          labels:
+            owner: "?*"
+  - name: require-ns-env-label
+    match:
+      any:
+      - resources:
+          kinds:
+          - Namespace
+    validate:
+      message: "You must have label `env` with a value of `dev`, `stage`, or `prod` set on all new namespaces."
+      pattern:
+        metadata:
+          labels:
+            env: dev | staging | prod
