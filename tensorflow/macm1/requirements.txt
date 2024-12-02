@@ -1,0 +1,5 @@
+# pyenv for 3.11.7
+# table: https://pypi.org/project/tensorflow-metal/
+tensorflow==2.15.1
+tensorflow-macos==2.15.1
+tensorflow-metal==1.1.0
