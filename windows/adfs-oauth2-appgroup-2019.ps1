@@ -19,7 +19,7 @@ if (get-adfsapplicationgroup -Name $ClientRoleIdentifier) {
 #Create the ADFS Server Application and generate the client secret.
 $ADFSApp = Get-AdfsServerApplication -Name "$ClientRoleIdentifier - Server app"
 if ($ADFSApp) {
-  write-host "SKIP New-AdfsApplicationGroup '$ClientRoleIdentifier - Server app'"
+  write-host "SKIP Add-AdfsServerApplication '$ClientRoleIdentifier - Server app'"
   $identifier = $ADFSApp.identifier
 }else {	
   # Creates a new GUID for use by the application group
@@ -44,7 +44,7 @@ if (!(Get-AdfsScopeDescription -name api_delete)) {
 }  
 
 #Grant the ADFS Application the allatclaims and openid permissions
-if ( (Get-AdfsApplicationPermission -ClientRoleIdentifier $identifier) -and (Get-AdfsApplicationPermission -ClientRoleIdentifier $identifier) ) {
+if ( (Get-AdfsApplicationPermission -ClientRoleIdentifier $identifier) -and (Get-AdfsApplicationPermission -ServerRoleIdentifier $identifier) ) {
   write-host "SKIP found Get-AdfsApplicationPermission for both client/server identifier '$identifier'"
   Set-AdfsApplicationPermission -TargetClientRoleIdentifier $identifier -TargetServerRoleIdentifier $identifier -ScopeNames @('allatclaims', 'openid', 'api_delete')
 }else {
@@ -70,7 +70,7 @@ $relativePath = Get-Item .\issueancetransformrules.tmp
 # Name the Web API Application and define its Issuance Transform Rules using an external file. 
 if (Get-AdfsWebApiApplication -Name "$ClientRoleIdentifier - Web API") {
   write-host "SKIP Add-AdfsWebApiApplication -Name '$ClientRoleIdentifier - Web API'"
-  Set-AdfsWebApiApplication -Name "$ClientRoleIdentifier - Web API" -TargetIdentifier $identifier -IssuanceTransformRulesFile $relativePath
+  Add-AdfsWebApiApplication -Name "$ClientRoleIdentifier - Web API" -TargetIdentifier $identifier -IssuanceTransformRulesFile $relativePath
 }else {
   Set-AdfsWebApiApplication -Name "$ClientRoleIdentifier - Web API" -TargetIdentifier $identifier -IssuanceTransformRulesFile $relativePath  
 } 
