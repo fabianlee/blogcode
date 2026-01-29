@@ -20,6 +20,7 @@ project_json=$(curl -s -XGET -H "Content-Type: application/json" --header "PRIVA
 
 project_id=$(echo "$project_json" | jq -r '.id')
 group_id=$(echo "$project_json" | jq -r 'select(.namespace.kind == "group") | .namespace.id')
+# the project details have only the immediate parent group, always single item and not array
 group_path=$(echo "$project_json" | jq -r 'select(.namespace.kind == "group") | .namespace.full_path')
 #project_path_with_ns=$( echo "$project_json" | jq -r 'select(.namespace.kind == "group") | .path_with_namespace')
 
