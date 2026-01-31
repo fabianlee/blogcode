@@ -11,6 +11,7 @@
 
 # one way to do URL encoding, assuming 'od' utility is installed
 # https://unix.stackexchange.com/questions/60653/urlencode-function
+# another way is using jq: echo -n "$1" | jq -sRr @uri
 function urlencode_od_awk () {
   echo -n "$1" | od -t d1 | awk '{
       for (i = 2; i <= NF; i++) {

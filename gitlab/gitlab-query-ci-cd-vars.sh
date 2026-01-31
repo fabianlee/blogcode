@@ -40,6 +40,9 @@ if [[ "$group_id" == "null" ]]; then
   echo "No group id found for this gitlab project"
 else
   echo "group_id=$group_id"
+  curl --silent --write-out "HTTPSTATUS:%{http_code}" \
+      --header "PRIVATE-TOKEN: $GITLAB_PAT" \
+      "https://$GITLAB_HOST/api/v4/groups/$group_id" | jq . #-r 'select(.namespace.kind == "group") | .namespace.full_path'
 
   # Attempt REST API call to retrieve group variables
   REST_URL="https://$GITLAB_HOST/api/v4/groups/$group_id/variables"
